@@ -38,4 +38,4 @@ For "throwaway" evaluations, it's handy to have a console. After opening the wor
 ```
 jupyter console --existing
 ```
-{:.output}
+{:.input}

@@ -47,7 +47,7 @@ To declare a dictionary in this way, specify a `key:value` pair.
 
 ~~~python
 >>> CAPS
-{'d': 'D', 'e': 'E', 'c': 'C', 'b': 'B', 'a': 'A'}
+{'d': 'D', 'a': 'A', 'c': 'C', 'b': 'B', 'e': 'E'}
 ~~~
 {:.output}
 

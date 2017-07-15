@@ -198,7 +198,7 @@ toons['Goofy'] = 'dog'
 
 ~~~python
 >>> toons
-{'Goofy': 'dog', 'Garfield': 'cat', 'Bugs': 'bunny', 'Snowy': 'dog'}
+{'Goofy': 'dog', 'Garfield': 'cat', 'Snowy': 'dog', 'Bugs': 'bunny'}
 ~~~
 {:.output}
 
