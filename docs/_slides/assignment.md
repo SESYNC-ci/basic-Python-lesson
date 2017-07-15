@@ -22,7 +22,7 @@ The "in-memory" location of `a` returned by `id()` ...
 
 ~~~python
 >>> id(a)
-140357895536912
+140522879234488
 ~~~
 {:.output}
 
@@ -33,7 +33,7 @@ The "in-memory" location of `a` returned by `id()` ...
 
 ~~~python
 >>> id('xyz')
-140357895536912
+140522879234488
 ~~~
 {:.output}
 
@@ -66,7 +66,7 @@ b = [1, 2, 3]
 
 ~~~python
 >>> id(b)
-140357728800008
+140522712482760
 ~~~
 {:.output}
 
@@ -77,7 +77,7 @@ The "in-memory" location of the list labeled `b` isn't the same as a list genera
 
 ~~~python
 >>> id([1, 2, 3])
-140357728781768
+140522712478920
 ~~~
 {:.output}
 
