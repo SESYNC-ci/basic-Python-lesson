@@ -138,7 +138,7 @@ s = set(l)
 
 ~~~python
 >>> s.difference({3.14})
-{'xyz', ('cat',)}
+{('cat',), 'xyz'}
 ~~~
 {:.output}
 
@@ -198,7 +198,7 @@ toons['Goofy'] = 'dog'
 
 ~~~python
 >>> toons
-{'Garfield': 'cat', 'Goofy': 'dog', 'Bugs': 'bunny', 'Snowy': 'dog'}
+{'Bugs': 'bunny', 'Goofy': 'dog', 'Snowy': 'dog', 'Garfield': 'cat'}
 ~~~
 {:.output}
 

@@ -134,9 +134,9 @@ To swap the plots associated with all these animal records, assign the opposite 
 
 ```{python, term=False}
 for animal in animals_a:
-    animal.plot = plot_b
+    animal.plots = plot_b
 for animal in animals_b:
-    animal.plot = plot_a
+    animal.plots = plot_a
 ```
 
 ===

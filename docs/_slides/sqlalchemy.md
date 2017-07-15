@@ -35,7 +35,7 @@ a class or data structure, in which each field corresponds to an attribute. Each
 
 ~~~python
 >>> Base.classes.keys()
-['animals', 'plots', 'species']
+['species', 'animals', 'plots']
 ~~~
 {:.output}
 
@@ -97,7 +97,7 @@ session.commit()
 
 ~~~python
 >>> plot.id
-25
+26
 ~~~
 {:.output}
 
@@ -140,7 +140,7 @@ Not only do we have the species' attributes
 
 ~~~python
 >>> species.animals_collection
-[<sqlalchemy.ext.automap.animals object at 0x7fcdf61012e8>, <sqlalchemy.ext.automap.animals object at 0x7fcdf6101358>, <sqlalchemy.ext.automap.animals object at 0x7fcdf6101400>, <sqlalchemy.ext.automap.animals object at 0x7fcdf61014e0>, <sqlalchemy.ext.automap.animals object at 0x7fcdf6101588>, <sqlalchemy.ext.automap.animals object at 0x7fcdf6101668>, <sqlalchemy.ext.automap.animals object at 0x7fcdf6101748>, <sqlalchemy.ext.automap.animals object at 0x7fcdf61017f0>]
+[<sqlalchemy.ext.automap.animals object at 0x7fa66638b3c8>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b438>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b4e0>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b5c0>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b668>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b748>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b828>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b8d0>]
 ~~~
 {:.output}
 
@@ -193,9 +193,9 @@ To swap the plots associated with all these animal records, assign the opposite 
 
 ~~~python
 for animal in animals_a:
-    animal.plot = plot_b
+    animal.plots = plot_b
 for animal in animals_b:
-    animal.plot = plot_a
+    animal.plots = plot_a
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
@@ -208,7 +208,7 @@ Check your work ...
 
 ~~~python
 >>> animals_a[0].plots is plot_b
-False
+True
 ~~~
 {:.output}
 
