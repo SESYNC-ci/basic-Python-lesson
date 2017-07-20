@@ -80,4 +80,4 @@ Comparison operators are symbols or plain english:
 
 ## Exercise 1
 
-Explore the use of `in` to test membership. What can an object of type `'int'` be a member of? Is it the same for an object of type `'str'`?
+Explore the use of `in` to test membership in a list. Create a list of multiple integers, and use `in` to test membership of some other numbers in your list.
