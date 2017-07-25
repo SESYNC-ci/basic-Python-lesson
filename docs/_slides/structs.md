@@ -18,14 +18,14 @@ The simplest kind of sequence, a tuple is declared with comma-separated values i
 
 
 ~~~python
-t = 'cat',
+T = 'cat',
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
 
 
 ~~~python
->>> type(t)
+>>> type(T)
 <class 'tuple'>
 ~~~
 {:.output}
@@ -40,14 +40,14 @@ The more common kind of sequence in Python is the list, which is declared with c
 
 
 ~~~python
-l = [3.14, 'xyz', t]
+L = [3.14, 'xyz', T]
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
 
 
 ~~~python
->>> type(l)
+>>> type(L)
 <class 'list'>
 ~~~
 {:.output}
@@ -62,7 +62,7 @@ Subsetting elements from a tuple or list is performed with square brackets in bo
 
 
 ~~~python
->>> l[0]
+>>> L[0]
 3.14
 ~~~
 {:.output}
@@ -75,7 +75,7 @@ Negative indices are allowed, and refer to the reverse ordering: -1 is the last 
 
 
 ~~~python
->>> l[-1]
+>>> L[-1]
 ('cat',)
 ~~~
 {:.output}
@@ -84,12 +84,12 @@ Negative indices are allowed, and refer to the reverse ordering: -1 is the last 
 
 ===
 
-The syntax `l[i:j]` selects a sub-list starting with the element at index
+The syntax `L[i:j]` selects a sub-list starting with the element at index
 `i` and ending with the element at index `j - 1`.
 
 
 ~~~python
->>> l[0:2]
+>>> L[0:2]
 [3.14, 'xyz']
 ~~~
 {:.output}
@@ -98,7 +98,7 @@ The syntax `l[i:j]` selects a sub-list starting with the element at index
 
 A blank space before or after the ":" indicates the start or end of the list,
 respectively. For example, the previous example could have been written 
-`l[:2]`.
+`L[:2]`.
 
 ===
 
@@ -113,7 +113,7 @@ to picture the indices as "dividers" between list elements.
 {:.input}
 
 Positive indices are written at the top and negative indices at the bottom. 
-`l[i]` returns the element to the right of `i` whereas `l[i:j]` returns
+`L[i]` returns the element to the right of `i` whereas `L[i:j]` returns
 elements between `i` and `j`.
 
 ===
@@ -130,15 +130,15 @@ The third and last "sequence" data structure is a set, used mainly for quick acc
 
 
 ~~~python
-s = set(l)
+S = set(L)
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
 
 
 ~~~python
->>> s.difference({3.14})
-{('cat',), 'xyz'}
+>>> S.difference({3.14})
+{'xyz', ('cat',)}
 ~~~
 {:.output}
 
@@ -198,7 +198,7 @@ toons['Goofy'] = 'dog'
 
 ~~~python
 >>> toons
-{'Bugs': 'bunny', 'Goofy': 'dog', 'Snowy': 'dog', 'Garfield': 'cat'}
+{'Snowy': 'dog', 'Garfield': 'cat', 'Bugs': 'bunny', 'Goofy': 'dog'}
 ~~~
 {:.output}
 
@@ -211,4 +211,3 @@ Dictionary keys are unique. Assigning a value to an existing key overwrites its 
 ## Exercise 3
 
 Based on what we have learned so far about lists and dictionaries, think up a data structure suitable for an address book. Using what you come up with, store the contact information (i.e. the name and email address) of three or four (hypothetical) persons as a variable `addr`.
-

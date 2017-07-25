@@ -17,10 +17,10 @@ The built-in structures for holding multiple values are:
 The simplest kind of sequence, a tuple is declared with comma-separated values inside `()` as we have already seen, or inside nothing at all. Note that to declare a one-tuple, a trailing "," is required.
 
 ```{python, term=False}
-t = 'cat',
+T = 'cat',
 ```
 ```{python}
-type(t)
+type(T)
 ```
 
 ===
@@ -30,10 +30,10 @@ type(t)
 The more common kind of sequence in Python is the list, which is declared with comma-separated values inside `[]`. Unlike a tuple, a list is mutable.
 
 ```{python, term=False}
-l = [3.14, 'xyz', t]
+L = [3.14, 'xyz', T]
 ```
 ```{python}
-type(l)
+type(L)
 ```
 
 ===
@@ -43,7 +43,7 @@ type(l)
 Subsetting elements from a tuple or list is performed with square brackets in both cases, and selects elements using their integer position starting from zero---their "index".
 
 ```{python}
-l[0]
+L[0]
 ```
 
 ===
@@ -51,21 +51,21 @@ l[0]
 Negative indices are allowed, and refer to the reverse ordering: -1 is the last item in the list, -2 the second-to-last item, and so on.
 
 ```{python}
-l[-1]
+L[-1]
 ```
 
 ===
 
-The syntax `l[i:j]` selects a sub-list starting with the element at index
+The syntax `L[i:j]` selects a sub-list starting with the element at index
 `i` and ending with the element at index `j - 1`.
 
 ```{python}
-l[0:2]
+L[0:2]
 ```
 
 A blank space before or after the ":" indicates the start or end of the list,
 respectively. For example, the previous example could have been written 
-`l[:2]`.
+`L[:2]`.
 
 ===
 
@@ -80,7 +80,7 @@ to picture the indices as "dividers" between list elements.
 {:.input}
 
 Positive indices are written at the top and negative indices at the bottom. 
-`l[i]` returns the element to the right of `i` whereas `l[i:j]` returns
+`L[i]` returns the element to the right of `i` whereas `L[i:j]` returns
 elements between `i` and `j`.
 
 ===
@@ -96,10 +96,10 @@ Create a Python list containing zero as a float, the integer 2, and a tuple of t
 The third and last "sequence" data structure is a set, used mainly for quick access to set operations like "union" and "difference". Declare a set with comma-separated values inside `{}` or by casting another sequence with `set()`.
 
 ```{python, term=False}
-s = set(l)
+S = set(L)
 ```
 ```{python}
-s.difference({3.14})
+S.difference({3.14})
 ```
 
 Python is a principled language: a set is technically unordered, so its elements do not have an index. You cannot subset a set using `[]`.
@@ -146,4 +146,3 @@ Dictionary keys are unique. Assigning a value to an existing key overwrites its 
 ## Exercise 3
 
 Based on what we have learned so far about lists and dictionaries, think up a data structure suitable for an address book. Using what you come up with, store the contact information (i.e. the name and email address) of three or four (hypothetical) persons as a variable `addr`.
-

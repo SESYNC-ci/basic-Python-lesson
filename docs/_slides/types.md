@@ -15,14 +15,14 @@ Any object can be queried with `type()`
 
 
 ~~~python
-t = ('x', 3, True)
+T = ('x', 3, True)
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
 
 
 ~~~python
->>> type(t)
+>>> type(T)
 <class 'tuple'>
 ~~~
 {:.output}
@@ -56,7 +56,7 @@ Some operators have natural extensions to non-numeric types:
 
 
 ~~~python
->>> t + (3.14, 'y')
+>>> T + (3.14, 'y')
 ('x', 3, True, 3.14, 'y')
 ~~~
 {:.output}
