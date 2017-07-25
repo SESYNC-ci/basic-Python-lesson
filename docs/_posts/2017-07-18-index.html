@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Introduction to Python, Pandas and SQLAlchemy</title>
+<meta name="description" content="Start learning Python with Numpy, Pandas and Matplotlib">
+<link rel="canonical" href="https://sesync-ci.github.io/basic-Python-lesson/course/archive.html">
+<link rel="stylesheet" href="/basic-Python-lesson/css/default.css">
+<link rel="stylesheet" href="/basic-Python-lesson/css/static.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
+
+	  <link rel="stylesheet" href="https://cdn.rawgit.com/sesync-ci/lesson-style/v1.2/docs/css/static.css">
+  </head>
+  <body>
+	  <div class="page-content">
+	    <div class="wrapper">
+        
+        
+<h1 style="text-transform: none;" id="introduction-to-python-pandas-and-sqlalchemy">Introduction to Python, Pandas and SQLAlchemy</h1>
+
+<p>Lesson 10 with <em>Kelly Hondula</em></p>
+
+<h2 id="contents">Contents</h2>
+
+<ul>
+  <li><a href="#/slides/objective">Why learn Python?</a></li>
+  <li><a href="#/slides/assignment">Variables</a></li>
+  <li><a href="#/slides/types">Data types</a></li>
+  <li><a href="#/slides/structs">Data structures</a></li>
+  <li><a href="#/slides/comps">Iteration</a></li>
+  <li><a href="#/slides/flow">Flow control</a></li>
+  <li><a href="#/slides/def">Function definition</a></li>
+  <li><a href="#/slides/packages">Python packages</a></li>
+  <li><a href="#/slides/pandas">Pandas</a></li>
+  <li><a href="#/slides/sqlalchemy">SQLAlchemy</a></li>
+  <li><a href="#/slides/conclude">Summary</a></li>
+</ul>
+
+<hr />
+
+<p><a name="/slides/objective"></a></p>
+
+<h2 id="why-learn-python">Why learn Python?</h2>
+
+<ul>
+  <li>Write scripts clearly and quickly</li>
+  <li>Community created extensions support high-performance scientific computing (e.g. NumPy and SciKits)</li>
+  <li>Common in- and out-side of academia</li>
+  <li>Helpful user community on <a href="https://stackoverflow.com">https://stackoverflow.com</a></li>
+  <li>The language for scripting ArcGIS and QGIS pipelines</li>
+  <li>Object-oriented design that facilitates database operations</li>
+</ul>
+
+<h2 id="objectives-for-this-lesson">Objectives for this Lesson</h2>
+
+<ul>
+  <li>Earn your Python “learner’s permit”</li>
+  <li>Work with one basic and one advanced data science package</li>
+  <li>Recognize differences between R and Python</li>
+</ul>
+
+<h2 id="specific-achievements">Specific Achievements</h2>
+
+<ul>
+  <li>Differentiate between data types and structures</li>
+  <li>Learn to use indentation as syntax</li>
+  <li>Import and query tabular data</li>
+  <li>Bind Python objects to database records</li>
+</ul>
+
+<h2 id="jupyter">Jupyter</h2>
+
+<p>Open up <code class="highlighter-rouge">worksheet-10.ipynb</code> after signing into JupyterHub. This worksheet is an IPython Notebook document: it is divided into “cells” that are run independently but access the same Python interpreter. Use the Notebook to write and annotate code.</p>
+
+<p>For “throwaway” evaluations, it’s handy to have a console. After opening the worksheet, go back to the tab showing your documents, and select <strong>New</strong> &gt; <strong>Terminal</strong>. In the shell that opens, enter</p>
+
+<div class="input highlighter-rouge"><pre class="highlight"><code>jupyter console --existing
+</code></pre>
+</div>
+
+<p class="ToS"><a href="#/slides/objective">Top of Section</a></p>
+
+<hr />
+
+<p><a name="/slides/assignment"></a></p>
+
+<h2 id="variables">Variables</h2>
+
+<p>Variable assignment attaches the label left of an <code class="highlighter-rouge">=</code> to the return value of the expression on its right.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">'xyz'</span>
+</code></pre>
+</div>
+
+<p>Colloquially, you might say the new variable <code class="highlighter-rouge">a</code> equals <code class="highlighter-rouge">'xyz'</code>, but Python makes it easy to “go deeper”. There can be only one string <code class="highlighter-rouge">'xyz'</code>, so the Python interpreter makes <code class="highlighter-rouge">a</code> into another label for the same <code class="highlighter-rouge">'xyz'</code>, which we can verify by <code class="highlighter-rouge">id()</code>.</p>
+
+<p>The “in-memory” location of <code class="highlighter-rouge">a</code> returned by <code class="highlighter-rouge">id()</code> …</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="mi">4362913584</span>
+</code></pre>
+</div>
+
+<p>… is equal to that of <code class="highlighter-rouge">xyz</code> itself:</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="s">'xyz'</span><span class="p">)</span>
+<span class="mi">4362913584</span>
+</code></pre>
+</div>
+
+<p>The idiom to test this “sameness” is typical of the Python language: it uses plain English when words will suffice.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="ow">is</span> <span class="s">'xyz'</span>
+<span class="bp">True</span>
+</code></pre>
+</div>
+
+<h2 id="equal-but-not-the-same">Equal but not the Same</h2>
+
+<p>The <code class="highlighter-rouge">id()</code> function helps demonstrate that “equal” is not the “same”.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="mi">4392204616</span>
+</code></pre>
+</div>
+
+<p>The “in-memory” location of the list labeled <code class="highlighter-rouge">b</code> isn’t the same as a list generated on-the-fly:</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="mi">4392203592</span>
+</code></pre>
+</div>
+
+<p>Even though <code class="highlighter-rouge">b == [1, 2, 3]</code> returns <code class="highlighter-rouge">True</code>, these are not the same object:</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="ow">is</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="bp">False</span>
+</code></pre>
+</div>
+
+<h2 id="side-effects">Side-effects</h2>
+
+<p>The reason to be aware of what <code class="highlighter-rouge">b</code> <strong>is</strong> has to do with “side-effects”, an import part of Python programming. A side-effect occurs when an expression generates some ripples other than its return value. And side-effects don’t change the label, they effect what the label is assigned to (i.e. what it <strong>is</strong>).</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="mi">3</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<dl>
+  <dt>Question</dt>
+  <dd>Re-check the “in-memory” location—is it the same <code class="highlighter-rouge">b</code>?</dd>
+  <dt>Answer</dt>
+  <dd class="fragment">Yes! The list got shorter but it is the same list.</dd>
+</dl>
+
+<p>Side-effects trip up Python programmers when an object has multiple labels, which is not so unusual:</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">c</span> <span class="o">=</span> <span class="n">b</span>
+<span class="n">b</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">c</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<p>The assignment to <code class="highlighter-rouge">c</code> does not create a new list, so the side-effect of popping off the tail of <code class="highlighter-rouge">b</code> ripples into <code class="highlighter-rouge">c</code>.</p>
+
+<p class="notes">A common mistake for those coming to Python from R, is to write <code class="highlighter-rouge">b = b.append(4)</code>, which overwrites <code class="highlighter-rouge">b</code> with the value <code class="highlighter-rouge">None</code> that happens to be returned by the <code class="highlighter-rouge">append()</code> method.</p>
+
+<p>Not every object is mutable; for example, the <code class="highlighter-rouge">a</code> assigned earlier is not.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">a</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="s">'XYZ'</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+<span class="s">'xyz'</span>
+</code></pre>
+</div>
+
+<p>The string ‘xyz’ hasn’t changed—it’s immutable. So it is also a safe guess that there has been no side-effect:</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span>
+<span class="s">'xyz'</span>
+</code></pre>
+</div>
+
+<p class="ToS"><a href="#/slides/assignment">Top of Section</a></p>
+
+<hr />
+
+<p><a name="/slides/types"></a></p>
+
+<h2 id="data-types">Data types</h2>
+
+<p>The immutable data types are</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">'int'</code></td>
+      <td>Integer</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">'float'</code></td>
+      <td>Real number</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">'str'</code></td>
+      <td>Character string</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">'bool'</code></td>
+      <td><code class="highlighter-rouge">True</code>/<code class="highlighter-rouge">False</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">'tuple'</code></td>
+      <td>Immutable sequence</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Any object can be queried with <code class="highlighter-rouge">type()</code></p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">T</span> <span class="o">=</span> <span class="p">(</span><span class="s">'x'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">'</span><span class="nc">tuple</span><span class="s">'&gt;</span><span class="err">
+</span></code></pre>
+</div>
+
+<p>Python supports the usual arithmetic operators for numeric types:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">+</code></td>
+      <td>addition</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-</code></td>
+      <td>subtraction</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">*</code></td>
+      <td>multiplication</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">/</code></td>
+      <td>floating-point division</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">**</code></td>
+      <td>exponent</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">%</code></td>
+      <td>modulus</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">//</code></td>
+      <td>floor division</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Some operators have natural extensions to non-numeric types:</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="s">'xyzxyz'</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">T</span> <span class="o">+</span> <span class="p">(</span><span class="mf">3.14</span><span class="p">,</span> <span class="s">'y'</span><span class="p">)</span>
+<span class="p">(</span><span class="s">'x'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">,</span> <span class="s">'y'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Comparison operators are symbols or plain english:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">==</code></td>
+      <td>equal</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">!=</code></td>
+      <td>non-equal</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;</code></td>
+      <td>greater, lesser</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">&gt;=</code>, <code class="highlighter-rouge">&lt;=</code></td>
+      <td>greater or equal, lesser or equal</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">and</code></td>
+      <td>logical and</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">or</code></td>
+      <td>logical or</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">not</code></td>
+      <td>logical negation</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">in</code></td>
+      <td>logical membership</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="exercise-1">Exercise 1</h2>
+
+<p>Explore the use of <code class="highlighter-rouge">in</code> to test membership in a list. Create a list of multiple integers, and use <code class="highlighter-rouge">in</code> to test membership of some other numbers in your list.</p>
+
+<p class="ToS"><a href="#/slides/types">Top of Section</a></p>
+
+<hr />
+
+<p><a name="/slides/structs"></a></p>
+
+<h2 id="data-structures">Data structures</h2>
+
+<p>The built-in structures for holding multiple values are:</p>
+
+<ul>
+  <li>Tuple</li>
+  <li>List</li>
+  <li>Set</li>
+  <li>Dictionary</li>
+</ul>
+
+<h2 id="tuple">Tuple</h2>
+
+<p>The simplest kind of sequence, a tuple is declared with comma-separated values inside <code class="highlighter-rouge">()</code> as we have already seen, or inside nothing at all. Note that to declare a one-tuple, a trailing “,” is required.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">T</span> <span class="o">=</span> <span class="s">'cat'</span><span class="p">,</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">'</span><span class="nc">tuple</span><span class="s">'&gt;</span><span class="err">
+</span></code></pre>
+</div>
+
+<h2 id="list">List</h2>
+
+<p>The more common kind of sequence in Python is the list, which is declared with comma-separated values inside <code class="highlighter-rouge">[]</code>. Unlike a tuple, a list is mutable.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.14</span><span class="p">,</span> <span class="s">'xyz'</span><span class="p">,</span> <span class="n">T</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">'</span><span class="nc">list</span><span class="s">'&gt;</span><span class="err">
+</span></code></pre>
+</div>
+
+<h2 id="subsetting-tuples-and-lists">Subsetting Tuples and Lists</h2>
+
+<p>Subsetting elements from a tuple or list is performed with square brackets in both cases, and selects elements using their integer position starting from zero—their “index”.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="mf">3.14</span>
+</code></pre>
+</div>
+
+<p>Negative indices are allowed, and refer to the reverse ordering: -1 is the last item in the list, -2 the second-to-last item, and so on.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">L</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">(</span><span class="s">'cat'</span><span class="p">,)</span>
+</code></pre>
+</div>
+
+<p>The syntax <code class="highlighter-rouge">L[i:j]</code> selects a sub-list starting with the element at index
+<code class="highlighter-rouge">i</code> and ending with the element at index <code class="highlighter-rouge">j - 1</code>.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="p">[</span><span class="mf">3.14</span><span class="p">,</span> <span class="s">'xyz'</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<p>A blank space before or after the “:” indicates the start or end of the list,
+respectively. For example, the previous example could have been written 
+<code class="highlighter-rouge">L[:2]</code>.</p>
+
+<p>A potentially useful trick to remember the list subsetting rules in Python is
+to picture the indices as “dividers” between list elements.</p>
+
+<div class="input highlighter-rouge"><pre class="highlight"><code> 0      1       2          3 
+ | 3.14 | 'xyz' | ('cat',) |
+-3     -2      -1
+</code></pre>
+</div>
+
+<p>Positive indices are written at the top and negative indices at the bottom. 
+<code class="highlighter-rouge">L[i]</code> returns the element to the right of <code class="highlighter-rouge">i</code> whereas <code class="highlighter-rouge">L[i:j]</code> returns
+elements between <code class="highlighter-rouge">i</code> and <code class="highlighter-rouge">j</code>.</p>
+
+<h2 id="exercise-2">Exercise 2</h2>
+
+<p>Create a Python list containing zero as a float, the integer 2, and a tuple of three separate characters. Now, assume you did not know the length of the list and extract the last two elements.</p>
+
+<h2 id="set">Set</h2>
+
+<p>The third and last “sequence” data structure is a set, used mainly for quick access to set operations like “union” and “difference”. Declare a set with comma-separated values inside <code class="highlighter-rouge"><span class="p">{}</span></code> or by casting another sequence with <code class="highlighter-rouge">set()</code>.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">S</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">S</span><span class="o">.</span><span class="n">difference</span><span class="p">({</span><span class="mf">3.14</span><span class="p">})</span>
+<span class="p">{</span><span class="s">'xyz'</span><span class="p">,</span> <span class="p">(</span><span class="s">'cat'</span><span class="p">,)}</span>
+</code></pre>
+</div>
+
+<p>Python is a principled language: a set is technically unordered, so its elements do not have an index. You cannot subset a set using <code class="highlighter-rouge">[]</code>.</p>
+
+<h2 id="dictionary">Dictionary</h2>
+
+<p>Lists are useful when you need to access elements by their position in a
+sequence. In contrast, a dictionary is needed to find values based on arbitrary identifiers.</p>
+
+<p>Construct a dictionary with comma-separated <code class="highlighter-rouge">key:value</code> pairs in <code class="highlighter-rouge"><span class="p">{}</span></code>.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">toons</span> <span class="o">=</span> <span class="p">{</span><span class="s">'Snowy'</span><span class="p">:</span><span class="s">'dog'</span><span class="p">,</span> <span class="s">'Garfield'</span><span class="p">:</span><span class="s">'cat'</span><span class="p">,</span> <span class="s">'Bugs'</span><span class="p">:</span><span class="s">'bunny'</span><span class="p">}</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">toons</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">'</span><span class="nc">dict</span><span class="s">'&gt;</span><span class="err">
+</span></code></pre>
+</div>
+
+<p>Individual values are accessed using square brackets, as for lists, but the key must be used rather than an index.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">toons</span><span class="p">[</span><span class="s">'Bugs'</span><span class="p">]</span>
+<span class="s">'bunny'</span>
+</code></pre>
+</div>
+
+<p>To add a single new element to the dictionary, define a new <code class="highlighter-rouge">key:value</code> pair by assigning a value to a novel key in the dictionary.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">toons</span><span class="p">[</span><span class="s">'Goofy'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'dog'</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">toons</span>
+<span class="p">{</span><span class="s">'Snowy'</span><span class="p">:</span> <span class="s">'dog'</span><span class="p">,</span> <span class="s">'Garfield'</span><span class="p">:</span> <span class="s">'cat'</span><span class="p">,</span> <span class="s">'Bugs'</span><span class="p">:</span> <span class="s">'bunny'</span><span class="p">,</span> <span class="s">'Goofy'</span><span class="p">:</span> <span class="s">'dog'</span><span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Dictionary keys are unique. Assigning a value to an existing key overwrites its previous value.</p>
+
+<h2 id="exercise-3">Exercise 3</h2>
+
+<p>Based on what we have learned so far about lists and dictionaries, think up a data structure suitable for an address book. Using what you come up with, store the contact information (i.e. the name and email address) of three or four (hypothetical) persons as a variable <code class="highlighter-rouge">addr</code>.</p>
+
+<p class="ToS"><a href="#/slides/structs">Top of Section</a></p>
+
+<hr />
+
+<p><a name="/slides/comps"></a></p>
+
+<h2 id="iteration">Iteration</h2>
+
+<p>The data structures just discussed have multiple values. Subsetting is one way to get at them individually. The common case of getting at each one individually is called iterating.</p>
+
+<p>Python formally declares a thing “iterable” if it can be used in an expression <code class="highlighter-rouge">for x in y</code>. where <code class="highlighter-rouge">y</code> is the iterable thing and <code class="highlighter-rouge">x</code> will label each element in turn.</p>
+
+<h2 id="declarations-with-iterables">Declarations with Iterables</h2>
+
+<p>Packing the <code class="highlighter-rouge">for x in y</code> expression inside a sequence declaration is one way to build a sequence.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">letters</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s">'abcde'</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">letters</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<p>This way of declaring with <code class="highlighter-rouge">for</code> and <code class="highlighter-rouge">in</code> is called a “comprehension” in Python.</p>
+
+<h2 id="dictionary-comprehension">Dictionary Comprehension</h2>
+
+<p>To declare a dictionary in this way, specify a <code class="highlighter-rouge">key:value</code> pair.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">CAPS</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s">'abcde'</span><span class="p">}</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">CAPS</span>
+<span class="p">{</span><span class="s">'a'</span><span class="p">:</span> <span class="s">'A'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">:</span> <span class="s">'B'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">:</span> <span class="s">'C'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">:</span> <span class="s">'D'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">:</span> <span class="s">'E'</span><span class="p">}</span>
+</code></pre>
+</div>
+
+<p class="ToS"><a href="#/slides/comps">Top of Section</a></p>
+
+<hr />
+
+<p><a name="/slides/flow"></a></p>
+
+<h2 id="flow-control">Flow control</h2>
+
+<p>The list and dictionary comprehensions embed a short form of the expression used to initiate a looping control statement.</p>
+
+<h2 id="for-loops">For loops</h2>
+
+<p>A <code class="highlighter-rouge">for</code> loop takes any iterable object and executes a block of code once for each
+element <code class="highlighter-rouge">in</code> the iterable..</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">squares</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+<span class="n">n_squares</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">n_squares</span>
+<span class="mi">4</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">range(i, j)</code> function creates a list of integers from <code class="highlighter-rouge">i</code> up through <code class="highlighter-rouge">j - 1</code>; just
+like in the case of list slices, the range is not inclusive of the upper bound.</p>
+
+<h2 id="indentation">Indentation</h2>
+
+<p>Note the pattern of the block above:</p>
+
+<ul>
+  <li>the <code class="highlighter-rouge">for x in y</code> expression is followed by a colon</li>
+  <li>the following lines are indented <strong>equally</strong></li>
+  <li>un-indenting indicates the end of the loop (rather than any special character)</li>
+</ul>
+
+<p>Compared with other programming languages in which code indentation only serves to
+enhance readability, Python uses indentation (and <strong>only</strong> indentation) to define “code blocks”, a.k.a. statements.</p>
+
+<h2 id="nesting-indentation">Nesting indentation</h2>
+
+<p>A <code class="highlighter-rouge">for</code> loop can be used to iterate over the elements of any list. In the
+following example, we create a contact list (as a list of dictionaries), then
+perform a loop over all contacts. Within the loop, we use a conditional 
+statement (<code class="highlighter-rouge">if</code>) to check if the name is ‘Alice’. If so, print the phone 
+number; otherwise print the name (<code class="highlighter-rouge">else</code> block).</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">contacts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s">'name'</span><span class="p">:</span><span class="s">'Alice'</span><span class="p">,</span> <span class="s">'phone'</span><span class="p">:</span><span class="s">'555-111-2222'</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">'name'</span><span class="p">:</span><span class="s">'Bob'</span><span class="p">,</span> <span class="s">'phone'</span><span class="p">:</span><span class="s">'555-333-4444'</span><span class="p">},</span>
+    <span class="p">]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">contacts</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s">'name'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'Alice'</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s">'phone'</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s">'name'</span><span class="p">])</span>
+</code></pre>
+</div>
+
+<pre><code class="language-{.python}">555-111-2222
+Bob
+</code></pre>
+
+<h2 id="exercise-4">Exercise 4</h2>
+
+<p>Write a for loop that prints all even numbers between 1 and 9. Use the modulo
+operator (<code class="highlighter-rouge">%</code>) to check for evenness: if <code class="highlighter-rouge">i</code> is even, then <code class="highlighter-rouge">i % 2</code>
+returns <code class="highlighter-rouge">0</code>, because <code class="highlighter-rouge">%</code> gives the remainder after division of the first number by the second.</p>
+
+<p class="ToS"><a href="#/slides/flow">Top of Section</a></p>
+
+<hr />
+
+<p><a name="/slides/def"></a></p>
+
+<h2 id="function-definition">Function definition</h2>
+
+<p>We already saw examples of a few built-in functions, such as <code class="highlighter-rouge">type()</code> and <code class="highlighter-rouge">len()</code>.
+New functions are defined as a block of code starting with a <code class="highlighter-rouge">def</code> keyword and (optionally) finishing with a <code class="highlighter-rouge">return</code>.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add_two</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">result</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">add_two</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="mi">12</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">def</code> keyword is followed by the function name, its arguments enclosed in
+parentheses (separated by commas if there are more than one), and a colon.</p>
+
+<p>The <code class="highlighter-rouge">return</code> statement is needed to make the function provide output.
+The lack of a <code class="highlighter-rouge">return</code>, or <code class="highlighter-rouge">return</code> followed by nothing, causes the function to return the value <code class="highlighter-rouge">None</code>.</p>
+
+<p>After it is defined, the function is invoked using its name and specifying the
+arguments in parentheses, in the same order as in its definition.</p>
+
+<h2 id="default-arguments">Default arguments</h2>
+
+<p>A default value can be “assigned” during function definition.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add_any</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="n">result</span>
+</code></pre>
+</div>
+
+<p>Then the function can be called without that argument:</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">add_any</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="mi">10</span>
+</code></pre>
+</div>
+
+<p>… as well as with an argument that will override the default:</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">add_any</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="mi">15</span>
+</code></pre>
+</div>
+
+<h2 id="exercise-5">Exercise 5</h2>
+
+<p>Create a function that takes a list as an argument and returns
+its first and last elements as a new list.</p>
+
+<h2 id="methods">Methods</h2>
+
+<p>The period is a special character in Python that accesses an object’s attributes and methods. In either the Jupyter Notebook or Console, typing an object’s name followed by <code class="highlighter-rouge">.</code> and then pressing the <code class="highlighter-rouge">TAB</code> key brings up suggestions.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">squares</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="mi">1</span>
+</code></pre>
+</div>
+
+<p>We call this <code class="highlighter-rouge">index()</code> function a method of lists (recall that <code class="highlighter-rouge">squares</code> is of type <code class="highlighter-rouge">'list'</code>). A useful feature of having methods attached to objects is that we can dial up help on a method as it applies to a particular type.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="n">squares</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">Help</span> <span class="n">on</span> <span class="n">built</span><span class="o">-</span><span class="ow">in</span> <span class="n">function</span> <span class="n">index</span><span class="p">:</span>
+
+<span class="n">index</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="n">method</span> <span class="n">of</span> <span class="n">builtins</span><span class="o">.</span><span class="nb">list</span> <span class="n">instance</span>
+    <span class="n">L</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">[</span><span class="n">start</span><span class="p">,</span> <span class="p">[</span><span class="n">stop</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">integer</span> <span class="o">--</span> <span class="k">return</span> <span class="n">first</span> <span class="n">index</span> <span class="n">of</span> <span class="n">value</span><span class="o">.</span>
+    <span class="n">Raises</span> <span class="nb">ValueError</span> <span class="k">if</span> <span class="n">the</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">present</span><span class="o">.</span>
+
+</code></pre>
+</div>
+
+<p class="notes">A major differnce between Python and R has to do with the process for making functions behave differently for different objects. In Python, a function is attached to an object as a “method”, while in R a “dispatcher” examines the attributes of a function call’s arguments and chooses a the particular function to use.</p>
+
+<h2 id="a-dictionary-method">A dictionary method</h2>
+
+<p>The <code class="highlighter-rouge">update()</code> method allows you to extend a dictionary with another dictionary of <code class="highlighter-rouge">key:value</code> pairs, while simultaneously overwriting values for existing keys.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">toons</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+  <span class="s">'Tweety'</span><span class="p">:</span><span class="s">'bird'</span><span class="p">,</span>
+  <span class="s">'Bob'</span><span class="p">:</span><span class="s">'sponge'</span><span class="p">,</span>
+  <span class="s">'Bugs'</span><span class="p">:</span><span class="s">'rabbit'</span><span class="p">,</span>
+  <span class="p">})</span>
+</code></pre>
+</div>
+
+<dl>
+  <dt>Question</dt>
+  <dd>How many <code class="highlighter-rouge">key:value</code> pairs are there now in toons?</dd>
+  <dt>Answer</dt>
+  <dd class="fragment">Five. The key <code class="highlighter-rouge">'Bugs'</code> is only inserted once.</dd>
+</dl>
+
+<p>Note a couple “Pythonic” style choices of the above:</p>
+
+<ol>
+  <li>Leave no space around the <code class="highlighter-rouge">:</code> when declaring <code class="highlighter-rouge">key:value</code> pairs</li>
+  <li>Trailing null arguments are syntactically correct, even advantageous</li>
+  <li>White space can be used to improve readiability; indentation within <code class="highlighter-rouge">()</code> is meaningless</li>
+</ol>
+
+<p class="ToS"><a href="#/slides/def">Top of Section</a></p>
+
+<hr />
+
+<p><a name="/slides/packages"></a></p>
+
+<h2 id="python-packages">Python packages</h2>
+
+<p>So far we have only covered elements of the core Python language. However, most of
+Python’s useful tools for scientific programming can be found in contributed packages
+that extend Python in every direction.</p>
+
+<h2 id="pypi">PyPI</h2>
+
+<p>The <a href="https://pypi.python.org">Python Package Index</a> is the online directory of contributed Python packages. Interaction with PyPI typically
+take place outside of Python, using the command line utility <code class="highlighter-rouge">pip</code> or a GUI package manager.</p>
+
+<p>The vast majority of Python packages can be installed with the command <code class="highlighter-rouge">pip install</code>. For example, to install the <a href="" class="pylib">pandas</a> package:</p>
+
+<div class="input highlighter-rouge"><pre class="highlight"><code>pip install pandas
+</code></pre>
+</div>
+
+<p>The packages for this lesson are already installed in SESYNC’s “teaching-lab” Docker container.</p>
+
+<p>To access the tools provided by a package, once it has been installed, use the <code class="highlighter-rouge">import</code> command. Their are several variations that
+preciesly control the tools made available.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Syntax</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">import pandas</code></td>
+      <td>all modules are available following pandas.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">import pandas as pd</code></td>
+      <td>all modules are available following pd.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">from pandas import DataFrame</code></td>
+      <td>the DataFrame module is available</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">from pandas import DataFrame as DF</code></td>
+      <td>the label DF points to pandas.DataFrame</td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="ToS"><a href="#/slides/packages">Top of Section</a></p>
+
+<hr />
+
+<p><a name="/slides/pandas"></a></p>
+
+<h2 id="pandas">Pandas</h2>
+
+<p>If you have used the statistical programming language R, you are familiar with
+“data frames”, two-dimensional data structures where each column can hold a 
+different type of data, as in a spreadsheet.</p>
+
+<p>The data analysis library <a href="" class="pylib">pandas</a> provides a data frame object type for
+Python, along with functions to subset, filter reshape and aggregate data
+stored in data frames.</p>
+
+<p>After importing <a href="" class="pylib">pandas</a>, we call its <code class="highlighter-rouge">read_csv</code> function to load the Portal 
+animals data from the file <code class="highlighter-rouge">animals.csv</code>.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="n">animals</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"data/animals.csv"</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">animals</span><span class="o">.</span><span class="n">dtypes</span>
+<span class="nb">id</span>                   <span class="n">int64</span>
+<span class="n">month</span>                <span class="n">int64</span>
+<span class="n">day</span>                  <span class="n">int64</span>
+<span class="n">year</span>                 <span class="n">int64</span>
+<span class="n">plot_id</span>              <span class="n">int64</span>
+<span class="n">species_id</span>          <span class="nb">object</span>
+<span class="n">sex</span>                 <span class="nb">object</span>
+<span class="n">hindfoot_length</span>    <span class="n">float64</span>
+<span class="n">weight</span>             <span class="n">float64</span>
+<span class="n">dtype</span><span class="p">:</span> <span class="nb">object</span>
+</code></pre>
+</div>
+
+<p>There are many ways to slice a <code class="highlighter-rouge">DataFrame</code>. To select a subset of rows and/or columns by name, use the <code class="highlighter-rouge">loc</code> attribute and <code class="highlighter-rouge">[</code> for indexing.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">animals</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'plot_id'</span><span class="p">,</span> <span class="s">'species_id'</span><span class="p">]]</span>
+</code></pre>
+</div>
+
+<p>As with lists, <code class="highlighter-rouge">:</code> by itself indicates all the rows (or columns). Unlike lists, the <code class="highlighter-rouge">loc</code> attribute returns both endpoints of a slice.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">animals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s">'plot_id'</span><span class="p">:</span><span class="s">'sex'</span><span class="p">]</span>
+   <span class="n">plot_id</span> <span class="n">species_id</span> <span class="n">sex</span>
+<span class="mi">2</span>        <span class="mi">7</span>         <span class="n">DM</span>   <span class="n">M</span>
+<span class="mi">3</span>        <span class="mi">3</span>         <span class="n">DM</span>   <span class="n">M</span>
+<span class="mi">4</span>        <span class="mi">1</span>         <span class="n">PF</span>   <span class="n">M</span>
+</code></pre>
+</div>
+
+<p>Use the <code class="highlighter-rouge">iloc</code> attribute of a DataFrame to get rows and/or columns by position, which behaves identically to list indexing.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">animals</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+   <span class="n">plot_id</span> <span class="n">species_id</span>
+<span class="mi">2</span>        <span class="mi">7</span>         <span class="n">DM</span>
+<span class="mi">3</span>        <span class="mi">3</span>         <span class="n">DM</span>
+</code></pre>
+</div>
+
+<p>The default indexing for a DataFrame, without using the <code class="highlighter-rouge">loc</code> or <code class="highlighter-rouge">iloc</code> attributes, is by column name.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">animals</span><span class="p">[[</span><span class="s">'hindfoot_length'</span><span class="p">,</span> <span class="s">'weight'</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">loc</code> attribute also allows logical indexing, i.e. the use of a boolean array of appropriate length for the selected dimension.</p>
+
+<p>The subset of <code class="highlighter-rouge">animals</code> where the species is “DM” is extracted into a new data frame.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">animals_dm</span> <span class="o">=</span> <span class="n">animals</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">animals</span><span class="p">[</span><span class="s">'species_id'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'DM'</span><span class="p">,</span> <span class="p">]</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">animals_dm</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+   <span class="nb">id</span>  <span class="n">month</span>  <span class="n">day</span>  <span class="n">year</span>  <span class="n">plot_id</span> <span class="n">species_id</span> <span class="n">sex</span>  <span class="n">hindfoot_length</span>  <span class="n">weight</span>
+<span class="mi">1</span>   <span class="mi">3</span>      <span class="mi">7</span>   <span class="mi">16</span>  <span class="mi">1977</span>        <span class="mi">2</span>         <span class="n">DM</span>   <span class="n">F</span>             <span class="mf">37.0</span>     <span class="n">NaN</span>
+<span class="mi">2</span>   <span class="mi">4</span>      <span class="mi">7</span>   <span class="mi">16</span>  <span class="mi">1977</span>        <span class="mi">7</span>         <span class="n">DM</span>   <span class="n">M</span>             <span class="mf">36.0</span>     <span class="n">NaN</span>
+<span class="mi">3</span>   <span class="mi">5</span>      <span class="mi">7</span>   <span class="mi">16</span>  <span class="mi">1977</span>        <span class="mi">3</span>         <span class="n">DM</span>   <span class="n">M</span>             <span class="mf">35.0</span>     <span class="n">NaN</span>
+<span class="mi">6</span>   <span class="mi">8</span>      <span class="mi">7</span>   <span class="mi">16</span>  <span class="mi">1977</span>        <span class="mi">1</span>         <span class="n">DM</span>   <span class="n">M</span>             <span class="mf">37.0</span>     <span class="n">NaN</span>
+<span class="mi">7</span>   <span class="mi">9</span>      <span class="mi">7</span>   <span class="mi">16</span>  <span class="mi">1977</span>        <span class="mi">1</span>         <span class="n">DM</span>   <span class="n">F</span>             <span class="mf">34.0</span>     <span class="n">NaN</span>
+</code></pre>
+</div>
+
+<!--
+===
+
+The `query()` method accepts an expression that may reference columns, increasing the readability of the same operation
+
+
+~~~python
+animals_dm = animals.query('species_id == "DM"')
+~~~
+{:.text-document title="worksheet-10.ipynb"}
+
+
+
+~~~python
+>>> animals_dm.head()
+   id  month  day  year  plot_id species_id sex  hindfoot_length  weight
+1   3      7   16  1977        2         DM   F             37.0     NaN
+2   4      7   16  1977        7         DM   M             36.0     NaN
+3   5      7   16  1977        3         DM   M             35.0     NaN
+6   8      7   16  1977        1         DM   M             37.0     NaN
+7   9      7   16  1977        1         DM   F             34.0     NaN
+~~~
+{:.output}
+
+
+-->
+
+<p>Aggregation of records in a DataFrame by value of a given variable is performed with the <code class="highlighter-rouge">groupby()</code> method. The resulting “grouped” DataFrame has additional methods (like <code class="highlighter-rouge">mean()</code>) that summarize each group, producing a DataFrame with one record for each group.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">dm_stats</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="n">animals_dm</span>
+  <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">'sex'</span><span class="p">)</span>
+  <span class="p">[</span><span class="s">'hindfoot_length'</span><span class="p">,</span> <span class="s">'weight'</span><span class="p">]</span>
+  <span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+  <span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">dm_stats</span>
+     <span class="n">hindfoot_length</span>     <span class="n">weight</span>
+<span class="n">sex</span>                            
+<span class="n">F</span>          <span class="mf">35.712692</span>  <span class="mf">41.609685</span>
+<span class="n">M</span>          <span class="mf">36.188229</span>  <span class="mf">44.353134</span>
+</code></pre>
+</div>
+
+<h2 id="exercise-6">Exercise 6</h2>
+
+<p>The <code class="highlighter-rouge">count</code> method for DataFrames (e.g. <code class="highlighter-rouge">animals.count()</code>) returns the number of rows
+in a data frame. Find out which month had the most observations recorded
+in <code class="highlighter-rouge">animals</code> using <code class="highlighter-rouge">groupby()</code> and <code class="highlighter-rouge">count()</code>.</p>
+
+<p class="ToS"><a href="#/slides/pandas">Top of Section</a></p>
+
+<hr />
+
+<p><a name="/slides/sqlalchemy"></a></p>
+
+<h2 id="sqlalchemy">SQLAlchemy</h2>
+
+<p>Working with databases from a high level programming language (Python or R) is usually a one way street: the language helps with complicated queries for pulling out data, but provides little assistance with pushing data back, especially for complicated modifications. SQLAlchemy lays the groundwork for bi-directional flow: Python objects become synchronized with database records.</p>
+
+<p>After some upfront alignment between the Portal Mammals database in PostgreSQL and a Python environment, we’ll be ready to go.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sqlalchemy.ext.automap</span> <span class="kn">import</span> <span class="n">automap_base</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">sessionmaker</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
+
+<span class="c"># Create the canvas for a map between Python objects and database records</span>
+<span class="n">Base</span> <span class="o">=</span> <span class="n">automap_base</span><span class="p">()</span>
+
+<span class="c"># Identify database, create the map from the schema, and prepare to create sessions</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">'postgresql+pygresql://@localhost/portal'</span><span class="p">)</span>
+<span class="n">Base</span><span class="o">.</span><span class="n">prepare</span><span class="p">(</span><span class="n">engine</span><span class="p">,</span> <span class="n">reflect</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<h2 id="object-relational-mapper-orm">Object Relational Mapper (ORM)</h2>
+
+<p>The ORM sets up a link between Python objects and records in a database. You could think of a table as defining
+a class or data structure, in which each field corresponds to an attribute. Each record corresponds to an instance of the class.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">Base</span><span class="o">.</span><span class="n">classes</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="p">[</span><span class="s">'species'</span><span class="p">,</span> <span class="s">'animals'</span><span class="p">,</span> <span class="s">'plots'</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">Base</code> class contains a list of tables that <code class="highlighter-rouge">automap_base()</code> found in the PostgreSQL database.</p>
+
+<p>Pull class definitions directly from the <code class="highlighter-rouge">Base</code> after it has been prepared.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">Plots</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s">'plots'</span><span class="p">]</span>
+<span class="n">Animals</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s">'animals'</span><span class="p">]</span>
+<span class="n">Species</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="s">'species'</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<p>Then create a new instance by calling the class “constructor” with values specified for each field.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">plot</span> <span class="o">=</span> <span class="n">Plots</span><span class="p">(</span><span class="n">treatment</span><span class="o">=</span><span class="s">'Control'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">plot</span><span class="o">.</span><span class="nb">id</span>
+</code></pre>
+</div>
+
+<p>Note that <code class="highlighter-rouge">plot.id</code> is empty. We did not specify a value for <code class="highlighter-rouge">id</code> because we don’t know what values would duplicate an existing primary key.</p>
+
+<h2 id="session">Session</h2>
+
+<p>Connections to the database are made within a “session”, as a safety protocol that protects against network disruptions and provides a <code class="highlighter-rouge">session.rollback()</code> method of aborting changes. After adding the new <code class="highlighter-rouge">plot</code> object to a session and commiting the change, the database and Python environments are synched.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+<span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">plot</span><span class="o">.</span><span class="nb">id</span>
+<span class="mi">26</span>
+</code></pre>
+</div>
+
+<p>The RDBMS inserted a new record, incrementing the <code class="highlighter-rouge">id</code> value as designed, and reflected it back into the object <code class="highlighter-rouge">plot</code>.</p>
+
+<h2 id="relations">Relations</h2>
+
+<p>The full reach of the ORM extends into relationships between tables.</p>
+
+<p>Let’s pull a <code class="highlighter-rouge">species</code> record using the <code class="highlighter-rouge">session.query()</code> method.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">query</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s">'RO'</span><span class="p">)</span>
+<span class="n">species</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>Not only do we have the species’ attributes</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">species</span><span class="o">.</span><span class="nb">id</span>
+<span class="s">'RO'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">species</span><span class="o">.</span><span class="n">genus</span>
+<span class="s">'Reithrodontomys'</span>
+</code></pre>
+</div>
+
+<p>… we have the list of every <code class="highlighter-rouge">animal</code> linked to this <code class="highlighter-rouge">species</code> by the many-to-one relationship dictated by the use of foreign keys.</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">species</span><span class="o">.</span><span class="n">animals_collection</span>
+<span class="p">[</span><span class="o">&lt;</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">automap</span><span class="o">.</span><span class="n">animals</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fa66638b3c8</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">automap</span><span class="o">.</span><span class="n">animals</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fa66638b438</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">automap</span><span class="o">.</span><span class="n">animals</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fa66638b4e0</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">automap</span><span class="o">.</span><span class="n">animals</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fa66638b5c0</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">automap</span><span class="o">.</span><span class="n">animals</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fa66638b668</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">automap</span><span class="o">.</span><span class="n">animals</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fa66638b748</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">automap</span><span class="o">.</span><span class="n">animals</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fa66638b828</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">ext</span><span class="o">.</span><span class="n">automap</span><span class="o">.</span><span class="n">animals</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fa66638b8d0</span><span class="o">&gt;</span><span class="p">]</span>
+</code></pre>
+</div>
+
+<h2 id="update">Update</h2>
+
+<p>With SQLAlchemy, you can programatically make complex updates to the data in Python, and then commit the state to the database in one transaction.</p>
+
+<p>Suppose a surveyor mistakenly reversed the labels of two plots during a particular survey, and your job is to correct the database. Here are the two problematic plots.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">plot_a</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Plots</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+<span class="n">plot_b</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Plots</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>Here are the animals <em>incorrectly</em> associated with each plot.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">query</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Animals</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2002</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">animals_a</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">Animals</span><span class="o">.</span><span class="n">plots</span> <span class="o">==</span> <span class="n">plot_a</span><span class="p">)</span><span class="o">.</span><span class="nb">all</span><span class="p">()</span>
+<span class="n">animals_b</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="nb">filter</span><span class="p">(</span><span class="n">Animals</span><span class="o">.</span><span class="n">plots</span> <span class="o">==</span> <span class="n">plot_b</span><span class="p">)</span><span class="o">.</span><span class="nb">all</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">animals_a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plots</span> <span class="ow">is</span> <span class="n">plot_a</span>
+<span class="bp">True</span>
+</code></pre>
+</div>
+
+<p>To swap the plots associated with all these animal records, assign the opposite plot to each <code class="highlighter-rouge">animal.plot</code> attribute.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals_a</span><span class="p">:</span>
+    <span class="n">animal</span><span class="o">.</span><span class="n">plots</span> <span class="o">=</span> <span class="n">plot_b</span>
+<span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals_b</span><span class="p">:</span>
+    <span class="n">animal</span><span class="o">.</span><span class="n">plots</span> <span class="o">=</span> <span class="n">plot_a</span>
+</code></pre>
+</div>
+
+<p>Check your work …</p>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">animals_a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plots</span> <span class="ow">is</span> <span class="n">plot_b</span>
+<span class="bp">True</span>
+</code></pre>
+</div>
+
+<p>and commit the result to the database.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="n">animals_a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plots</span> <span class="ow">is</span> <span class="n">plot_b</span>
+</code></pre>
+</div>
+
+<h2 id="query">Query</h2>
+
+<p>At any time, collect the result of a SQLAlchemy query into a data fram</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-10.ipynb"><pre class="highlight"><code><span class="n">query</span> <span class="o">=</span> <span class="p">(</span><span class="n">session</span>
+    <span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Animals</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Species</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">taxa</span><span class="o">=</span><span class="s">'Rodent'</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">rodents</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">statement</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<div class="language-python output highlighter-rouge"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">rodents</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+   <span class="nb">id</span>  <span class="n">month</span>  <span class="n">day</span>  <span class="n">year</span>  <span class="n">plot_id</span> <span class="n">species_id</span> <span class="n">sex</span>  <span class="n">hindfoot_length</span>  <span class="n">weight</span>
+<span class="mi">0</span>   <span class="mi">2</span>      <span class="mi">7</span>   <span class="mi">16</span>  <span class="mi">1977</span>        <span class="mi">3</span>         <span class="n">NL</span>   <span class="n">M</span>             <span class="mf">33.0</span>     <span class="n">NaN</span>
+<span class="mi">1</span>   <span class="mi">3</span>      <span class="mi">7</span>   <span class="mi">16</span>  <span class="mi">1977</span>        <span class="mi">2</span>         <span class="n">DM</span>   <span class="n">F</span>             <span class="mf">37.0</span>     <span class="n">NaN</span>
+<span class="mi">2</span>   <span class="mi">4</span>      <span class="mi">7</span>   <span class="mi">16</span>  <span class="mi">1977</span>        <span class="mi">7</span>         <span class="n">DM</span>   <span class="n">M</span>             <span class="mf">36.0</span>     <span class="n">NaN</span>
+<span class="mi">3</span>   <span class="mi">5</span>      <span class="mi">7</span>   <span class="mi">16</span>  <span class="mi">1977</span>        <span class="mi">3</span>         <span class="n">DM</span>   <span class="n">M</span>             <span class="mf">35.0</span>     <span class="n">NaN</span>
+<span class="mi">4</span>   <span class="mi">6</span>      <span class="mi">7</span>   <span class="mi">16</span>  <span class="mi">1977</span>        <span class="mi">1</span>         <span class="n">PF</span>   <span class="n">M</span>             <span class="mf">14.0</span>     <span class="n">NaN</span>
+</code></pre>
+</div>
+
+<p class="ToS"><a href="#/slides/sqlalchemy">Top of Section</a></p>
+
+<hr />
+
+<p><a name="/slides/conclude"></a></p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Python is said to have a gentle learning curve, but all new languages take practice.</p>
+
+<p>Key concepts covered in this lesson include:</p>
+
+<ul>
+  <li>Variable assignment</li>
+  <li>Data structures</li>
+  <li>Functions and methods</li>
+  <li>Python packages
+    <ul>
+      <li><a href="" class="pylib">pandas</a></li>
+      <li><a href="" class="pylib">SQLAlchemy</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Additional critical packages for data science:</p>
+<ul>
+  <li><a href="" class="pylib">matplotlib</a>, <a href="" class="pylib">plotly</a>, <a href="" class="pylib">seaborn</a> for vizualization</li>
+  <li><a href="" class="pylib">StatsModels</a>, <a href="" class="pylib">scikit-learn</a>, and <a href="" class="pylib">pystan</a> for model fitting</li>
+  <li><a href="" class="pylib">PyQGIS</a>, <a href="" class="pylib">Shapely</a>, and <a href="" class="pylib">Cartopy</a> for GIS</li>
+</ul>
+
+<p class="ToS"><a href="#/slides/conclude">Top of Section</a></p>
+
+<hr />
+
+
+
+	    </div>
+	  </div>
+  </body>
+</html>
