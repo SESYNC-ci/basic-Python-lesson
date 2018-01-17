@@ -1,10 +1,14 @@
 ---
 ---
 
+
+
+
 ## Function definition
 
-We already saw examples of a few built-in functions, such as `type()` and `len()`.
-New functions are defined as a block of code starting with a `def` keyword and (optionally) finishing with a `return`.
+We already saw examples of a few built-in functions, such as `type()`
+and `len()`.  New functions are defined as a block of code starting
+with a `def` keyword and (optionally) finishing with a `return`.
 
 
 ~~~python
@@ -12,16 +16,7 @@ def add_two(x):
     result = x + 2
     return result
 ~~~
-{:.text-document title="{{ site.handouts }}"}
-
-
-
-~~~python
->>> add_two(10)
-12
-~~~
-{:.output}
-
+{:.input}
 
 
 ===
@@ -32,8 +27,22 @@ parentheses (separated by commas if there are more than one), and a colon.
 The `return` statement is needed to make the function provide output.
 The lack of a `return`, or `return` followed by nothing, causes the function to return the value `None`.
 
-After it is defined, the function is invoked using its name and specifying the
-arguments in parentheses, in the same order as in its definition.
+===
+
+
+~~~python
+add_two(10)
+~~~
+{:.input}
+~~~
+Out[1]: 12
+~~~
+{:.output}
+
+
+
+This function is invoked by name followed by any arguments in
+parentheses and **in the order defined**.
 
 ===
 
@@ -47,27 +56,20 @@ def add_any(x, y=0):
     result = x + y
     return result
 ~~~
-{:.text-document title="{{ site.handouts }}"}
+{:.input}
 
 
+===
 
 Then the function can be called without that argument:
 
 
 ~~~python
->>> add_any(10)
-10
+add_any(10)
 ~~~
-{:.output}
-
-
-
-... as well as with an argument that will override the default:
-
-
-~~~python
->>> add_any(10, 5)
-15
+{:.input}
+~~~
+Out[1]: 10
 ~~~
 {:.output}
 
@@ -75,31 +77,54 @@ Then the function can be called without that argument:
 
 ===
 
-## Exercise 5
+Adding an argument will override the default:
 
-Create a function that takes a list as an argument and returns
-its first and last elements as a new list.
+
+~~~python
+add_any(10, 5)
+~~~
+{:.input}
+~~~
+Out[1]: 15
+~~~
+{:.output}
+
+
 
 ===
 
 ## Methods
 
-The period is a special character in Python that accesses an object's attributes and methods. In either the Jupyter Notebook or Console, typing an object's name followed by `.` and then pressing the `TAB` key brings up suggestions.
+The period is a special character in Python that accesses an object's
+attributes and methods. In either the Jupyter Notebook or Console,
+typing an object's name followed by `.` and then pressing the `TAB`
+key brings up suggestions.
 
 
 ~~~python
->>> squares.index(4)
-1
+squares.index(4)
+~~~
+{:.input}
+~~~
+Out[1]: 1
 ~~~
 {:.output}
 
 
 
-We call this `index()` function a method of lists (recall that `squares` is of type `'list'`). A useful feature of having methods attached to objects is that we can dial up help on a method as it applies to a particular type.
+===
+
+We call this `index()` function a method of lists (recall that
+`squares` is of type `'list'`). A useful feature of having methods
+attached to objects is that we can dial up help on a method as it
+applies to any instance of a type.
 
 
 ~~~python
->>> help(squares.index)
+help(squares.index)
+~~~
+{:.input}
+~~~
 Help on built-in function index:
 
 index(...) method of builtins.list instance
@@ -123,18 +148,18 @@ The `update()` method allows you to extend a dictionary with another dictionary 
 
 ~~~python
 toons.update({
-  'Tweety':'bird',
-  'Bob':'sponge',
-  'Bugs':'rabbit',
-  })
+  'Tweety': 'bird',
+  'Bob': 'sponge',
+  'Bugs': 'rabbit',
+})
 ~~~
-{:.text-document title="{{ site.handouts }}"}
+{:.input}
 
 
 ===
 
 Question
-: How many `key:value` pairs are there now in toons?
+: How many `key: value` pairs are there now in toons?
 
 Answer
 : {:.fragment} Five. The key `'Bugs'` is only inserted once.
@@ -143,6 +168,6 @@ Answer
 
 Note a couple "Pythonic" style choices of the above:
 
-1. Leave no space around the `:` when declaring `key:value` pairs
+1. Leave a space after the `:` when declaring `key: value` pairs
 1. Trailing null arguments are syntactically correct, even advantageous
-1. White space can be used to improve readiability; indentation within `()` is meaningless
+1. White space with `()` has no meaning and can improve readiability

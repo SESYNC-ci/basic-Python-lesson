@@ -1,6 +1,9 @@
 ---
 ---
 
+
+
+
 ## Data types
 
 The immutable data types are
@@ -11,25 +14,27 @@ The immutable data types are
 | `'bool'`  | `True`/`False`     |
 | `'tuple'` | Immutable sequence |
 
+===
+
 Any object can be queried with `type()` 
 
 
 ~~~python
-T = ('x', 3, True)
+T = 'x', 3, True
+type(T)
+type('x')
 ~~~
-{:.text-document title="{{ site.handouts }}"}
-
-
-
-~~~python
->>> type(T)
-<class 'tuple'>
+{:.input}
+~~~
+Out[1]: str
 ~~~
 {:.output}
 
 
 
 ===
+
+## Operators
 
 Python supports the usual arithmetic operators for numeric types:
 
@@ -43,12 +48,15 @@ Python supports the usual arithmetic operators for numeric types:
 
 ===
 
-Some operators have natural extensions to non-numeric types:
+One or both of these might be a surprise:
 
 
 ~~~python
->>> a * 2
-'xyzxyz'
+5 ** 2
+~~~
+{:.input}
+~~~
+Out[1]: 25
 ~~~
 {:.output}
 
@@ -56,8 +64,39 @@ Some operators have natural extensions to non-numeric types:
 
 
 ~~~python
->>> T + (3.14, 'y')
-('x', 3, True, 3.14, 'y')
+2 // 3
+~~~
+{:.input}
+~~~
+Out[1]: 0
+~~~
+{:.output}
+
+
+
+===
+
+Some operators have natural extensions to non-numeric types:
+
+
+~~~python
+a * 2
+~~~
+{:.input}
+~~~
+Out[1]: 'xyzxyz'
+~~~
+{:.output}
+
+
+
+
+~~~python
+T + (3.14, 'y')
+~~~
+{:.input}
+~~~
+Out[1]: ('x', 3, True, 3.14, 'y')
 ~~~
 {:.output}
 
@@ -80,4 +119,9 @@ Comparison operators are symbols or plain english:
 
 ## Exercise 1
 
-Explore the use of `in` to test membership in a list. Create a list of multiple integers, and use `in` to test membership of some other numbers in your list.
+Explore the use of `in` to test membership in a list. Create a list of
+multiple integers, and use `in` to test membership of some other
+numbers in your list.
+
+[View solution](#solution-1)
+{:.notes}

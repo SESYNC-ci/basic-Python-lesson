@@ -1,6 +1,10 @@
 ---
 ---
 
+```{python, echo=False}
+a = 'xyz'
+```
+
 ## Data types
 
 The immutable data types are
@@ -11,16 +15,19 @@ The immutable data types are
 | `'bool'`  | `True`/`False`     |
 | `'tuple'` | Immutable sequence |
 
+===
+
 Any object can be queried with `type()` 
 
-```{python, term=False}
-T = ('x', 3, True)
-```
-```{python}
+```python
+T = 'x', 3, True
 type(T)
+type('x')
 ```
 
 ===
+
+## Operators
 
 Python supports the usual arithmetic operators for numeric types:
 
@@ -34,13 +41,25 @@ Python supports the usual arithmetic operators for numeric types:
 
 ===
 
+One or both of these might be a surprise:
+
+```python
+5 ** 2
+```
+
+```python
+2 // 3
+```
+
+===
+
 Some operators have natural extensions to non-numeric types:
 
-```{python}
+```python
 a * 2
 ```
 
-```{python}
+```python
 T + (3.14, 'y')
 ```
 
@@ -61,4 +80,9 @@ Comparison operators are symbols or plain english:
 
 ## Exercise 1
 
-Explore the use of `in` to test membership in a list. Create a list of multiple integers, and use `in` to test membership of some other numbers in your list.
+Explore the use of `in` to test membership in a list. Create a list of
+multiple integers, and use `in` to test membership of some other
+numbers in your list.
+
+[View solution](#solution-1)
+{:.notes}

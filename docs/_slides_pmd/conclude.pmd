@@ -10,9 +10,9 @@ Key concepts covered in this lesson include:
 - Variable assignment
 - Data structures
 - Functions and methods
-- Python packages
-  - [pandas](){:.pylib}
-  - [SQLAlchemy](){:.pylib}
+- [pandas](){:.pylib}
+
+===
 
 Additional critical packages for data science:
   - [matplotlib](){:.pylib}, [plotly](){:.pylib}, [seaborn](){:.pylib} for vizualization

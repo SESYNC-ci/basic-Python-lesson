@@ -1,10 +1,13 @@
 # Site
 
-title: Introduction to Python, Pandas and SQLAlchemy
-handouts: worksheet.ipynb
-tag: v0.1
-lesson: 10
-instructor: Kelly Hondula
+title: Introduction to Python with Pandas
+handouts:
+ - worksheet.ipynb
+ - data/animals.csv
+ - data/README.md
+tag: v0.2
+lesson: 5
+instructor: Ian Carroll
 authors:
   - Philippe Marchand
   - Ian Carroll
@@ -19,12 +22,13 @@ slide_sorter:
   - comps
   - flow
   - def
-  - packages
+#  - packages
 #  - numpy
   - pandas
 #  - matplotlib
-  - sqlalchemy
+#  - sqlalchemy
   - conclude
+  - solutions
 
 #####################################
 # Only modify content above or risk #

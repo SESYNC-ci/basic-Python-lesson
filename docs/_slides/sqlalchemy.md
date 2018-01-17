@@ -23,6 +23,10 @@ Session = sessionmaker(bind=engine)
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
+~~~~{.python}
+<class 'AttributeError'>
+module 'pgdb' has no attribute 'paramstyle'~~~~~~~~~~~~~
+
 
 
 ===
@@ -35,7 +39,7 @@ a class or data structure, in which each field corresponds to an attribute. Each
 
 ~~~python
 >>> Base.classes.keys()
-['species', 'animals', 'plots']
+[]
 ~~~
 {:.output}
 
@@ -55,6 +59,10 @@ Species = Base.classes['species']
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
+~~~~{.python}
+<class 'KeyError'>
+'plots'~~~~~~~~~~~~~
+
 
 
 ===
@@ -67,10 +75,17 @@ plot = Plots(treatment='Control')
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
+~~~~{.python}
+<class 'NameError'>
+name 'Plots' is not defined~~~~~~~~~~~~~
+
 
 
 ~~~python
 >>> plot.id
+Traceback (most recent call last):
+  File "< chunk 5 named None >", line 1, in <module>
+NameError: name 'plot' is not defined
 ~~~
 {:.output}
 
@@ -92,12 +107,18 @@ session.commit()
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
+~~~~{.python}
+<class 'NameError'>
+name 'Session' is not defined~~~~~~~~~~~~~
+
 
 
 
 ~~~python
 >>> plot.id
-26
+Traceback (most recent call last):
+  File "< chunk 7 named None >", line 1, in <module>
+NameError: name 'plot' is not defined
 ~~~
 {:.output}
 
@@ -120,6 +141,10 @@ species = query.one()
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
+~~~~{.python}
+<class 'NameError'>
+name 'session' is not defined~~~~~~~~~~~~~
+
 
 
 Not only do we have the species' attributes
@@ -127,9 +152,13 @@ Not only do we have the species' attributes
 
 ~~~python
 >>> species.id
-'RO'
+Traceback (most recent call last):
+  File "< chunk 9 named None >", line 1, in <module>
+NameError: name 'species' is not defined
 >>> species.genus
-'Reithrodontomys'
+Traceback (most recent call last):
+  File "< chunk 9 named None >", line 1, in <module>
+NameError: name 'species' is not defined
 ~~~
 {:.output}
 
@@ -140,7 +169,9 @@ Not only do we have the species' attributes
 
 ~~~python
 >>> species.animals_collection
-[<sqlalchemy.ext.automap.animals object at 0x7fa66638b3c8>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b438>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b4e0>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b5c0>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b668>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b748>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b828>, <sqlalchemy.ext.automap.animals object at 0x7fa66638b8d0>]
+Traceback (most recent call last):
+  File "< chunk 10 named None >", line 1, in <module>
+NameError: name 'species' is not defined
 ~~~
 {:.output}
 
@@ -161,6 +192,10 @@ plot_b = session.query(Plots).filter_by(id=12).one()
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
+~~~~{.python}
+<class 'NameError'>
+name 'session' is not defined~~~~~~~~~~~~~
+
 
 
 ===
@@ -175,12 +210,18 @@ animals_b = query.filter(Animals.plots == plot_b).all()
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
+~~~~{.python}
+<class 'NameError'>
+name 'session' is not defined~~~~~~~~~~~~~
+
 
 
 
 ~~~python
 >>> animals_a[0].plots is plot_a
-True
+Traceback (most recent call last):
+  File "< chunk 13 named None >", line 1, in <module>
+NameError: name 'animals_a' is not defined
 ~~~
 {:.output}
 
@@ -199,6 +240,10 @@ for animal in animals_b:
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
+~~~~{.python}
+<class 'NameError'>
+name 'animals_a' is not defined~~~~~~~~~~~~~
+
 
 
 ===
@@ -208,7 +253,9 @@ Check your work ...
 
 ~~~python
 >>> animals_a[0].plots is plot_b
-True
+Traceback (most recent call last):
+  File "< chunk 15 named None >", line 1, in <module>
+NameError: name 'animals_a' is not defined
 ~~~
 {:.output}
 
@@ -222,6 +269,10 @@ session.commit()
 animals_a[0].plots is plot_b
 ~~~
 {:.text-document title="{{ site.handouts }}"}
+
+~~~~{.python}
+<class 'NameError'>
+name 'session' is not defined~~~~~~~~~~~~~
 
 
 
@@ -242,17 +293,18 @@ rodents = pd.read_sql(query.statement, engine)
 ~~~
 {:.text-document title="{{ site.handouts }}"}
 
+~~~~{.python}
+<class 'NameError'>
+name 'session' is not defined~~~~~~~~~~~~~
+
 
 
 
 ~~~python
 >>> rodents.head()
-   id  month  day  year  plot_id species_id sex  hindfoot_length  weight
-0   2      7   16  1977        3         NL   M             33.0     NaN
-1   3      7   16  1977        2         DM   F             37.0     NaN
-2   4      7   16  1977        7         DM   M             36.0     NaN
-3   5      7   16  1977        3         DM   M             35.0     NaN
-4   6      7   16  1977        1         PF   M             14.0     NaN
+Traceback (most recent call last):
+  File "< chunk 18 named None >", line 1, in <module>
+NameError: name 'rodents' is not defined
 ~~~
 {:.output}
 

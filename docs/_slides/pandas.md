@@ -13,20 +13,18 @@ stored in data frames.
 
 ===
 
-After importing [pandas](){:.pylib}, we call its `read_csv` function to load the Portal 
-animals data from the file `animals.csv`.
+After importing [pandas](){:.pylib}, we call its `read_csv` function
+to load the Portal animals data from the file `animals.csv`.
 
 
 ~~~python
 import pandas as pd
 animals = pd.read_csv("data/animals.csv")
+animals.dtypes
 ~~~
-{:.text-document title="{{ site.handouts }}"}
-
-
-
-~~~python
->>> animals.dtypes
+{:.input}
+~~~
+Out[1]: 
 id                   int64
 month                int64
 day                  int64
@@ -44,23 +42,98 @@ dtype: object
 
 ===
 
-There are many ways to slice a `DataFrame`. To select a subset of rows and/or columns by name, use the `loc` attribute and `[` for indexing.
+There are many ways to slice a `DataFrame`. To select a subset of rows
+and/or columns by name, use the `loc` attribute and `[` for indexing.
 
 
 ~~~python
 animals.loc[:, ['plot_id', 'species_id']]
 ~~~
-{:.text-document title="{{ site.handouts }}"}
+{:.input}
+~~~
+Out[1]: 
+       plot_id species_id
+0            3         NL
+1            2         DM
+2            7         DM
+3            3         DM
+4            1         PF
+5            2         PE
+6            1         DM
+7            1         DM
+8            6         PF
+9            5         DS
+10           7         DM
+11           3         DM
+12           8         DM
+13           6         DM
+14           4         DM
+15           3         DS
+16           2         PP
+17           4         PF
+18          11         DS
+19          14         DM
+20          15         NL
+21          13         DM
+22          13         SH
+23           9         DM
+24          15         DM
+25          15         DM
+26          11         DM
+27          11         PP
+28          10         DS
+29          15         DM
+...        ...        ...
+35519        9         DM
+35520        9         DM
+35521        9         DM
+35522        9         PB
+35523        9         OL
+35524        8         OT
+35525       13         DO
+35526       13         US
+35527       13         PB
+35528       13         OT
+35529       13         PB
+35530       14         DM
+35531       14         DM
+35532       14         DM
+35533       14         DM
+35534       14         DM
+35535       14         DM
+35536       15         PB
+35537       15         SF
+35538       15         PB
+35539       15         PB
+35540       15         PB
+35541       15         PB
+35542       15         US
+35543       15         AH
+35544       15         AH
+35545       10         RM
+35546        7         DO
+35547        5        NaN
+35548        2         NL
+
+[35549 rows x 2 columns]
+~~~
+{:.output}
 
 
 
 ===
 
-As with lists, `:` by itself indicates all the rows (or columns). Unlike lists, the `loc` attribute returns both endpoints of a slice.
+As with lists, `:` by itself indicates all the rows (or
+columns). Unlike lists, the `loc` attribute returns both endpoints of
+a slice.
 
 
 ~~~python
->>> animals.loc[2:4, 'plot_id':'sex']
+animals.loc[2:4, 'plot_id':'sex']
+~~~
+{:.input}
+~~~
+Out[1]: 
    plot_id species_id sex
 2        7         DM   M
 3        3         DM   M
@@ -72,11 +145,16 @@ As with lists, `:` by itself indicates all the rows (or columns). Unlike lists, 
 
 ===
 
-Use the `iloc` attribute of a DataFrame to get rows and/or columns by position, which behaves identically to list indexing.
+Use the `iloc` attribute of a DataFrame to get rows and/or columns by
+position, which behaves identically to list indexing.
 
 
 ~~~python
->>> animals.iloc[2:4, 4:6]
+animals.iloc[2:4, 4:6]
+~~~
+{:.input}
+~~~
+Out[1]: 
    plot_id species_id
 2        7         DM
 3        3         DM
@@ -87,32 +165,46 @@ Use the `iloc` attribute of a DataFrame to get rows and/or columns by position, 
 
 ===
 
-The default indexing for a DataFrame, without using the `loc` or `iloc` attributes, is by column name.
+The default indexing for a DataFrame, without using the `loc` or
+`iloc` attributes, is by column name.
 
 
 ~~~python
 animals[['hindfoot_length', 'weight']].describe()
 ~~~
-{:.text-document title="{{ site.handouts }}"}
+{:.input}
+~~~
+Out[1]: 
+       hindfoot_length        weight
+count     31438.000000  32283.000000
+mean         29.287932     42.672428
+std           9.564759     36.631259
+min           2.000000      4.000000
+25%          21.000000     20.000000
+50%          32.000000     37.000000
+75%          36.000000     48.000000
+max          70.000000    280.000000
+~~~
+{:.output}
 
 
 
 ===
 
-The `loc` attribute also allows logical indexing, i.e. the use of a boolean array of appropriate length for the selected dimension.
-
-The subset of `animals` where the species is "DM" is extracted into a new data frame.
+The `loc` attribute also allows logical indexing, i.e. the use of a
+boolean array of appropriate length for the selected dimension. The
+subset of `animals` where the species is "DM" can be extracted with a
+logical test.
 
 
 ~~~python
-animals_dm = animals.loc[animals['species_id'] == 'DM', ]
+idx = animals['species_id'] == 'DM'
+animals_dm = animals.loc[idx]
+animals_dm.head()
 ~~~
-{:.text-document title="{{ site.handouts }}"}
-
-
-
-~~~python
->>> animals_dm.head()
+{:.input}
+~~~
+Out[1]: 
    id  month  day  year  plot_id species_id sex  hindfoot_length  weight
 1   3      7   16  1977        2         DM   F             37.0     NaN
 2   4      7   16  1977        7         DM   M             36.0     NaN
@@ -127,18 +219,17 @@ animals_dm = animals.loc[animals['species_id'] == 'DM', ]
 <!--
 ===
 
-The `query()` method accepts an expression that may reference columns, increasing the readability of the same operation
+The `query()` method accepts an expression that may reference columns,
+increasing the readability of the same operation
 
 
 ~~~python
 animals_dm = animals.query('species_id == "DM"')
+animals_dm.head()
 ~~~
-{:.text-document title="{{ site.handouts }}"}
-
-
-
-~~~python
->>> animals_dm.head()
+{:.input}
+~~~
+Out[1]: 
    id  month  day  year  plot_id species_id sex  hindfoot_length  weight
 1   3      7   16  1977        2         DM   F             37.0     NaN
 2   4      7   16  1977        7         DM   M             36.0     NaN
@@ -153,27 +244,30 @@ animals_dm = animals.query('species_id == "DM"')
 
 ===
 
-Aggregation of records in a DataFrame by value of a given variable is performed with the `groupby()` method. The resulting "grouped" DataFrame has additional methods (like `mean()`) that summarize each group, producing a DataFrame with one record for each group.
+Aggregation of records in a DataFrame by value of a given variable is
+performed with the `groupby()` method. The resulting "grouped"
+DataFrame can apply aggregations to each group, and combine the result
+into a DataFrame with one record for each group.
+
+===
 
 
 ~~~python
 dm_stats = (
   animals_dm
   .groupby('sex')
-  ['hindfoot_length', 'weight']
-  .mean()
-  )
+  .agg({'hindfoot_length': ['mean', 'std']})
+)
+dm_stats
 ~~~
-{:.text-document title="{{ site.handouts }}"}
-
-
-
-~~~python
->>> dm_stats
-     hindfoot_length     weight
-sex                            
-F          35.712692  41.609685
-M          36.188229  44.353134
+{:.input}
+~~~
+Out[1]: 
+    hindfoot_length          
+               mean       std
+sex                          
+F         35.712692  1.433067
+M         36.188229  1.455396
 ~~~
 {:.output}
 
@@ -181,8 +275,13 @@ M          36.188229  44.353134
 
 ===
 
-## Exercise 6
+## Exercise 4
 
-The `count` method for DataFrames (e.g. `animals.count()`) returns the number of rows
-in a data frame. Find out which month had the most observations recorded
-in `animals` using `groupby()` and `count()`.
+The `count()` method can be used in a pandas aggregation step to
+count non-NA values in a column. Find out which month had the most
+observations recorded in `animals` using `groupby()` and `count()`. If
+you are feeling adventurous, calculate the average weight in each
+month and `rename()` the columns to "n" and "mean_weight".
+
+[View solution](#solution-4)
+{:.notes}
