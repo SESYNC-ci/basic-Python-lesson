@@ -7,14 +7,15 @@ Python is said to have a gentle learning curve, but all new languages take pract
 
 Key concepts covered in this lesson include:
 
-- Variable assignment
+- Variables, or objects
 - Data structures
-- Functions and methods
-- [pandas](){:.pylib}
+- Methods
+- [pandas](){:.pylib} `DataFrame`
+- [Scikit-learn](){:.pylib} `SVC`
 
 ===
 
 Additional critical packages for data science:
   - [matplotlib](){:.pylib}, [plotly](){:.pylib}, [seaborn](){:.pylib} for vizualization
-  - [StatsModels](){:.pylib}, [scikit-learn](){:.pylib}, and [pystan](){:.pylib} for model fitting
-  - [PyQGIS](){:.pylib}, [Shapely](){:.pylib}, and [Cartopy](){:.pylib} for GIS
+  - [StatsModels](){:.pylib}, and [pystan](){:.pylib} for model fitting
+  - [PyQGIS](){:.pylib}, [rasterio](){:.pylib}, [Shapely](){:.pylib}, and [Cartopy](){:.pylib} for GIS

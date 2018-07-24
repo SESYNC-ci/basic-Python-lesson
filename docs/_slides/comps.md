@@ -23,9 +23,9 @@ one way to build a sequence.
 letters = [x for x in 'abcde']
 letters
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: ['a', 'b', 'c', 'd', 'e']
+['a', 'b', 'c', 'd', 'e']
 ~~~
 {:.output}
 
@@ -44,9 +44,9 @@ To declare a dictionary in this way, specify a `key:value` pair.
 CAPS = {x: x.upper() for x in 'abcde'}
 CAPS
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: {'a': 'A', 'b': 'B', 'c': 'C', 'd': 'D', 'e': 'E'}
+{'a': 'A', 'b': 'B', 'c': 'C', 'd': 'D', 'e': 'E'}
 ~~~
 {:.output}
 

@@ -7,33 +7,101 @@ If you have used the statistical programming language R, you are familiar with
 "data frames", two-dimensional data structures where each column can hold a 
 different type of data, as in a spreadsheet.
 
-The data analysis library [pandas](){:.pylib} provides a data frame object type for
-Python, along with functions to subset, filter reshape and aggregate data
-stored in data frames.
+The analagous data frame package for Python is [pandas](){:.pylib},
+which provides a `DataFrame` object type with methods to subset,
+filter reshape and aggregate tabular data.
 
 ===
 
 After importing [pandas](){:.pylib}, we call its `read_csv` function
-to load the Portal animals data from the file `animals.csv`.
+to load the [County Business Patterns (CBP)] dataset.
 
 
 ~~~python
 import pandas as pd
-animals = pd.read_csv("data/animals.csv")
-animals.dtypes
+cbp = pd.read_csv('data/cbp15co.csv')
+cbp.dtypes
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0] }}"}
+
 ~~~
-Out[1]: 
-id                   int64
-month                int64
-day                  int64
-year                 int64
-plot_id              int64
-species_id          object
-sex                 object
-hindfoot_length    float64
-weight             float64
+
+FIPSTATE     int64
+FIPSCTY      int64
+NAICS       object
+EMPFLAG     object
+EMP_NF      object
+EMP          int64
+QP1_NF      object
+QP1          int64
+AP_NF       object
+AP           int64
+EST          int64
+N1_4         int64
+N5_9         int64
+N10_19       int64
+N20_49       int64
+N50_99       int64
+N100_249     int64
+N250_499     int64
+N500_999     int64
+N1000        int64
+N1000_1      int64
+N1000_2      int64
+N1000_3      int64
+N1000_4      int64
+CENSTATE     int64
+CENCTY       int64
+dtype: object
+~~~
+{:.output}
+
+
+
+[County Business Patterns (CBP)]: https://www.census.gov/programs-surveys/cbp/data/datasets.html
+
+===
+
+As is common with CSV files, the inferred data types were not quite right.
+
+
+~~~python
+cbp = pd.read_csv(
+    'data/cbp15co.csv',
+    dtype={'FIPSTATE':'str', 'FIPSCTY':'str'},
+    )
+cbp.dtypes
+~~~
+{:.text-document title="{{ site.handouts[0] }}"}
+
+~~~
+
+FIPSTATE    object
+FIPSCTY     object
+NAICS       object
+EMPFLAG     object
+EMP_NF      object
+EMP          int64
+QP1_NF      object
+QP1          int64
+AP_NF       object
+AP           int64
+EST          int64
+N1_4         int64
+N5_9         int64
+N10_19       int64
+N20_49       int64
+N50_99       int64
+N100_249     int64
+N250_499     int64
+N500_999     int64
+N1000        int64
+N1000_1      int64
+N1000_2      int64
+N1000_3      int64
+N1000_4      int64
+CENSTATE     int64
+CENCTY       int64
 dtype: object
 ~~~
 {:.output}
@@ -47,75 +115,76 @@ and/or columns by name, use the `loc` attribute and `[` for indexing.
 
 
 ~~~python
-animals.loc[:, ['plot_id', 'species_id']]
+cbp.loc[:, ['FIPSTATE', 'NAICS']]
 ~~~
-{:.input}
-~~~
-Out[1]: 
-       plot_id species_id
-0            3         NL
-1            2         DM
-2            7         DM
-3            3         DM
-4            1         PF
-5            2         PE
-6            1         DM
-7            1         DM
-8            6         PF
-9            5         DS
-10           7         DM
-11           3         DM
-12           8         DM
-13           6         DM
-14           4         DM
-15           3         DS
-16           2         PP
-17           4         PF
-18          11         DS
-19          14         DM
-20          15         NL
-21          13         DM
-22          13         SH
-23           9         DM
-24          15         DM
-25          15         DM
-26          11         DM
-27          11         PP
-28          10         DS
-29          15         DM
-...        ...        ...
-35519        9         DM
-35520        9         DM
-35521        9         DM
-35522        9         PB
-35523        9         OL
-35524        8         OT
-35525       13         DO
-35526       13         US
-35527       13         PB
-35528       13         OT
-35529       13         PB
-35530       14         DM
-35531       14         DM
-35532       14         DM
-35533       14         DM
-35534       14         DM
-35535       14         DM
-35536       15         PB
-35537       15         SF
-35538       15         PB
-35539       15         PB
-35540       15         PB
-35541       15         PB
-35542       15         US
-35543       15         AH
-35544       15         AH
-35545       10         RM
-35546        7         DO
-35547        5        NaN
-35548        2         NL
+{:.text-document title="{{ site.handouts[0] }}"}
 
-[35549 rows x 2 columns]
+~~~
+
+        FIPSTATE   NAICS
+0             01  ------
+1             01  11----
+2             01  113///
+3             01  1133//
+4             01  11331/
+5             01  113310
+6             01  115///
+7             01  1151//
+8             01  11511/
+9             01  115112
+10            01  21----
+11            01  212///
+12            01  2123//
+13            01  21231/
+14            01  212319
+15            01  21232/
+16            01  212321
+17            01  22----
+18            01  221///
+19            01  2211//
+20            01  22111/
+21            01  221112
+22            01  22112/
+23            01  221122
+24            01  2213//
+25            01  22131/
+26            01  221310
+27            01  23----
+28            01  236///
+29            01  2361//
+...          ...     ...
+2126571       56  611///
+2126572       56  6113//
+2126573       56  61131/
+2126574       56  611310
+2126575       56  6117//
+2126576       56  61171/
+2126577       56  611710
+2126578       56  62----
+2126579       56  621///
+2126580       56  6213//
+2126581       56  62134/
+2126582       56  621340
+2126583       56  6214//
+2126584       56  62142/
+2126585       56  621420
+2126586       56  6216//
+2126587       56  62161/
+2126588       56  621610
+2126589       56  6219//
+2126590       56  62199/
+2126591       56  621999
+2126592       56  81----
+2126593       56  812///
+2126594       56  8129//
+2126595       56  81299/
+2126596       56  812990
+2126597       56  813///
+2126598       56  8133//
+2126599       56  81331/
+2126600       56  813312
+
+[2126601 rows x 2 columns]
 ~~~
 {:.output}
 
@@ -129,15 +198,16 @@ a slice.
 
 
 ~~~python
-animals.loc[2:4, 'plot_id':'sex']
+cbp.loc[2:4, 'FIPSTATE':'NAICS']
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0] }}"}
+
 ~~~
-Out[1]: 
-   plot_id species_id sex
-2        7         DM   M
-3        3         DM   M
-4        1         PF   M
+
+  FIPSTATE FIPSCTY   NAICS
+2       01     001  113///
+3       01     001  1133//
+4       01     001  11331/
 ~~~
 {:.output}
 
@@ -150,14 +220,15 @@ position, which behaves identically to list indexing.
 
 
 ~~~python
-animals.iloc[2:4, 4:6]
+cbp.iloc[2:4, 0:3]
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0] }}"}
+
 ~~~
-Out[1]: 
-   plot_id species_id
-2        7         DM
-3        3         DM
+
+  FIPSTATE FIPSCTY   NAICS
+2       01     001  113///
+3       01     001  1133//
 ~~~
 {:.output}
 
@@ -170,20 +241,18 @@ The default indexing for a DataFrame, without using the `loc` or
 
 
 ~~~python
-animals[['hindfoot_length', 'weight']].describe()
+cbp[['NAICS', 'AP']].head()
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0] }}"}
+
 ~~~
-Out[1]: 
-       hindfoot_length        weight
-count     31438.000000  32283.000000
-mean         29.287932     42.672428
-std           9.564759     36.631259
-min           2.000000      4.000000
-25%          21.000000     20.000000
-50%          32.000000     37.000000
-75%          36.000000     48.000000
-max          70.000000    280.000000
+
+    NAICS      AP
+0  ------  321433
+1  11----    3566
+2  113///    3551
+3  1133//    3551
+4  11331/    3551
 ~~~
 {:.output}
 
@@ -193,81 +262,27 @@ max          70.000000    280.000000
 
 The `loc` attribute also allows logical indexing, i.e. the use of a
 boolean array of appropriate length for the selected dimension. The
-subset of `animals` where the species is "DM" can be extracted with a
-logical test.
+subset of `cbp` with sector level NAICS codes can indexed with string
+matching.
 
 
 ~~~python
-idx = animals['species_id'] == 'DM'
-animals_dm = animals.loc[idx]
-animals_dm.head()
+logical_idx = cbp['NAICS'].str.match('^\d{2}----')
+cbp = cbp.loc[logical_idx]
+cbp.head()
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0] }}"}
+
 ~~~
-Out[1]: 
-   id  month  day  year  plot_id species_id sex  hindfoot_length  weight
-1   3      7   16  1977        2         DM   F             37.0     NaN
-2   4      7   16  1977        7         DM   M             36.0     NaN
-3   5      7   16  1977        3         DM   M             35.0     NaN
-6   8      7   16  1977        1         DM   M             37.0     NaN
-7   9      7   16  1977        1         DM   F             34.0     NaN
-~~~
-{:.output}
 
+   FIPSTATE FIPSCTY   NAICS EMPFLAG   ...   N1000_3  N1000_4 CENSTATE  CENCTY
+1        01     001  11----     NaN   ...         0        0       63       1
+10       01     001  21----     NaN   ...         0        0       63       1
+17       01     001  22----     NaN   ...         0        0       63       1
+27       01     001  23----     NaN   ...         0        0       63       1
+93       01     001  31----     NaN   ...         0        0       63       1
 
-
-<!--
-===
-
-The `query()` method accepts an expression that may reference columns,
-increasing the readability of the same operation
-
-
-~~~python
-animals_dm = animals.query('species_id == "DM"')
-animals_dm.head()
-~~~
-{:.input}
-~~~
-Out[1]: 
-   id  month  day  year  plot_id species_id sex  hindfoot_length  weight
-1   3      7   16  1977        2         DM   F             37.0     NaN
-2   4      7   16  1977        7         DM   M             36.0     NaN
-3   5      7   16  1977        3         DM   M             35.0     NaN
-6   8      7   16  1977        1         DM   M             37.0     NaN
-7   9      7   16  1977        1         DM   F             34.0     NaN
-~~~
-{:.output}
-
-
--->
-
-===
-
-Aggregation of records in a DataFrame by value of a given variable is
-performed with the `groupby()` method. The resulting "grouped"
-DataFrame can apply aggregations to each group, and combine the result
-into a DataFrame with one record for each group.
-
-===
-
-
-~~~python
-dm_stats = (
-  animals_dm
-  .groupby('sex')
-  .agg({'hindfoot_length': ['mean', 'std']})
-)
-dm_stats
-~~~
-{:.input}
-~~~
-Out[1]: 
-    hindfoot_length          
-               mean       std
-sex                          
-F         35.712692  1.433067
-M         36.188229  1.455396
+[5 rows x 26 columns]
 ~~~
 {:.output}
 
@@ -275,13 +290,106 @@ M         36.188229  1.455396
 
 ===
 
-## Exercise 4
+Creation of new variables, our old favorite the full FIPS identifier,
+is done by assignment to new column names, using another `str` method.
 
-The `count()` method can be used in a pandas aggregation step to
-count non-NA values in a column. Find out which month had the most
-observations recorded in `animals` using `groupby()` and `count()`. If
-you are feeling adventurous, calculate the average weight in each
-month and `rename()` the columns to "n" and "mean_weight".
 
-[View solution](#solution-4)
+~~~python
+cbp['FIPS'] = cbp['FIPSTATE'].str.cat(cbp['FIPSCTY'])
+cbp.head()
+~~~
+{:.text-document title="{{ site.handouts[0] }}"}
+
+~~~
+
+   FIPSTATE FIPSCTY   NAICS EMPFLAG  ...   N1000_4  CENSTATE CENCTY   FIPS
+1        01     001  11----     NaN  ...         0        63      1  01001
+10       01     001  21----     NaN  ...         0        63      1  01001
+17       01     001  22----     NaN  ...         0        63      1  01001
+27       01     001  23----     NaN  ...         0        63      1  01001
+93       01     001  31----     NaN  ...         0        63      1  01001
+
+[5 rows x 27 columns]
+~~~
+{:.output}
+
+
+
+===
+
+## Index
+
+The `DataFrame` object includes the notion of "primary keys" for a
+table in its `Index` construct. One or more columns that uniquely
+identify rows can be set aside from the remaining columns.
+
+
+~~~python
+cbp = cbp.set_index(['FIPS', 'NAICS'])
+cbp.head()
+~~~
+{:.text-document title="{{ site.handouts[0] }}"}
+
+~~~
+
+             FIPSTATE FIPSCTY EMPFLAG EMP_NF  ...    N1000_3 N1000_4  CENSTATE CENCTY
+FIPS  NAICS                                   ...                                    
+01001 11----       01     001     NaN      H  ...          0       0        63      1
+      21----       01     001     NaN      H  ...          0       0        63      1
+      22----       01     001     NaN      H  ...          0       0        63      1
+      23----       01     001     NaN      G  ...          0       0        63      1
+      31----       01     001     NaN      H  ...          0       0        63      1
+
+[5 rows x 25 columns]
+~~~
+{:.output}
+
+
+
+===
+
+Any hierarchical index can be "unstacked", and all columns appropriately spread into a "wide" table layout.
+
+
+~~~python
+cbp = cbp[['EMP', 'AP']].unstack(fill_value=0)
+~~~
+{:.text-document title="{{ site.handouts[0] }}"}
+
+
+
+The last transformation kept only two variables for each FIPS and
+NAICS combination: the number of employees and the annual payroll (x
+$1000). By now, it may be obvious we are slowly working towards some
+goal!
 {:.notes}
+
+===
+
+The number of employees in just two sectors will serve as the set of
+variables (i.e. columns) by which we attempt to classify each county
+as "Metro" (i.e. urban) or not (i.e. rural). The first code is for
+Agriculture, Forestry, Fishing, and Hunting. The second is
+Accommodation and Food Services.
+
+
+~~~python
+income = cbp['EMP']
+income = income.loc[:, ['11----', '72----']]
+income.head()
+~~~
+{:.text-document title="{{ site.handouts[0] }}"}
+
+~~~
+
+NAICS  11----  72----
+FIPS                 
+01001      70    2091
+01003      14   12081
+01005     180     594
+01007      70     306
+01009      10     679
+~~~
+{:.output}
+
+

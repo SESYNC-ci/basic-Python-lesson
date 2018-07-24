@@ -1,7 +1,7 @@
 ---
 ---
 
-## Data structures
+## Data Structures
 
 The built-in structures for holding multiple values are:
 
@@ -15,31 +15,36 @@ The built-in structures for holding multiple values are:
 ## Tuple
 
 The simplest kind of sequence, a tuple is declared with
-comma-separated values, optionally inside `()`.
+comma-separated values, optionally inside `(...)`. The tuple is a
+common type of return value for functions with multiple outputs.
 
 
 ~~~python
 T = 'x', 3, True
 type(T)
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0] }}"}
+
 ~~~
-Out[1]: tuple
+tuple
 ~~~
 {:.output}
 
 
 
-Note that to declare a one-tuple without "(", a trailing "," is required.
+===
+
+To declare a one-tuple without `(...)`, a trailing "," is required.
 
 
 ~~~python
 T = 'cat',
 type(T)
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0] }}"}
+
 ~~~
-Out[1]: tuple
+tuple
 ~~~
 {:.output}
 
@@ -50,7 +55,7 @@ Out[1]: tuple
 ## List
 
 The more common kind of sequence in Python is the list, which is
-declared with comma-separated values inside `[]`. Unlike a tuple, a
+declared with comma-separated values inside `[...]`. Unlike a tuple, a
 list is mutable.
 
 
@@ -58,9 +63,10 @@ list is mutable.
 L = [3.14, 'xyz', T]
 type(L)
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0] }}"}
+
 ~~~
-Out[1]: list
+list
 ~~~
 {:.output}
 
@@ -78,9 +84,9 @@ position starting from zero---their "index".
 ~~~python
 L[0]
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: 3.14
+3.14
 ~~~
 {:.output}
 
@@ -95,9 +101,9 @@ the last item in the list, -2 the second-to-last item, and so on.
 ~~~python
 L[-1]
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: ('cat',)
+('cat',)
 ~~~
 {:.output}
 
@@ -112,9 +118,9 @@ The syntax `L[i:j]` selects a sub-list starting with the element at index
 ~~~python
 L[0:2]
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: [3.14, 'xyz']
+[3.14, 'xyz']
 ~~~
 {:.output}
 
@@ -134,17 +140,20 @@ to picture the indices as "dividers" between list elements.
  | 3.14 | 'xyz' | ('cat',) |
 -3     -2      -1
 ~~~
-{:.input}
 
 Positive indices are written at the top and negative indices at the bottom. 
 `L[i]` returns the element to the right of `i` whereas `L[i:j]` returns
 elements between `i` and `j`.
+{:.notes}
 
 ===
 
 ## Set
 
-The third and last "sequence" data structure is a set, used mainly for quick access to set operations like "union" and "difference". Declare a set with comma-separated values inside `{}` or by casting another sequence with `set()`.
+The third and last "sequence" data structure is a set, useful for
+operations like "union" and "difference". Declare a set with
+comma-separated values inside `{...}` or by casting another sequence with
+`set()`.
 
 
 ~~~python
@@ -152,15 +161,18 @@ S1 = set(L)
 S2 = {3.14, 'z'}
 S1.difference(S2)
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0] }}"}
+
 ~~~
-Out[1]: {('cat',), 'xyz'}
+{('cat',), 'xyz'}
 ~~~
 {:.output}
 
 
 
-Python is a rather principled language: a set is technically unordered, so its elements do not have an index. You cannot subset a set using `[]`.
+Python is a rather principled language: a set is technically
+unordered, so its elements do not have an index. You cannot subset a
+set using `[...]`.
 {:.notes}
 
 ===
@@ -169,24 +181,25 @@ Python is a rather principled language: a set is technically unordered, so its e
 
 Lists are useful when you need to access elements by their position in
 a sequence. In contrast, a dictionary is needed to find values based
-on arbitrary identifiers.
+on arbitrary identifiers, called "keys".
 
 ===
 
-Construct a dictionary with comma-separated `key: value` pairs in `{}`.
+Construct a dictionary with comma-separated `key: value` pairs within `{...}`.
 
 
 ~~~python
-toons = {
-  'Snowy': 'dog',
-  'Garfield': 'cat',
-  'Bugs': 'bunny',
+user = {
+  'First Name': 'J.',
+  'Last Name': 'Doe',
+  'Email': 'j.doe@gmail.com',
 }
-type(toons)
+type(user)
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0] }}"}
+
 ~~~
-Out[1]: dict
+dict
 ~~~
 {:.output}
 
@@ -199,11 +212,12 @@ but the key must be used rather than an index.
 
 
 ~~~python
-toons['Bugs']
+user['Email']
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0] }}"}
+
 ~~~
-Out[1]: 'bunny'
+'j.doe@gmail.com'
 ~~~
 {:.output}
 
@@ -217,28 +231,13 @@ dictionary.
 
 
 ~~~python
-toons['Goofy'] = 'dog'
-toons
+user['Age'] = 42
 ~~~
-{:.input}
-~~~
-Out[1]: {'Bugs': 'bunny', 'Garfield': 'cat', 'Goofy': 'dog', 'Snowy': 'dog'}
-~~~
-{:.output}
+{:.text-document title="{{ site.handouts[0] }}"}
 
 
 
 Dictionary keys are unique. Assigning a value to an existing key
-overwrites its previous value.
-
-===
-
-## Exercise 2
-
-Based on what we have learned so far about lists and dictionaries,
-think up a data structure suitable for an address book of names and
-emails. Now create it! Enter the name and email address for yourself
-and your neighbor in a new variable called `addr`.
-
-[View solution](#solution-2)
+overwrites its previous value. You would replace the current Gmail
+address with `user['Email'] = doedoe1337@aol.com`.
 {:.notes}

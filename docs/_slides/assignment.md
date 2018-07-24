@@ -11,9 +11,10 @@ value of the expression on its right.
 a = 'xyz'
 a
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0] }}"}
+
 ~~~
-Out[1]: 'xyz'
+'xyz'
 ~~~
 {:.output}
 
@@ -33,9 +34,9 @@ The "in-memory" location of `a` returned by `id()` ...
 ~~~python
 id(a)
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: 4388719672
+4454018216
 ~~~
 {:.output}
 
@@ -47,9 +48,9 @@ Out[1]: 4388719672
 ~~~python
 id('xyz')
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: 4388719672
+4454018216
 ~~~
 {:.output}
 
@@ -64,9 +65,9 @@ it uses plain English when words will suffice.
 ~~~python
 a is 'xyz'
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: True
+True
 ~~~
 {:.output}
 
@@ -83,9 +84,10 @@ The `id()` function helps demonstrate that "equal" is not the "same".
 b = [1, 2, 3]
 id(b)
 ~~~
-{:.input}
+{:.text-document title="{{ site.handouts[0]}}"}
+
 ~~~
-Out[1]: 4388891208
+4443177480
 ~~~
 {:.output}
 
@@ -95,9 +97,9 @@ Out[1]: 4388891208
 ~~~python
 id([1, 2, 3])
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: 4388401672
+4445161480
 ~~~
 {:.output}
 
@@ -112,9 +114,9 @@ object:
 ~~~python
 b is [1, 2, 3]
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: False
+False
 ~~~
 {:.output}
 
@@ -125,23 +127,28 @@ Out[1]: False
 ## Side-effects
 
 The reason to be aware of what `b` **is** has to do with
-"side-effects", an import part of Python programming. A side-effect
-occurs when an expression generates some ripples other than its return
-value. And side-effects don't change the label, they effect what the
-label is assigned to (i.e. what it **is**).
+"side-effects", an very import part of Python programming. A
+side-effect occurs when an expression generates some ripples other
+than its return value.
 
 
 ~~~python
 b.pop()
 b
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: [1, 2]
+[1, 2]
 ~~~
 {:.output}
 
 
+
+Python is an object-oriented language from the ground up---everything
+is an "object" with some state to be more or less aware of. And
+side-effects don't touch the label, they effect what the label is
+assigned to (i.e. what it **is**).
+{:.notes}
 
 ===
 
@@ -161,11 +168,7 @@ labels, which is not so unusual:
 c = b
 b.pop()
 ~~~
-{:.input}
-~~~
-Out[1]: 2
-~~~
-{:.output}
+{:.text-document title="{{ site.handouts[0] }}"}
 
 
 
@@ -173,9 +176,9 @@ Out[1]: 2
 ~~~python
 c
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: [1]
+[1]
 ~~~
 {:.output}
 
@@ -189,6 +192,7 @@ b.append(4)`, which overwrites `b` with the value `None` that happens
 to be returned by the `append()` method.
 {:.notes}
 
+<!--
 ===
 
 Not every object is "mutable" like our list `b`. For example, the `a`
@@ -199,9 +203,9 @@ assigned earlier is not.
 x = a
 a.upper()
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: 'XYZ'
+'XYZ'
 ~~~
 {:.output}
 
@@ -213,9 +217,9 @@ Out[1]: 'XYZ'
 ~~~python
 x
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: 'xyz'
+'xyz'
 ~~~
 {:.output}
 
@@ -228,10 +232,11 @@ guess that there has been no side-effect on the original `a`.
 ~~~python
 a
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: 'xyz'
+'xyz'
 ~~~
 {:.output}
 
 
+-->

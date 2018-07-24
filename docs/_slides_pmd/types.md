@@ -1,13 +1,9 @@
 ---
 ---
 
-```{python, echo=False}
-a = 'xyz'
-```
+## Data Types
 
-## Data types
-
-The immutable data types are
+The basic data types are
 
 | `'int'`   | Integer            |
 | `'float'` | Real number        |
@@ -19,7 +15,7 @@ The immutable data types are
 
 Any object can be queried with `type()` 
 
-```python
+```{python title='{{ site.handouts[0] }}'}
 T = 'x', 3, True
 type(T)
 type('x')
@@ -29,7 +25,7 @@ type('x')
 
 ## Operators
 
-Python supports the usual arithmetic operators for numeric types:
+Python supports the usual (or not) arithmetic operators for numeric types:
 
 | `+`  | addition                |
 | `-`  | subtraction             |
@@ -43,11 +39,11 @@ Python supports the usual arithmetic operators for numeric types:
 
 One or both of these might be a surprise:
 
-```python
+```{python title='{{ site.handouts[0] }}'}
 5 ** 2
 ```
 
-```python
+```{python title='{{ site.handouts[0] }}'}
 2 // 3
 ```
 
@@ -55,12 +51,8 @@ One or both of these might be a surprise:
 
 Some operators have natural extensions to non-numeric types:
 
-```python
+```{python title='{{ site.handouts[0] }}'}
 a * 2
-```
-
-```python
-T + (3.14, 'y')
 ```
 
 ===
@@ -75,14 +67,3 @@ Comparison operators are symbols or plain english:
 | `or`       | logical or                        |
 | `not`      | logical negation                  |
 | `in`       | logical membership                |
-
-===
-
-## Exercise 1
-
-Explore the use of `in` to test membership in a list. Create a list of
-multiple integers, and use `in` to test membership of some other
-numbers in your list.
-
-[View solution](#solution-1)
-{:.notes}

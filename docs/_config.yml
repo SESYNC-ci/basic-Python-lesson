@@ -1,13 +1,14 @@
 # Site
 
-title: Introduction to Python with Pandas
+title: Classification
 handouts:
  - worksheet.ipynb
- - data/animals.csv
+ - data/cbp15co.csv
+ - data/ruralurbancodes2013.csv
  - data/README.md
-tag: v0.2
-lesson: 6
-instructor: Ian Carroll
+tag: v0.3
+lesson: 7
+instructor: Kelly Hondula
 authors:
   - Philippe Marchand
   - Ian Carroll
@@ -19,16 +20,18 @@ slide_sorter:
   - assignment
   - types
   - structs
-  - comps
+#  - comps
   - flow
-  - def
+#  - def
+  - methods
 #  - packages
 #  - numpy
   - pandas
+  - svm
 #  - matplotlib
 #  - sqlalchemy
   - conclude
-  - solutions
+  - exercise
 
 #####################################
 # Only modify content above or risk #

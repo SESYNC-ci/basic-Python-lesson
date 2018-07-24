@@ -3,7 +3,6 @@
 
 
 
-
 ## Function definition
 
 We already saw examples of a few built-in functions, such as `type()`
@@ -16,7 +15,7 @@ def add_two(x):
     result = x + 2
     return result
 ~~~
-{:.input}
+{:.input title="Console"}
 
 
 ===
@@ -33,9 +32,9 @@ The lack of a `return`, or `return` followed by nothing, causes the function to 
 ~~~python
 add_two(10)
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: 12
+12
 ~~~
 {:.output}
 
@@ -56,7 +55,7 @@ def add_any(x, y=0):
     result = x + y
     return result
 ~~~
-{:.input}
+{:.input title="Console"}
 
 
 ===
@@ -67,9 +66,9 @@ Then the function can be called without that argument:
 ~~~python
 add_any(10)
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: 10
+10
 ~~~
 {:.output}
 
@@ -83,9 +82,9 @@ Adding an argument will override the default:
 ~~~python
 add_any(10, 5)
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
-Out[1]: 15
+15
 ~~~
 {:.output}
 
@@ -104,12 +103,7 @@ key brings up suggestions.
 ~~~python
 squares.index(4)
 ~~~
-{:.input}
-~~~
-Out[1]: 1
-~~~
-{:.output}
-
+{:.input title="Console"}
 
 
 ===
@@ -123,12 +117,13 @@ applies to any instance of a type.
 ~~~python
 help(squares.index)
 ~~~
-{:.input}
+{:.input title="Console"}
 ~~~
 Help on built-in function index:
 
-index(...) method of builtins.list instance
-    L.index(value, [start, [stop]]) -> integer -- return first index of value.
+index(value, start=0, stop=9223372036854775807, /) method of builtins.list instance
+    Return first index of value.
+    
     Raises ValueError if the value is not present.
 
 ~~~
@@ -153,7 +148,21 @@ toons.update({
   'Bugs': 'rabbit',
 })
 ~~~
-{:.input}
+{:.input title="Console"}
+~~~
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-1-2cd87e484c55>[0m in [0;36m<module>[0;34m()[0m
+[1;32m      1[0m [0;34m[0m[0m
+[0;32m----> 2[0;31m toons.update({
+[0m[1;32m      3[0m   [0;34m'Tweety'[0m[0;34m:[0m [0;34m'bird'[0m[0;34m,[0m[0;34m[0m[0m
+[1;32m      4[0m   [0;34m'Bob'[0m[0;34m:[0m [0;34m'sponge'[0m[0;34m,[0m[0;34m[0m[0m
+[1;32m      5[0m   [0;34m'Bugs'[0m[0;34m:[0m [0;34m'rabbit'[0m[0;34m,[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'toons' is not defined
+~~~
+{:.output}
+
 
 
 ===

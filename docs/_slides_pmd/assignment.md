@@ -6,7 +6,7 @@
 Variable assignment attaches the label left of an `=` to the return
 value of the expression on its right.
 
-```python
+```{python title='{{ site.handouts[0] }}'}
 a = 'xyz'
 a
 ```
@@ -21,13 +21,13 @@ the same `'xyz'`, which we can verify by `id()`.
 
 The "in-memory" location of `a` returned by `id()` ...
 
-```python
+```{python}
 id(a)
 ```
 
 ... is equal to that of `xyz` itself:
 
-```python
+```{python}
 id('xyz')
 ```
 
@@ -36,7 +36,7 @@ id('xyz')
 The idiom to test this "sameness" is typical of the Python language:
 it uses plain English when words will suffice.
 
-```python
+```{python}
 a is 'xyz'
 ```
 
@@ -46,12 +46,12 @@ a is 'xyz'
 
 The `id()` function helps demonstrate that "equal" is not the "same".
 
-```python
+```{python title='{{ site.handouts[0]}}'}
 b = [1, 2, 3]
 id(b)
 ```
 
-```python
+```{python}
 id([1, 2, 3])
 ```
 
@@ -60,7 +60,7 @@ id([1, 2, 3])
 Even though `b == [1, 2, 3]` returns `True`, these are not the same
 object:
 
-```python
+```{python}
 b is [1, 2, 3]
 ```
 
@@ -69,15 +69,20 @@ b is [1, 2, 3]
 ## Side-effects
 
 The reason to be aware of what `b` **is** has to do with
-"side-effects", an import part of Python programming. A side-effect
-occurs when an expression generates some ripples other than its return
-value. And side-effects don't change the label, they effect what the
-label is assigned to (i.e. what it **is**).
+"side-effects", an very import part of Python programming. A
+side-effect occurs when an expression generates some ripples other
+than its return value.
 
-```python
+```{python}
 b.pop()
 b
 ```
+
+Python is an object-oriented language from the ground up---everything
+is an "object" with some state to be more or less aware of. And
+side-effects don't touch the label, they effect what the label is
+assigned to (i.e. what it **is**).
+{:.notes}
 
 ===
 
@@ -92,12 +97,12 @@ Answer
 Side-effects trip up Python programmers when an object has multiple
 labels, which is not so unusual:
 
-```python
+```{python title='{{ site.handouts[0] }}'}
 c = b
 b.pop()
 ```
 
-```python
+```{python}
 c
 ```
 
@@ -109,25 +114,27 @@ b.append(4)`, which overwrites `b` with the value `None` that happens
 to be returned by the `append()` method.
 {:.notes}
 
+<!--
 ===
 
 Not every object is "mutable" like our list `b`. For example, the `a`
 assigned earlier is not.
 
-```python
+```{python}
 x = a
 a.upper()
 ```
 
 ===
 
-```python
+```{python}
 x
 ```
 
 The string 'xyz' hasn't changed---it's immutable. So it is also a safe
 guess that there has been no side-effect on the original `a`.
 
-```python
+```{python}
 a
 ```
+-->

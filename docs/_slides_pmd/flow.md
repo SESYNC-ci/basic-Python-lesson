@@ -16,17 +16,13 @@ main motivation for looking at flow control.
 A `for` loop takes any "iterable" object and executes a block of code
 once for each element `in` the object.
 
-
-~~~python
+```{python title='{{ site.handouts[0] }}'}
 squares = []
 for i in range(1, 5):
     j = i ** 2
     squares.append(j)
 len(squares)
-~~~
-{:.text-document title="{{ site.handouts[0] }}"}
-
-
+```
 
 The `range(i, j)` function creates an object that iterates from `i` up
 through `j - 1`; just like in the case of list slices, the range is
@@ -64,8 +60,7 @@ so, the interpreter prints her email address; otherwise it prints an
 empty string.
 {:.notes}
 
-
-~~~python
+```{python title='{{ site.handouts[0] }}'}
 users = [
     {'Name':'Alice', 'Email':'alice@email.com'},
     {'Name':'Bob', 'Email': 'bob@email.com'},
@@ -75,13 +70,4 @@ for u in users:
         print(u['Email'])
     else:
         print('')
-~~~
-{:.text-document title="{{ site.handouts[0] }}"}
-
-~~~
-alice@email.com
-
-~~~
-{:.output}
-
-
+```

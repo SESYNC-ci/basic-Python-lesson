@@ -1,7 +1,7 @@
 ---
 ---
 
-## Data structures
+## Data Structures
 
 The built-in structures for holding multiple values are:
 
@@ -15,16 +15,19 @@ The built-in structures for holding multiple values are:
 ## Tuple
 
 The simplest kind of sequence, a tuple is declared with
-comma-separated values, optionally inside `()`.
+comma-separated values, optionally inside `(...)`. The tuple is a
+common type of return value for functions with multiple outputs.
 
-```python
+```{python title='{{ site.handouts[0] }}'}
 T = 'x', 3, True
 type(T)
 ```
 
-Note that to declare a one-tuple without "(", a trailing "," is required.
+===
 
-```python
+To declare a one-tuple without `(...)`, a trailing "," is required.
+
+```{python title='{{ site.handouts[0] }}'}
 T = 'cat',
 type(T)
 ```
@@ -34,10 +37,10 @@ type(T)
 ## List
 
 The more common kind of sequence in Python is the list, which is
-declared with comma-separated values inside `[]`. Unlike a tuple, a
+declared with comma-separated values inside `[...]`. Unlike a tuple, a
 list is mutable.
 
-```python
+```{python title='{{ site.handouts[0] }}'}
 L = [3.14, 'xyz', T]
 type(L)
 ```
@@ -50,7 +53,7 @@ Subsetting elements from a tuple or list is performed with square
 brackets in both cases, and selects elements using their integer
 position starting from zero---their "index".
 
-```python
+```{python}
 L[0]
 ```
 
@@ -59,7 +62,7 @@ L[0]
 Negative indices are allowed, and refer to the reverse ordering: -1 is
 the last item in the list, -2 the second-to-last item, and so on.
 
-```python
+```{python}
 L[-1]
 ```
 
@@ -68,7 +71,7 @@ L[-1]
 The syntax `L[i:j]` selects a sub-list starting with the element at index
 `i` and ending with the element at index `j - 1`.
 
-```python
+```{python}
 L[0:2]
 ```
 
@@ -86,25 +89,30 @@ to picture the indices as "dividers" between list elements.
  | 3.14 | 'xyz' | ('cat',) |
 -3     -2      -1
 ~~~
-{:.input}
 
 Positive indices are written at the top and negative indices at the bottom. 
 `L[i]` returns the element to the right of `i` whereas `L[i:j]` returns
 elements between `i` and `j`.
+{:.notes}
 
 ===
 
 ## Set
 
-The third and last "sequence" data structure is a set, used mainly for quick access to set operations like "union" and "difference". Declare a set with comma-separated values inside `{}` or by casting another sequence with `set()`.
+The third and last "sequence" data structure is a set, useful for
+operations like "union" and "difference". Declare a set with
+comma-separated values inside `{...}` or by casting another sequence with
+`set()`.
 
-```python
+```{python title='{{ site.handouts[0] }}'}
 S1 = set(L)
 S2 = {3.14, 'z'}
 S1.difference(S2)
 ```
 
-Python is a rather principled language: a set is technically unordered, so its elements do not have an index. You cannot subset a set using `[]`.
+Python is a rather principled language: a set is technically
+unordered, so its elements do not have an index. You cannot subset a
+set using `[...]`.
 {:.notes}
 
 ===
@@ -113,19 +121,19 @@ Python is a rather principled language: a set is technically unordered, so its e
 
 Lists are useful when you need to access elements by their position in
 a sequence. In contrast, a dictionary is needed to find values based
-on arbitrary identifiers.
+on arbitrary identifiers, called "keys".
 
 ===
 
-Construct a dictionary with comma-separated `key: value` pairs in `{}`.
+Construct a dictionary with comma-separated `key: value` pairs within `{...}`.
 
-```python
-toons = {
-  'Snowy': 'dog',
-  'Garfield': 'cat',
-  'Bugs': 'bunny',
+```{python title='{{ site.handouts[0] }}'}
+user = {
+  'First Name': 'J.',
+  'Last Name': 'Doe',
+  'Email': 'j.doe@gmail.com',
 }
-type(toons)
+type(user)
 ```
 
 ===
@@ -133,8 +141,8 @@ type(toons)
 Individual values are accessed using square brackets, as for lists,
 but the key must be used rather than an index.
 
-```python
-toons['Bugs']
+```{python title='{{ site.handouts[0] }}'}
+user['Email']
 ```
 
 ===
@@ -143,22 +151,11 @@ To add a single new element to the dictionary, define a new
 `key:value` pair by assigning a value to a novel key in the
 dictionary.
 
-```python
-toons['Goofy'] = 'dog'
-toons
+```{python title='{{ site.handouts[0] }}'}
+user['Age'] = 42
 ```
 
 Dictionary keys are unique. Assigning a value to an existing key
-overwrites its previous value.
-
-===
-
-## Exercise 2
-
-Based on what we have learned so far about lists and dictionaries,
-think up a data structure suitable for an address book of names and
-emails. Now create it! Enter the name and email address for yourself
-and your neighbor in a new variable called `addr`.
-
-[View solution](#solution-2)
+overwrites its previous value. You would replace the current Gmail
+address with `user['Email'] = doedoe1337@aol.com`.
 {:.notes}
