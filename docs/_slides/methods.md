@@ -30,9 +30,8 @@ help(squares.index)
 ~~~
 Help on built-in function index:
 
-index(value, start=0, stop=9223372036854775807, /) method of builtins.list instance
-    Return first index of value.
-    
+index(...) method of builtins.list instance
+    L.index(value, [start, [stop]]) -> integer -- return first index of value.
     Raises ValueError if the value is not present.
 
 ~~~
@@ -64,10 +63,10 @@ user
 
 ~~~
 
-{'First Name': 'J.',
- 'Last Name': 'Doe',
+{'Age': 24,
  'Email': 'j.doe@gmail.com',
- 'Age': 24,
+ 'First Name': 'J.',
+ 'Last Name': 'Doe',
  'Nickname': 'Jamie'}
 ~~~
 {:.output}

@@ -332,13 +332,13 @@ cbp.head()
 
 ~~~
 
-             FIPSTATE FIPSCTY EMPFLAG EMP_NF  ...    N1000_3 N1000_4  CENSTATE CENCTY
-FIPS  NAICS                                   ...                                    
-01001 11----       01     001     NaN      H  ...          0       0        63      1
-      21----       01     001     NaN      H  ...          0       0        63      1
-      22----       01     001     NaN      H  ...          0       0        63      1
-      23----       01     001     NaN      G  ...          0       0        63      1
-      31----       01     001     NaN      H  ...          0       0        63      1
+             FIPSTATE FIPSCTY EMPFLAG  ...   N1000_4  CENSTATE CENCTY
+FIPS  NAICS                            ...                           
+01001 11----       01     001     NaN  ...         0        63      1
+      21----       01     001     NaN  ...         0        63      1
+      22----       01     001     NaN  ...         0        63      1
+      23----       01     001     NaN  ...         0        63      1
+      31----       01     001     NaN  ...         0        63      1
 
 [5 rows x 25 columns]
 ~~~

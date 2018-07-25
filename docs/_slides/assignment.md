@@ -36,7 +36,7 @@ id(a)
 ~~~
 {:.input title="Console"}
 ~~~
-4454018216
+140683679044640
 ~~~
 {:.output}
 
@@ -50,7 +50,7 @@ id('xyz')
 ~~~
 {:.input title="Console"}
 ~~~
-4454018216
+140683679044640
 ~~~
 {:.output}
 
@@ -87,7 +87,7 @@ id(b)
 {:.text-document title="{{ site.handouts[0]}}"}
 
 ~~~
-4443177480
+140683676290568
 ~~~
 {:.output}
 
@@ -99,7 +99,7 @@ id([1, 2, 3])
 ~~~
 {:.input title="Console"}
 ~~~
-4445161480
+140683679144648
 ~~~
 {:.output}
 

@@ -37,7 +37,7 @@ sitting on the dashed lines above are the support vectors.
 ===
 
 The USDA ERS classifies the counties of the US with a set of 9
-[Rurual-Urban Continuum Codes]. Joining these to the CBP attributes,
+[Rural-Urban Continuum Codes]. Joining these to the CBP attributes,
 and creating a binary "Metropolitan" class based on the the codes for
 urban-influenced areas, completes our dataset.
 
@@ -169,7 +169,7 @@ plot_decision_regions(X, y, clf=ml, legend=2)
 {:.text-document title="{{ site.handouts[0] }}"}
 
 ~~~
-<matplotlib.axes._subplots.AxesSubplot at 0x125cd93c8>
+<matplotlib.axes._subplots.AxesSubplot at 0x7ff371631630>
 ~~~
 {:.output}
 
@@ -235,7 +235,7 @@ plot_decision_regions(X, y, clf=ml, legend=2)
 {:.text-document title="{{ site.handouts[0] }}"}
 
 ~~~
-<matplotlib.axes._subplots.AxesSubplot at 0x112773048>
+<matplotlib.axes._subplots.AxesSubplot at 0x7ff371a93a58>
 ~~~
 {:.output}
 
