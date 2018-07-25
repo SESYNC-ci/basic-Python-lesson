@@ -37,7 +37,7 @@ sitting on the dashed lines above are the support vectors.
 ===
 
 The USDA ERS classifies the counties of the US with a set of 9
-[Rurual-Urban Continuum Codes]. Joining these to the CBP attributes,
+[Rural-Urban Continuum Codes]. Joining these to the CBP attributes,
 and creating a binary "Metropolitan" class based on the the codes for
 urban-influenced areas, completes our dataset.
 

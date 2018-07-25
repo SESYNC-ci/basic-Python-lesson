@@ -4,7 +4,7 @@
 ## Flow Control
 
 The syntax for "if ... then" tests and for-loops involves plain
-English and few special characters---you will easilly ingest
+English and few special characters---you will easily ingest
 it. Whitespace actually serves as the most important special
 character, although you may not think of it that way, and that is our
 main motivation for looking at flow control.
