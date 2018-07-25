@@ -17,8 +17,6 @@ Any object can be queried with `type()`
 
 
 ~~~python
-T = 'x', 3, True
-type(T)
 type('x')
 ~~~
 {:.text-document title="{{ site.handouts[0] }}"}

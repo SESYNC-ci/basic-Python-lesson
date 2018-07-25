@@ -81,7 +81,7 @@ subset of `cbp` with sector level NAICS codes can indexed with string
 matching.
 
 ```{python title='{{ site.handouts[0] }}'}
-logical_idx = cbp['NAICS'].str.match('^\d{2}----')
+logical_idx = cbp['NAICS'].str.match('^[0-9]{2}----')
 cbp = cbp.loc[logical_idx]
 cbp.head()
 ```

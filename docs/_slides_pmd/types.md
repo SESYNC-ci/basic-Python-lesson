@@ -16,8 +16,6 @@ The basic data types are
 Any object can be queried with `type()` 
 
 ```{python title='{{ site.handouts[0] }}'}
-T = 'x', 3, True
-type(T)
 type('x')
 ```
 

@@ -267,7 +267,7 @@ matching.
 
 
 ~~~python
-logical_idx = cbp['NAICS'].str.match('^\d{2}----')
+logical_idx = cbp['NAICS'].str.match('^[0-9]{2}----')
 cbp = cbp.loc[logical_idx]
 cbp.head()
 ~~~

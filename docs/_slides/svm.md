@@ -162,14 +162,13 @@ shows the challeng of separating this attribute space!
 
 ~~~python
 from mlxtend.plotting import plot_decision_regions
-import matplotlib.pyplot as plt
 
 plot_decision_regions(X, y, clf=ml, legend=2)
 ~~~
 {:.text-document title="{{ site.handouts[0] }}"}
 
 ~~~
-<matplotlib.axes._subplots.AxesSubplot at 0x7ff371631630>
+<matplotlib.axes._subplots.AxesSubplot at 0x7f11c31b7320>
 ~~~
 {:.output}
 
@@ -235,7 +234,7 @@ plot_decision_regions(X, y, clf=ml, legend=2)
 {:.text-document title="{{ site.handouts[0] }}"}
 
 ~~~
-<matplotlib.axes._subplots.AxesSubplot at 0x7ff371a93a58>
+<matplotlib.axes._subplots.AxesSubplot at 0x7f11d0d30828>
 ~~~
 {:.output}
 

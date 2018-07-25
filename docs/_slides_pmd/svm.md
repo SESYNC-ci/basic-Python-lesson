@@ -125,7 +125,6 @@ shows the challeng of separating this attribute space!
 
 ```{python title='{{ site.handouts[0] }}'}
 from mlxtend.plotting import plot_decision_regions
-import matplotlib.pyplot as plt
 
 plot_decision_regions(X, y, clf=ml, legend=2)
 ```
