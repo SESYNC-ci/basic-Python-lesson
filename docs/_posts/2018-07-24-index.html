@@ -128,14 +128,14 @@ the same <code class="highlighter-rouge">'xyz'</code>, which we can verify by <c
 
 <div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>139714388067416
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>140241398229848
 </code></pre></div></div>
 
 <p>… is equal to that of <code class="highlighter-rouge">xyz</code> itself:</p>
 
 <div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span><span class="p">(</span><span class="s">'xyz'</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>139714388067416
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>140241398229848
 </code></pre></div></div>
 
 <p>The idiom to test this “sameness” is typical of the Python language:
@@ -154,12 +154,12 @@ it uses plain English when words will suffice.</p>
 <span class="nb">id</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>139714385299976
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>140241398331720
 </code></pre></div></div>
 
 <div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 </code></pre></div></div>
-<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>139714388024776
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>140241398330440
 </code></pre></div></div>
 
 <p>Even though <code class="highlighter-rouge">b == [1, 2, 3]</code> returns <code class="highlighter-rouge">True</code>, these are not the same
@@ -276,23 +276,23 @@ a
   <tbody>
     <tr>
       <td><code class="highlighter-rouge">'int'</code></td>
-      <td>Integer</td>
+      <td>integers</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">'float'</code></td>
-      <td>Real number</td>
+      <td>real numbers</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">'str'</code></td>
-      <td>Character string</td>
+      <td>character strings</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">'bool'</code></td>
-      <td><code class="highlighter-rouge">True</code>/<code class="highlighter-rouge">False</code></td>
+      <td><code class="highlighter-rouge">True</code> or <code class="highlighter-rouge">False</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">'tuple'</code></td>
-      <td>Immutable sequence</td>
+      <td><code class="highlighter-rouge">'NoneType'</code></td>
+      <td><code class="highlighter-rouge">None</code></td>
     </tr>
   </tbody>
 </table>
@@ -681,7 +681,7 @@ of a second dictionary into the one calling <code class="highlighter-rouge">upda
 <ol>
   <li>Leave a space after the <code class="highlighter-rouge">:</code> when declaring <code class="highlighter-rouge">key: value</code> pairs</li>
   <li>Trailing null arguments are syntactically correct, even advantageous</li>
-  <li>White space with <code class="highlighter-rouge">()</code> has no meaning and can improve readiability</li>
+  <li>White space within <code class="highlighter-rouge">(...)</code> has no meaning and can improve readiability</li>
 </ol>
 
 <p class="notes">The “style-guide” for Python scripting, <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a>, is first authored by the inventor
@@ -899,18 +899,18 @@ boolean array of appropriate length for the selected dimension. The
 subset of <code class="highlighter-rouge">cbp</code> with sector level NAICS codes can indexed with string
 matching.</p>
 
-<div class="language-python text-document highlighter-rouge" title="worksheet-7.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">logical_idx</span> <span class="o">=</span> <span class="n">cbp</span><span class="p">[</span><span class="s">'NAICS'</span><span class="p">]</span><span class="o">.</span><span class="nb">str</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">'^[0-9]{2}----'</span><span class="p">)</span>
+<div class="language-python text-document highlighter-rouge" title="worksheet-7.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">logical_idx</span> <span class="o">=</span> <span class="n">cbp</span><span class="p">[</span><span class="s">'NAICS'</span><span class="p">]</span><span class="o">.</span><span class="nb">str</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s">'[0-9]{2}----'</span><span class="p">)</span>
 <span class="n">cbp</span> <span class="o">=</span> <span class="n">cbp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">logical_idx</span><span class="p">]</span>
 <span class="n">cbp</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-   FIPSTATE FIPSCTY   NAICS EMPFLAG   ...   N1000_3  N1000_4 CENSTATE  CENCTY
-1        01     001  11----     NaN   ...         0        0       63       1
-10       01     001  21----     NaN   ...         0        0       63       1
-17       01     001  22----     NaN   ...         0        0       63       1
-27       01     001  23----     NaN   ...         0        0       63       1
-93       01     001  31----     NaN   ...         0        0       63       1
+   FIPSTATE FIPSCTY   NAICS EMPFLAG EMP_NF  EMP QP1_NF    QP1 AP_NF     AP   ...    N100_249  N250_499  N500_999  N1000  N1000_1  N1000_2  N1000_3  N1000_4  CENSTATE  CENCTY
+1        01     001  11----     NaN      H   70      H    790     H   3566   ...           0         0         0      0        0        0        0        0        63       1
+10       01     001  21----     NaN      H   82      H    713     H   3294   ...           0         0         0      0        0        0        0        0        63       1
+17       01     001  22----     NaN      H  196      H   4793     H  18611   ...           0         0         0      0        0        0        0        0        63       1
+27       01     001  23----     NaN      G  372      G   2891     G  13801   ...           0         0         0      0        0        0        0        0        63       1
+93       01     001  31----     NaN      H  971      H  15386     H  64263   ...           0         0         1      0        0        0        0        0        63       1
 
 [5 rows x 26 columns]
 </code></pre></div></div>
@@ -923,12 +923,12 @@ is done by assignment to new column names, using another <code class="highlighte
 </code></pre></div></div>
 
 <div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-   FIPSTATE FIPSCTY   NAICS EMPFLAG  ...   N1000_4  CENSTATE CENCTY   FIPS
-1        01     001  11----     NaN  ...         0        63      1  01001
-10       01     001  21----     NaN  ...         0        63      1  01001
-17       01     001  22----     NaN  ...         0        63      1  01001
-27       01     001  23----     NaN  ...         0        63      1  01001
-93       01     001  31----     NaN  ...         0        63      1  01001
+   FIPSTATE FIPSCTY   NAICS EMPFLAG EMP_NF  EMP QP1_NF    QP1 AP_NF     AP  ...    N250_499  N500_999  N1000  N1000_1  N1000_2  N1000_3  N1000_4  CENSTATE  CENCTY   FIPS
+1        01     001  11----     NaN      H   70      H    790     H   3566  ...           0         0      0        0        0        0        0        63       1  01001
+10       01     001  21----     NaN      H   82      H    713     H   3294  ...           0         0      0        0        0        0        0        63       1  01001
+17       01     001  22----     NaN      H  196      H   4793     H  18611  ...           0         0      0        0        0        0        0        63       1  01001
+27       01     001  23----     NaN      G  372      G   2891     G  13801  ...           0         0      0        0        0        0        0        63       1  01001
+93       01     001  31----     NaN      H  971      H  15386     H  64263  ...           0         1      0        0        0        0        0        63       1  01001
 
 [5 rows x 27 columns]
 </code></pre></div></div>
@@ -944,13 +944,13 @@ identify rows can be set aside from the remaining columns.</p>
 </code></pre></div></div>
 
 <div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-             FIPSTATE FIPSCTY EMPFLAG  ...   N1000_4  CENSTATE CENCTY
-FIPS  NAICS                            ...                           
-01001 11----       01     001     NaN  ...         0        63      1
-      21----       01     001     NaN  ...         0        63      1
-      22----       01     001     NaN  ...         0        63      1
-      23----       01     001     NaN  ...         0        63      1
-      31----       01     001     NaN  ...         0        63      1
+             FIPSTATE FIPSCTY EMPFLAG EMP_NF  EMP QP1_NF    QP1 AP_NF     AP  EST   ...    N100_249  N250_499  N500_999  N1000  N1000_1  N1000_2  N1000_3  N1000_4  CENSTATE  CENCTY
+FIPS  NAICS                                                                         ...                                                                                             
+01001 11----       01     001     NaN      H   70      H    790     H   3566    7   ...           0         0         0      0        0        0        0        0        63       1
+      21----       01     001     NaN      H   82      H    713     H   3294    3   ...           0         0         0      0        0        0        0        0        63       1
+      22----       01     001     NaN      H  196      H   4793     H  18611    9   ...           0         0         0      0        0        0        0        0        63       1
+      23----       01     001     NaN      G  372      G   2891     G  13801   75   ...           0         0         0      0        0        0        0        0        63       1
+      31----       01     001     NaN      H  971      H  15386     H  64263   24   ...           0         0         1      0        0        0        0        0        63       1
 
 [5 rows x 25 columns]
 </code></pre></div></div>
@@ -971,9 +971,9 @@ as “Metro” (i.e. urban) or not (i.e. rural). The first code is for
 Agriculture, Forestry, Fishing, and Hunting. The second is
 Accommodation and Food Services.</p>
 
-<div class="language-python text-document highlighter-rouge" title="worksheet-7.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">income</span> <span class="o">=</span> <span class="n">cbp</span><span class="p">[</span><span class="s">'EMP'</span><span class="p">]</span>
-<span class="n">income</span> <span class="o">=</span> <span class="n">income</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'11----'</span><span class="p">,</span> <span class="s">'72----'</span><span class="p">]]</span>
-<span class="n">income</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="language-python text-document highlighter-rouge" title="worksheet-7.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">employment</span> <span class="o">=</span> <span class="n">cbp</span><span class="p">[</span><span class="s">'EMP'</span><span class="p">]</span>
+<span class="n">employment</span> <span class="o">=</span> <span class="n">employment</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'11----'</span><span class="p">,</span> <span class="s">'72----'</span><span class="p">]]</span>
+<span class="n">employment</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div></div>
 
 <div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -1034,7 +1034,7 @@ urban-influenced areas, completes our dataset.</p>
 <p>By default, the join will take place on the index, which serves as a
 primary key, for each table. It is a one-to-one join.</p>
 
-<div class="language-python text-document highlighter-rouge" title="worksheet-7.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">income_rural_urban</span> <span class="o">=</span> <span class="n">income</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<div class="language-python text-document highlighter-rouge" title="worksheet-7.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">employment_rural_urban</span> <span class="o">=</span> <span class="n">employment</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
     <span class="n">rural_urban</span><span class="p">[</span><span class="s">'Metro'</span><span class="p">],</span>
     <span class="n">how</span><span class="o">=</span><span class="s">'inner'</span><span class="p">,</span>
     <span class="p">)</span>
@@ -1049,7 +1049,7 @@ and “validation” sets.</p>
 
 <div class="language-python text-document highlighter-rouge" title="worksheet-7.ipynb"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 
-<span class="n">train</span> <span class="o">=</span> <span class="n">income_rural_urban</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">employment_rural_urban</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
     <span class="n">frac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
     <span class="n">random_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">345</span><span class="p">))</span>
 </code></pre></div></div>
@@ -1104,7 +1104,7 @@ shows the challeng of separating this attribute space!</p>
 <span class="n">plot_decision_regions</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">clf</span><span class="o">=</span><span class="n">ml</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f11c31b7320&gt;
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f8c7cd58358&gt;
 </code></pre></div></div>
 
 <p><img src="/basic-Python-lesson/images/svm_figure6_1.png" alt="plot of ../images/svm_figure6_1.png" /></p>
@@ -1145,7 +1145,7 @@ can “wrap around” the attribute space as necessary.</p>
 <div class="language-python text-document highlighter-rouge" title="worksheet-7.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">plot_decision_regions</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">clf</span><span class="o">=</span><span class="n">ml</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f11d0d30828&gt;
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f8c7d430240&gt;
 </code></pre></div></div>
 
 <p><img src="/basic-Python-lesson/images/svm_figure9_1.png" alt="plot of ../images/svm_figure9_1.png" /></p>
