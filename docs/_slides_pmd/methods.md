@@ -48,7 +48,7 @@ Note a couple "Pythonic" style choices in the above:
 
 1. Leave a space after the `:` when declaring `key: value` pairs
 1. Trailing null arguments are syntactically correct, even advantageous
-1. White space with `()` has no meaning and can improve readiability
+1. White space within `(...)` has no meaning and can improve readiability
 
 The "style-guide" for Python scripting, [PEP 8], is first authored by the inventor
 of Python and adhered too by many. It's sometimes nice to know their is a preferred

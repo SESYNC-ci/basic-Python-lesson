@@ -62,7 +62,7 @@ primary key, for each table. It is a one-to-one join.
 
 
 ~~~python
-income_rural_urban = income.join(
+employment_rural_urban = employment.join(
     rural_urban['Metro'],
     how='inner',
     )
@@ -85,7 +85,7 @@ and "validation" sets.
 ~~~python
 import numpy as np
 
-train = income_rural_urban.sample(
+train = employment_rural_urban.sample(
     frac=0.5,
     random_state = np.random.seed(345))
 ~~~
@@ -168,7 +168,7 @@ plot_decision_regions(X, y, clf=ml, legend=2)
 {:.text-document title="{{ site.handouts[0] }}"}
 
 ~~~
-<matplotlib.axes._subplots.AxesSubplot at 0x7f11c31b7320>
+<matplotlib.axes._subplots.AxesSubplot at 0x7f8c7cd58358>
 ~~~
 {:.output}
 
@@ -234,7 +234,7 @@ plot_decision_regions(X, y, clf=ml, legend=2)
 {:.text-document title="{{ site.handouts[0] }}"}
 
 ~~~
-<matplotlib.axes._subplots.AxesSubplot at 0x7f11d0d30828>
+<matplotlib.axes._subplots.AxesSubplot at 0x7f8c7d430240>
 ~~~
 {:.output}
 

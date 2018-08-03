@@ -5,11 +5,11 @@
 
 The basic data types are
 
-| `'int'`   | Integer            |
-| `'float'` | Real number        |
-| `'str'`   | Character string   |
-| `'bool'`  | `True`/`False`     |
-| `'tuple'` | Immutable sequence |
+| `'int'`      | integers            |
+| `'float'`    | real numbers        |
+| `'str'`      | character strings   |
+| `'bool'`     | `True` or `False`   |
+| `'NoneType'` | `None`              |
 
 ===
 

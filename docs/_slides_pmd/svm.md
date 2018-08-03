@@ -57,7 +57,7 @@ By default, the join will take place on the index, which serves as a
 primary key, for each table. It is a one-to-one join.
 
 ```{python title='{{ site.handouts[0] }}'}
-income_rural_urban = income.join(
+employment_rural_urban = employment.join(
     rural_urban['Metro'],
     how='inner',
     )
@@ -76,7 +76,7 @@ and "validation" sets.
 ```{python title='{{ site.handouts[0] }}'}
 import numpy as np
 
-train = income_rural_urban.sample(
+train = employment_rural_urban.sample(
     frac=0.5,
     random_state = np.random.seed(345))
 ```

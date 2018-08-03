@@ -81,7 +81,7 @@ subset of `cbp` with sector level NAICS codes can indexed with string
 matching.
 
 ```{python title='{{ site.handouts[0] }}'}
-logical_idx = cbp['NAICS'].str.match('^[0-9]{2}----')
+logical_idx = cbp['NAICS'].str.match('[0-9]{2}----')
 cbp = cbp.loc[logical_idx]
 cbp.head()
 ```
@@ -132,7 +132,7 @@ Agriculture, Forestry, Fishing, and Hunting. The second is
 Accommodation and Food Services.
 
 ```{python title='{{ site.handouts[0] }}'}
-income = cbp['EMP']
-income = income.loc[:, ['11----', '72----']]
-income.head()
+employment = cbp['EMP']
+employment = employment.loc[:, ['11----', '72----']]
+employment.head()
 ```

@@ -267,7 +267,7 @@ matching.
 
 
 ~~~python
-logical_idx = cbp['NAICS'].str.match('^[0-9]{2}----')
+logical_idx = cbp['NAICS'].str.match('[0-9]{2}----')
 cbp = cbp.loc[logical_idx]
 cbp.head()
 ~~~
@@ -275,12 +275,12 @@ cbp.head()
 
 ~~~
 
-   FIPSTATE FIPSCTY   NAICS EMPFLAG   ...   N1000_3  N1000_4 CENSTATE  CENCTY
-1        01     001  11----     NaN   ...         0        0       63       1
-10       01     001  21----     NaN   ...         0        0       63       1
-17       01     001  22----     NaN   ...         0        0       63       1
-27       01     001  23----     NaN   ...         0        0       63       1
-93       01     001  31----     NaN   ...         0        0       63       1
+   FIPSTATE FIPSCTY   NAICS EMPFLAG EMP_NF  EMP QP1_NF    QP1 AP_NF     AP   ...    N100_249  N250_499  N500_999  N1000  N1000_1  N1000_2  N1000_3  N1000_4  CENSTATE  CENCTY
+1        01     001  11----     NaN      H   70      H    790     H   3566   ...           0         0         0      0        0        0        0        0        63       1
+10       01     001  21----     NaN      H   82      H    713     H   3294   ...           0         0         0      0        0        0        0        0        63       1
+17       01     001  22----     NaN      H  196      H   4793     H  18611   ...           0         0         0      0        0        0        0        0        63       1
+27       01     001  23----     NaN      G  372      G   2891     G  13801   ...           0         0         0      0        0        0        0        0        63       1
+93       01     001  31----     NaN      H  971      H  15386     H  64263   ...           0         0         1      0        0        0        0        0        63       1
 
 [5 rows x 26 columns]
 ~~~
@@ -302,12 +302,12 @@ cbp.head()
 
 ~~~
 
-   FIPSTATE FIPSCTY   NAICS EMPFLAG  ...   N1000_4  CENSTATE CENCTY   FIPS
-1        01     001  11----     NaN  ...         0        63      1  01001
-10       01     001  21----     NaN  ...         0        63      1  01001
-17       01     001  22----     NaN  ...         0        63      1  01001
-27       01     001  23----     NaN  ...         0        63      1  01001
-93       01     001  31----     NaN  ...         0        63      1  01001
+   FIPSTATE FIPSCTY   NAICS EMPFLAG EMP_NF  EMP QP1_NF    QP1 AP_NF     AP  ...    N250_499  N500_999  N1000  N1000_1  N1000_2  N1000_3  N1000_4  CENSTATE  CENCTY   FIPS
+1        01     001  11----     NaN      H   70      H    790     H   3566  ...           0         0      0        0        0        0        0        63       1  01001
+10       01     001  21----     NaN      H   82      H    713     H   3294  ...           0         0      0        0        0        0        0        63       1  01001
+17       01     001  22----     NaN      H  196      H   4793     H  18611  ...           0         0      0        0        0        0        0        63       1  01001
+27       01     001  23----     NaN      G  372      G   2891     G  13801  ...           0         0      0        0        0        0        0        63       1  01001
+93       01     001  31----     NaN      H  971      H  15386     H  64263  ...           0         1      0        0        0        0        0        63       1  01001
 
 [5 rows x 27 columns]
 ~~~
@@ -332,13 +332,13 @@ cbp.head()
 
 ~~~
 
-             FIPSTATE FIPSCTY EMPFLAG  ...   N1000_4  CENSTATE CENCTY
-FIPS  NAICS                            ...                           
-01001 11----       01     001     NaN  ...         0        63      1
-      21----       01     001     NaN  ...         0        63      1
-      22----       01     001     NaN  ...         0        63      1
-      23----       01     001     NaN  ...         0        63      1
-      31----       01     001     NaN  ...         0        63      1
+             FIPSTATE FIPSCTY EMPFLAG EMP_NF  EMP QP1_NF    QP1 AP_NF     AP  EST   ...    N100_249  N250_499  N500_999  N1000  N1000_1  N1000_2  N1000_3  N1000_4  CENSTATE  CENCTY
+FIPS  NAICS                                                                         ...                                                                                             
+01001 11----       01     001     NaN      H   70      H    790     H   3566    7   ...           0         0         0      0        0        0        0        0        63       1
+      21----       01     001     NaN      H   82      H    713     H   3294    3   ...           0         0         0      0        0        0        0        0        63       1
+      22----       01     001     NaN      H  196      H   4793     H  18611    9   ...           0         0         0      0        0        0        0        0        63       1
+      23----       01     001     NaN      G  372      G   2891     G  13801   75   ...           0         0         0      0        0        0        0        0        63       1
+      31----       01     001     NaN      H  971      H  15386     H  64263   24   ...           0         0         1      0        0        0        0        0        63       1
 
 [5 rows x 25 columns]
 ~~~
@@ -374,9 +374,9 @@ Accommodation and Food Services.
 
 
 ~~~python
-income = cbp['EMP']
-income = income.loc[:, ['11----', '72----']]
-income.head()
+employment = cbp['EMP']
+employment = employment.loc[:, ['11----', '72----']]
+employment.head()
 ~~~
 {:.text-document title="{{ site.handouts[0] }}"}
 
