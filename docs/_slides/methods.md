@@ -39,7 +39,7 @@ attached to objects is that their documentation is attached too.
 ~~~
 Help on built-in function index:
 
-index(...)
+index(...) method of builtins.list instance
     L.index(value, [start, [stop]]) -> integer -- return first index of value.
     Raises ValueError if the value is not present.
 ~~~
@@ -71,7 +71,7 @@ user
 
 
 ~~~
-{'First Name': 'J.', 'Last Name': 'Doe', 'Age': 24, 'Nickname': 'Jamie', 'Email': 'j.doe@gmail.com'}
+{'Age': 24, 'First Name': 'J.', 'Last Name': 'Doe', 'Email': 'j.doe@gmail.com', 'Nickname': 'Jamie'}
 ~~~
 {:.output}
 

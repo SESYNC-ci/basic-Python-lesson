@@ -1,32 +1,6 @@
 ---
 ---
 
-
-
-~~~r
-> plot(1:10, 1:10)
-~~~
-{:title="Console" .input}
-![ ]({{ "assignment/unnamed-chunk-1-1.png" | prepend: site.imageurl | relative_url }})
-{:.captioned}
-
-
-
-~~~python
-> import matplotlib.pyplot as plt
-+ #plt.plot([1,2,3,4])
-+ #plt.ylabel('some numbers')
-+ plt.get_backend()
-~~~
-{:title="Console" .input}
-
-
-~~~
-u'TkAgg'
-~~~
-{:.output}
-
-
 ## Variables
 
 Variable assignment attaches the label left of an `=` to the return
@@ -66,7 +40,7 @@ The "in-memory" location of `a` returned by `id()` ...
 
 
 ~~~
-139675600344408
+140356932267344
 ~~~
 {:.output}
 
@@ -82,7 +56,7 @@ The "in-memory" location of `a` returned by `id()` ...
 
 
 ~~~
-139675600344408
+140356932267344
 ~~~
 {:.output}
 
@@ -122,7 +96,7 @@ id(b)
 
 
 ~~~
-139675536021264
+140356929096264
 ~~~
 {:.output}
 
@@ -136,7 +110,7 @@ id(b)
 
 
 ~~~
-139675536022992
+140356929097672
 ~~~
 {:.output}
 

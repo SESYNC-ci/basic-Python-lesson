@@ -28,7 +28,7 @@ type(T)
 
 
 ~~~
-<type 'tuple'>
+<class 'tuple'>
 ~~~
 {:.output}
 
@@ -47,7 +47,7 @@ type(T)
 
 
 ~~~
-<type 'tuple'>
+<class 'tuple'>
 ~~~
 {:.output}
 
@@ -70,7 +70,7 @@ type(L)
 
 
 ~~~
-<type 'list'>
+<class 'list'>
 ~~~
 {:.output}
 
@@ -175,7 +175,7 @@ S1.difference(S2)
 
 
 ~~~
-set([('cat',), 'xyz'])
+{('cat',), 'xyz'}
 ~~~
 {:.output}
 
@@ -211,7 +211,7 @@ type(user)
 
 
 ~~~
-<type 'dict'>
+<class 'dict'>
 ~~~
 {:.output}
 

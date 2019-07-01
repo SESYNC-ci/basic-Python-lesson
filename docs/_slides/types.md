@@ -24,7 +24,7 @@ type('x')
 
 
 ~~~
-<type 'str'>
+<class 'str'>
 ~~~
 {:.output}
 

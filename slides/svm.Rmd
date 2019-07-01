@@ -19,7 +19,7 @@ predict given a model and a set of training data, could be a problem
 for logistic regression. An alternative method, and a foundation of
 machine learning, is the Support Vector Machine.
 
-![]({{ site.baseurl }}/images/Kernel_Machine.svg){:width="60%"}  
+![]({% include asset.html path="images/Kernel_Machine.svg" %}){:width="60%"}  
 *[Image][kernel_machine] by Alisneaky / [CC BY-SA]*
 {:.captioned}
 

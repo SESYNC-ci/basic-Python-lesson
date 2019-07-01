@@ -19,7 +19,7 @@ predict given a model and a set of training data, could be a problem
 for logistic regression. An alternative method, and a foundation of
 machine learning, is the Support Vector Machine.
 
-![]({{ site.baseurl }}/images/Kernel_Machine.svg){:width="60%"}  
+![]({% include asset.html path="images/Kernel_Machine.svg" %}){:width="60%"}  
 *[Image][kernel_machine] by Alisneaky / [CC BY-SA]*
 {:.captioned}
 
@@ -115,9 +115,12 @@ ml.fit(X, y)
 
 ~~~
 LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
-     intercept_scaling=1, loss='squared_hinge', max_iter=1000,
-     multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
-     verbose=0)
+          intercept_scaling=1, loss='squared_hinge', max_iter=1000,
+          multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
+          verbose=0)
+
+/usr/local/lib/python3.5/dist-packages/sklearn/svm/base.py:929: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  "the number of iterations.", ConvergenceWarning)
 ~~~
 {:.output}
 
@@ -161,9 +164,79 @@ shows the challeng of separating this attribute space!
 
 
 
+~~~python
+from mlxtend.plotting import plot_decision_regions
+
+plot_decision_regions(X, y, clf=ml, legend=2)
+~~~
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+![ ]({% include asset.html path="images/svm/unnamed-chunk-6-1.png" %})
+{:.captioned}
+
+===
+
+## Kernel Method
+
+The `LinearSVM` is rarely used in practice despite its speed---rare is
+the case when a hyperplane cleanly separates the attributes. The more
+general `SVC` machine accepts multiple `kernel` options that provide
+great flexibility in the shape of the barrier (no longer a hyperplane).
 
 
 
+~~~python
+ml = svm.SVC(kernel = 'rbf', C=1, gamma='auto')
+ml.fit(X, y)
+~~~
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
+
+~~~
+SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
+    decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+    max_iter=-1, probability=False, random_state=None, shrinking=True,
+    tol=0.001, verbose=False)
+~~~
+{:.output}
+
+
+===
+
+The improvement in the confusion matrix is slight---we have not tuned
+the `gamma` value, which is automatically chosen based on the size of
+the dataset.
 
 
 
+~~~python
+metrics.confusion_matrix(y, ml.predict(X), (True, False))
+~~~
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
+
+~~~
+array([[322, 271],
+       [ 35, 943]])
+~~~
+{:.output}
+
+
+===
+
+More important is to understand the nature of the separation, which
+can "wrap around" the attribute space as necessary.
+
+
+
+~~~python
+plot_decision_regions(X, y, clf=ml, legend=2)
+~~~
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+![ ]({% include asset.html path="images/svm/unnamed-chunk-9-1.png" %})
+{:.captioned}
+
+<!--
+https://www.ers.usda.gov/data-products/rural-urban-continuum-codes/
+FIPS over 3K
+RUCC_2013 1,2,3 Metro / 4-9 Nonmetro
+-->
