@@ -6,7 +6,7 @@
 Variable assignment attaches the label left of an `=` to the return
 value of the expression on its right.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 a = 'xyz'
 a
 ```
@@ -46,7 +46,7 @@ a is 'xyz'
 
 The `id()` function helps demonstrate that "equal" is not the "same".
 
-```{python title='{{ site.handouts[0]}}'}
+```{python title='{{ site.data.lesson.handouts[0]}}'}
 b = [1, 2, 3]
 id(b)
 ```
@@ -97,7 +97,7 @@ Answer
 Side-effects trip up Python programmers when an object has multiple
 labels, which is not so unusual:
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 c = b
 b.pop()
 ```

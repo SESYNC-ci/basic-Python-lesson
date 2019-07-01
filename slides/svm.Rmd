@@ -41,7 +41,7 @@ The USDA ERS classifies the counties of the US with a set of 9
 and creating a binary "Metropolitan" class based on the the codes for
 urban-influenced areas, completes our dataset.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 rural_urban = pd.read_csv(
     'data/ruralurbancodes2013.csv',
     dtype={'FIPS':'str'},
@@ -56,7 +56,7 @@ rural_urban['Metro'] = rural_urban['RUCC_2013'] < 4
 By default, the join will take place on the index, which serves as a
 primary key, for each table. It is a one-to-one join.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 employment_rural_urban = employment.join(
     rural_urban['Metro'],
     how='inner',
@@ -73,7 +73,7 @@ Model evaluation for SVMs and other machine learning methods lacking a
 probabilistic interpretion is based on subsetting data into "training"
 and "validation" sets.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 import numpy as np
 
 train = employment_rural_urban.sample(
@@ -86,7 +86,7 @@ train = employment_rural_urban.sample(
 Import the learning machine from `sklearn`, and pass the training data
 separately as the attributes (as `X` below) and class (as `y`).
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 from sklearn import svm
 ml = svm.LinearSVC()
 
@@ -112,7 +112,7 @@ The "confusion matrix" shows the largest numbers are on the
 diagonal---that is the number of metro and Non-metro data points
 correctly separated by the chosen support vectors.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 from sklearn import metrics
 
 metrics.confusion_matrix(y, ml.predict(X), (True, False))
@@ -123,7 +123,7 @@ metrics.confusion_matrix(y, ml.predict(X), (True, False))
 A quick visualization using the [mlxtend](){:.pylib} package
 shows the challeng of separating this attribute space!
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 from mlxtend.plotting import plot_decision_regions
 
 plot_decision_regions(X, y, clf=ml, legend=2)
@@ -138,7 +138,7 @@ the case when a hyperplane cleanly separates the attributes. The more
 general `SVC` machine accepts multiple `kernel` options that provide
 great flexibility in the shape of the barrier (no longer a hyperplane).
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 ml = svm.SVC(kernel = 'rbf', C=1, gamma='auto')
 ml.fit(X, y)
 ```
@@ -149,7 +149,7 @@ The improvement in the confusion matrix is slight---we have not tuned
 the `gamma` value, which is automatically chosen based on the size of
 the dataset.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 metrics.confusion_matrix(y, ml.predict(X), (True, False))
 ```
 
@@ -158,7 +158,7 @@ metrics.confusion_matrix(y, ml.predict(X), (True, False))
 More important is to understand the nature of the separation, which
 can "wrap around" the attribute space as necessary.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 plot_decision_regions(X, y, clf=ml, legend=2)
 ```
 

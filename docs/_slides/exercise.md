@@ -57,18 +57,10 @@ the counties not used for training)?
 
 ### Solution 1
 
-
-~~~python
+```python
 answers = [2, 15, 42, 19]
 42 in answers
-~~~
-{:.input title="Console"}
-~~~
-True
-~~~
-{:.output}
-
-
+```
 
 [Return](#exercise-1)
 {:.notes}
@@ -77,15 +69,12 @@ True
 
 ### Solution 2
 
-
-~~~python
+```python
 addr = [
   {'name': 'Alice', 'email': 'alice@gmail.com'},
   {'name': 'Bob', 'email': 'bob59@aol.com'},
 ]
-~~~
-{:.input title="Console"}
-
+```
 
 [Return](#exercise-1)
 {:.notes}
@@ -94,22 +83,11 @@ addr = [
 
 ### Solution 3
 
-
-~~~python
+```python
 for i in range(1, 9):
   if i % 2 == 0:
     print(i)
-~~~
-{:.input title="Console"}
-~~~
-2
-4
-6
-8
-~~~
-{:.output}
-
-
+```
 
 [Return](#exercise-3)
 {:.notes}

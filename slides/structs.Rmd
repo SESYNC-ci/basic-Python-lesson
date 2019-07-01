@@ -18,7 +18,7 @@ The simplest kind of sequence, a tuple is declared with
 comma-separated values, optionally inside `(...)`. The tuple is a
 common type of return value for functions with multiple outputs.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 T = 'x', 3, True
 type(T)
 ```
@@ -27,7 +27,7 @@ type(T)
 
 To declare a one-tuple without `(...)`, a trailing "," is required.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 T = 'cat',
 type(T)
 ```
@@ -40,7 +40,7 @@ The more common kind of sequence in Python is the list, which is
 declared with comma-separated values inside `[...]`. Unlike a tuple, a
 list is mutable.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 L = [3.14, 'xyz', T]
 type(L)
 ```
@@ -104,7 +104,7 @@ operations like "union" and "difference". Declare a set with
 comma-separated values inside `{...}` or by casting another sequence with
 `set()`.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 S1 = set(L)
 S2 = {3.14, 'z'}
 S1.difference(S2)
@@ -127,7 +127,7 @@ on arbitrary identifiers, called "keys".
 
 Construct a dictionary with comma-separated `key: value` pairs within `{...}`.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 user = {
   'First Name': 'J.',
   'Last Name': 'Doe',
@@ -141,7 +141,7 @@ type(user)
 Individual values are accessed using square brackets, as for lists,
 but the key must be used rather than an index.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 user['Email']
 ```
 
@@ -151,7 +151,7 @@ To add a single new element to the dictionary, define a new
 `key:value` pair by assigning a value to a novel key in the
 dictionary.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 user['Age'] = 42
 ```
 

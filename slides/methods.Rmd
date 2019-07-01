@@ -8,7 +8,7 @@ attributes and methods. In either the Jupyter Notebook or Console,
 typing an object's name followed by `.` and then pressing the `TAB`
 key brings up suggestions.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 squares.index(4)
 ```
 
@@ -34,7 +34,7 @@ call's arguments and chooses the particular function to use.
 Dictionary's have an `update()` method, for merging the contents
 of a second dictionary into the one calling `update()`.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 user.update({
   'Nickname': 'Jamie',
   'Age': 24,

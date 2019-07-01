@@ -15,7 +15,7 @@ The basic data types are
 
 Any object can be queried with `type()` 
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 type('x')
 ```
 
@@ -37,11 +37,11 @@ Python supports the usual (or not) arithmetic operators for numeric types:
 
 One or both of these might be a surprise:
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 5 ** 2
 ```
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 2 // 3
 ```
 
@@ -49,7 +49,7 @@ One or both of these might be a surprise:
 
 Some operators have natural extensions to non-numeric types:
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 a * 2
 ```
 

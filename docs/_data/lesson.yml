@@ -1,0 +1,29 @@
+title: Classification
+handouts:
+ - worksheet.ipynb
+ - data/cbp15co.csv
+ - data/ruralurbancodes2013.csv
+ - data/README.md
+tag: v0.3
+lesson: 7
+instructor: Kelly Hondula
+authors:
+  - Philippe Marchand
+  - Ian Carroll
+sorter:
+  - objective
+  - assignment
+  - types
+  - structs
+#  - comps
+  - flow
+#  - def
+  - methods
+#  - packages
+#  - numpy
+  - pandas
+  - svm
+#  - matplotlib
+#  - sqlalchemy
+  - conclude
+  - exercise

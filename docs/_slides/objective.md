@@ -51,12 +51,12 @@ distance between the "support vectors".
 
 ## Jupyter
 
-Sign into JupyterHub and open up `{{ site.handouts[0] }}`. This
+Sign into JupyterHub and open up `{{ site.data.lesson.handouts[0] }}`. This
 worksheet is an Jupyter Notebook document: it is divided into "cells"
 that are run independently but access the same Python interpreter. Use
 the Notebook to write and annotate code.
 {:.notes}
 
-After opening `{{ site.handouts[0] }}`, right click anywhere in your
+After opening `{{ site.data.lesson.handouts[0] }}`, right click anywhere in your
 notebook and choose "Create Console for Notebook". Drag-and-drop the
 tabs into whatever arrangement you like.

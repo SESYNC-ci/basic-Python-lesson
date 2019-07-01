@@ -18,7 +18,7 @@ label each element in turn.
 Packing the `for x in y` expression inside a sequence declaration is
 one way to build a sequence.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 letters = [x for x in 'abcde']
 letters
 ```
@@ -31,7 +31,7 @@ This way of declaring with `for` and `in` is called a "comprehension" in Python.
 
 To declare a dictionary in this way, specify a `key:value` pair.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 CAPS = {x: x.upper() for x in 'abcde'}
 CAPS
 ```

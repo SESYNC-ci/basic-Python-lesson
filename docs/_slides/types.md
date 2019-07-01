@@ -16,16 +16,17 @@ The basic data types are
 Any object can be queried with `type()` 
 
 
+
 ~~~python
 type('x')
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-str
+<type 'str'>
 ~~~
 {:.output}
-
 
 
 ===
@@ -47,10 +48,12 @@ Python supports the usual (or not) arithmetic operators for numeric types:
 One or both of these might be a surprise:
 
 
+
 ~~~python
 5 ** 2
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
 25
@@ -63,8 +66,13 @@ One or both of these might be a surprise:
 ~~~python
 2 // 3
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
 
+
+~~~
+0
+~~~
+{:.output}
 
 
 ===
@@ -72,16 +80,17 @@ One or both of these might be a surprise:
 Some operators have natural extensions to non-numeric types:
 
 
+
 ~~~python
 a * 2
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
 'xyzxyz'
 ~~~
 {:.output}
-
 
 
 ===

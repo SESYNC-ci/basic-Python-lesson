@@ -16,7 +16,7 @@ main motivation for looking at flow control.
 A `for` loop takes any "iterable" object and executes a block of code
 once for each element `in` the object.
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 squares = []
 for i in range(1, 5):
     j = i ** 2
@@ -60,7 +60,7 @@ so, the interpreter prints her email address; otherwise it prints an
 empty string.
 {:.notes}
 
-```{python title='{{ site.handouts[0] }}'}
+```{python handout = 0}
 users = [
     {'Name':'Alice', 'Email':'alice@email.com'},
     {'Name':'Bob', 'Email': 'bob@email.com'},

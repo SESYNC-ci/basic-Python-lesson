@@ -42,6 +42,7 @@ and creating a binary "Metropolitan" class based on the the codes for
 urban-influenced areas, completes our dataset.
 
 
+
 ~~~python
 rural_urban = pd.read_csv(
     'data/ruralurbancodes2013.csv',
@@ -49,8 +50,7 @@ rural_urban = pd.read_csv(
     ).set_index('FIPS')
 rural_urban['Metro'] = rural_urban['RUCC_2013'] < 4
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
-
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
 
 
 [Rural-Urban Continuum Codes]: https://www.ers.usda.gov/data-products/rural-urban-continuum-codes/
@@ -61,14 +61,14 @@ By default, the join will take place on the index, which serves as a
 primary key, for each table. It is a one-to-one join.
 
 
+
 ~~~python
 employment_rural_urban = employment.join(
     rural_urban['Metro'],
     how='inner',
     )
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
-
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
 
 
 Only the single variable "Metro" is taken from the `rural_urban` table for use
@@ -82,6 +82,7 @@ probabilistic interpretion is based on subsetting data into "training"
 and "validation" sets.
 
 
+
 ~~~python
 import numpy as np
 
@@ -89,14 +90,14 @@ train = employment_rural_urban.sample(
     frac=0.5,
     random_state = np.random.seed(345))
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
-
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
 
 
 ===
 
 Import the learning machine from `sklearn`, and pass the training data
 separately as the attributes (as `X` below) and class (as `y`).
+
 
 
 ~~~python
@@ -109,17 +110,16 @@ y = train['Metro'].values.astype(int)
 
 ml.fit(X, y)
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-
 LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
      intercept_scaling=1, loss='squared_hinge', max_iter=1000,
      multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
      verbose=0)
 ~~~
 {:.output}
-
 
 
 Why `np.log(1 + X)`? Remember, "whatever it takes" is the machine
@@ -138,20 +138,20 @@ diagonal---that is the number of metro and Non-metro data points
 correctly separated by the chosen support vectors.
 
 
+
 ~~~python
 from sklearn import metrics
 
 metrics.confusion_matrix(y, ml.predict(X), (True, False))
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-
 array([[355, 238],
        [109, 869]])
 ~~~
 {:.output}
-
 
 
 ===
@@ -160,88 +160,10 @@ A quick visualization using the [mlxtend](){:.pylib} package
 shows the challeng of separating this attribute space!
 
 
-~~~python
-from mlxtend.plotting import plot_decision_regions
-
-plot_decision_regions(X, y, clf=ml, legend=2)
-~~~
-{:.text-document title="{{ site.handouts[0] }}"}
-
-~~~
-<matplotlib.axes._subplots.AxesSubplot at 0x7f8c7cd58358>
-~~~
-{:.output}
-
-![plot of ../images/svm_figure6_1.png]({{ site.baseurl }}/images/svm_figure6_1.png)
-
-===
-
-## Kernel Method
-
-The `LinearSVM` is rarely used in practice despite its speed---rare is
-the case when a hyperplane cleanly separates the attributes. The more
-general `SVC` machine accepts multiple `kernel` options that provide
-great flexibility in the shape of the barrier (no longer a hyperplane).
-
-
-~~~python
-ml = svm.SVC(kernel = 'rbf', C=1, gamma='auto')
-ml.fit(X, y)
-~~~
-{:.text-document title="{{ site.handouts[0] }}"}
-
-~~~
-
-SVC(C=1, cache_size=200, class_weight=None, coef0=0.0,
-  decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
-  max_iter=-1, probability=False, random_state=None, shrinking=True,
-  tol=0.001, verbose=False)
-~~~
-{:.output}
 
 
 
-===
-
-The improvement in the confusion matrix is slight---we have not tuned
-the `gamma` value, which is automatically chosen based on the size of
-the dataset.
-
-
-~~~python
-metrics.confusion_matrix(y, ml.predict(X), (True, False))
-~~~
-{:.text-document title="{{ site.handouts[0] }}"}
-
-~~~
-
-array([[322, 271],
-       [ 35, 943]])
-~~~
-{:.output}
 
 
 
-===
 
-More important is to understand the nature of the separation, which
-can "wrap around" the attribute space as necessary.
-
-
-~~~python
-plot_decision_regions(X, y, clf=ml, legend=2)
-~~~
-{:.text-document title="{{ site.handouts[0] }}"}
-
-~~~
-<matplotlib.axes._subplots.AxesSubplot at 0x7f8c7d430240>
-~~~
-{:.output}
-
-![plot of ../images/svm_figure9_1.png]({{ site.baseurl }}/images/svm_figure9_1.png)
-
-<!--
-https://www.ers.usda.gov/data-products/rural-urban-continuum-codes/
-FIPS over 3K
-RUCC_2013 1,2,3 Metro / 4-9 Nonmetro
--->

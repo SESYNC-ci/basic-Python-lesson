@@ -9,11 +9,17 @@ typing an object's name followed by `.` and then pressing the `TAB`
 key brings up suggestions.
 
 
+
 ~~~python
 squares.index(4)
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
 
+
+~~~
+1
+~~~
+{:.output}
 
 
 ===
@@ -23,20 +29,21 @@ We call this `index()` function a method of lists (recall that
 attached to objects is that their documentation is attached too.
 
 
+
 ~~~python
-help(squares.index)
+> help(squares.index)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
 Help on built-in function index:
 
-index(...) method of builtins.list instance
+index(...)
     L.index(value, [start, [stop]]) -> integer -- return first index of value.
     Raises ValueError if the value is not present.
-
 ~~~
 {:.output}
-
 
 
 A major differnce between Python and R has to do with the process for
@@ -52,6 +59,7 @@ Dictionary's have an `update()` method, for merging the contents
 of a second dictionary into the one calling `update()`.
 
 
+
 ~~~python
 user.update({
   'Nickname': 'Jamie',
@@ -59,18 +67,13 @@ user.update({
 })
 user
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-
-{'Age': 24,
- 'Email': 'j.doe@gmail.com',
- 'First Name': 'J.',
- 'Last Name': 'Doe',
- 'Nickname': 'Jamie'}
+{'First Name': 'J.', 'Last Name': 'Doe', 'Age': 24, 'Nickname': 'Jamie', 'Email': 'j.doe@gmail.com'}
 ~~~
 {:.output}
-
 
 
 ===

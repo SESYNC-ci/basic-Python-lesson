@@ -17,6 +17,7 @@ A `for` loop takes any "iterable" object and executes a block of code
 once for each element `in` the object.
 
 
+
 ~~~python
 squares = []
 for i in range(1, 5):
@@ -24,8 +25,13 @@ for i in range(1, 5):
     squares.append(j)
 len(squares)
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
 
+
+~~~
+4
+~~~
+{:.output}
 
 
 The `range(i, j)` function creates an object that iterates from `i` up
@@ -65,6 +71,7 @@ empty string.
 {:.notes}
 
 
+
 ~~~python
 users = [
     {'Name':'Alice', 'Email':'alice@email.com'},
@@ -76,12 +83,11 @@ for u in users:
     else:
         print('')
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
 alice@email.com
-
 ~~~
 {:.output}
-
 

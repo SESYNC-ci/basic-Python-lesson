@@ -19,17 +19,18 @@ comma-separated values, optionally inside `(...)`. The tuple is a
 common type of return value for functions with multiple outputs.
 
 
+
 ~~~python
 T = 'x', 3, True
 type(T)
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-tuple
+<type 'tuple'>
 ~~~
 {:.output}
-
 
 
 ===
@@ -37,17 +38,18 @@ tuple
 To declare a one-tuple without `(...)`, a trailing "," is required.
 
 
+
 ~~~python
 T = 'cat',
 type(T)
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-tuple
+<type 'tuple'>
 ~~~
 {:.output}
-
 
 
 ===
@@ -59,17 +61,18 @@ declared with comma-separated values inside `[...]`. Unlike a tuple, a
 list is mutable.
 
 
+
 ~~~python
 L = [3.14, 'xyz', T]
 type(L)
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-list
+<type 'list'>
 ~~~
 {:.output}
-
 
 
 ===
@@ -81,15 +84,17 @@ brackets in both cases, and selects elements using their integer
 position starting from zero---their "index".
 
 
+
 ~~~python
-L[0]
+> L[0]
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
 3.14
 ~~~
 {:.output}
-
 
 
 ===
@@ -98,15 +103,17 @@ Negative indices are allowed, and refer to the reverse ordering: -1 is
 the last item in the list, -2 the second-to-last item, and so on.
 
 
+
 ~~~python
-L[-1]
+> L[-1]
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
 ('cat',)
 ~~~
 {:.output}
-
 
 
 ===
@@ -115,15 +122,17 @@ The syntax `L[i:j]` selects a sub-list starting with the element at index
 `i` and ending with the element at index `j - 1`.
 
 
+
 ~~~python
-L[0:2]
+> L[0:2]
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
 [3.14, 'xyz']
 ~~~
 {:.output}
-
 
 
 A blank space before or after the ":" indicates the start or end of the list,
@@ -156,18 +165,19 @@ comma-separated values inside `{...}` or by casting another sequence with
 `set()`.
 
 
+
 ~~~python
 S1 = set(L)
 S2 = {3.14, 'z'}
 S1.difference(S2)
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-{('cat',), 'xyz'}
+set([('cat',), 'xyz'])
 ~~~
 {:.output}
-
 
 
 Python is a rather principled language: a set is technically
@@ -188,6 +198,7 @@ on arbitrary identifiers, called "keys".
 Construct a dictionary with comma-separated `key: value` pairs within `{...}`.
 
 
+
 ~~~python
 user = {
   'First Name': 'J.',
@@ -196,13 +207,13 @@ user = {
 }
 type(user)
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-dict
+<type 'dict'>
 ~~~
 {:.output}
-
 
 
 ===
@@ -211,16 +222,17 @@ Individual values are accessed using square brackets, as for lists,
 but the key must be used rather than an index.
 
 
+
 ~~~python
 user['Email']
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
 'j.doe@gmail.com'
 ~~~
 {:.output}
-
 
 
 ===
@@ -230,11 +242,11 @@ To add a single new element to the dictionary, define a new
 dictionary.
 
 
+
 ~~~python
 user['Age'] = 42
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
-
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
 
 
 Dictionary keys are unique. Assigning a value to an existing key

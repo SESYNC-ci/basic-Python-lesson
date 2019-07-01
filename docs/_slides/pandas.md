@@ -17,15 +17,16 @@ After importing [pandas](){:.pylib}, we call its `read_csv` function
 to load the [County Business Patterns (CBP)] dataset.
 
 
+
 ~~~python
 import pandas as pd
 cbp = pd.read_csv('data/cbp15co.csv')
 cbp.dtypes
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-
 FIPSTATE     int64
 FIPSCTY      int64
 NAICS       object
@@ -57,12 +58,12 @@ dtype: object
 {:.output}
 
 
-
 [County Business Patterns (CBP)]: https://www.census.gov/programs-surveys/cbp/data/datasets.html
 
 ===
 
 As is common with CSV files, the inferred data types were not quite right.
+
 
 
 ~~~python
@@ -72,10 +73,10 @@ cbp = pd.read_csv(
     )
 cbp.dtypes
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-
 FIPSTATE    object
 FIPSCTY     object
 NAICS       object
@@ -107,20 +108,20 @@ dtype: object
 {:.output}
 
 
-
 ===
 
 There are many ways to slice a `DataFrame`. To select a subset of rows
 and/or columns by name, use the `loc` attribute and `[` for indexing.
 
 
+
 ~~~python
 cbp.loc[:, ['FIPSTATE', 'NAICS']]
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-
         FIPSTATE   NAICS
 0             01  ------
 1             01  11----
@@ -189,7 +190,6 @@ cbp.loc[:, ['FIPSTATE', 'NAICS']]
 {:.output}
 
 
-
 ===
 
 As with lists, `:` by itself indicates all the rows (or
@@ -197,13 +197,14 @@ columns). Unlike lists, the `loc` attribute returns both endpoints of
 a slice.
 
 
+
 ~~~python
 cbp.loc[2:4, 'FIPSTATE':'NAICS']
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-
   FIPSTATE FIPSCTY   NAICS
 2       01     001  113///
 3       01     001  1133//
@@ -212,26 +213,25 @@ cbp.loc[2:4, 'FIPSTATE':'NAICS']
 {:.output}
 
 
-
 ===
 
 Use the `iloc` attribute of a DataFrame to get rows and/or columns by
 position, which behaves identically to list indexing.
 
 
+
 ~~~python
 cbp.iloc[2:4, 0:3]
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-
   FIPSTATE FIPSCTY   NAICS
 2       01     001  113///
 3       01     001  1133//
 ~~~
 {:.output}
-
 
 
 ===
@@ -240,13 +240,14 @@ The default indexing for a DataFrame, without using the `loc` or
 `iloc` attributes, is by column name.
 
 
+
 ~~~python
 cbp[['NAICS', 'AP']].head()
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-
     NAICS      AP
 0  ------  321433
 1  11----    3566
@@ -257,7 +258,6 @@ cbp[['NAICS', 'AP']].head()
 {:.output}
 
 
-
 ===
 
 The `loc` attribute also allows logical indexing, i.e. the use of a
@@ -266,26 +266,40 @@ subset of `cbp` with sector level NAICS codes can indexed with string
 matching.
 
 
+
 ~~~python
 logical_idx = cbp['NAICS'].str.match('[0-9]{2}----')
 cbp = cbp.loc[logical_idx]
 cbp.head()
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
+   FIPSTATE FIPSCTY   NAICS EMPFLAG EMP_NF  EMP QP1_NF    QP1 AP_NF     AP  \
+1        01     001  11----     NaN      H   70      H    790     H   3566   
+10       01     001  21----     NaN      H   82      H    713     H   3294   
+17       01     001  22----     NaN      H  196      H   4793     H  18611   
+27       01     001  23----     NaN      G  372      G   2891     G  13801   
+93       01     001  31----     NaN      H  971      H  15386     H  64263   
 
-   FIPSTATE FIPSCTY   NAICS EMPFLAG EMP_NF  EMP QP1_NF    QP1 AP_NF     AP   ...    N100_249  N250_499  N500_999  N1000  N1000_1  N1000_2  N1000_3  N1000_4  CENSTATE  CENCTY
-1        01     001  11----     NaN      H   70      H    790     H   3566   ...           0         0         0      0        0        0        0        0        63       1
-10       01     001  21----     NaN      H   82      H    713     H   3294   ...           0         0         0      0        0        0        0        0        63       1
-17       01     001  22----     NaN      H  196      H   4793     H  18611   ...           0         0         0      0        0        0        0        0        63       1
-27       01     001  23----     NaN      G  372      G   2891     G  13801   ...           0         0         0      0        0        0        0        0        63       1
-93       01     001  31----     NaN      H  971      H  15386     H  64263   ...           0         0         1      0        0        0        0        0        63       1
+     ...    N100_249  N250_499  N500_999  N1000  N1000_1  N1000_2  N1000_3  \
+1    ...           0         0         0      0        0        0        0   
+10   ...           0         0         0      0        0        0        0   
+17   ...           0         0         0      0        0        0        0   
+27   ...           0         0         0      0        0        0        0   
+93   ...           0         0         1      0        0        0        0   
+
+    N1000_4  CENSTATE  CENCTY  
+1         0        63       1  
+10        0        63       1  
+17        0        63       1  
+27        0        63       1  
+93        0        63       1  
 
 [5 rows x 26 columns]
 ~~~
 {:.output}
-
 
 
 ===
@@ -294,25 +308,39 @@ Creation of new variables, our old favorite the full FIPS identifier,
 is done by assignment to new column names, using another `str` method.
 
 
+
 ~~~python
 cbp['FIPS'] = cbp['FIPSTATE'].str.cat(cbp['FIPSCTY'])
 cbp.head()
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
+   FIPSTATE FIPSCTY   NAICS EMPFLAG EMP_NF  EMP QP1_NF    QP1 AP_NF     AP  \
+1        01     001  11----     NaN      H   70      H    790     H   3566   
+10       01     001  21----     NaN      H   82      H    713     H   3294   
+17       01     001  22----     NaN      H  196      H   4793     H  18611   
+27       01     001  23----     NaN      G  372      G   2891     G  13801   
+93       01     001  31----     NaN      H  971      H  15386     H  64263   
 
-   FIPSTATE FIPSCTY   NAICS EMPFLAG EMP_NF  EMP QP1_NF    QP1 AP_NF     AP  ...    N250_499  N500_999  N1000  N1000_1  N1000_2  N1000_3  N1000_4  CENSTATE  CENCTY   FIPS
-1        01     001  11----     NaN      H   70      H    790     H   3566  ...           0         0      0        0        0        0        0        63       1  01001
-10       01     001  21----     NaN      H   82      H    713     H   3294  ...           0         0      0        0        0        0        0        63       1  01001
-17       01     001  22----     NaN      H  196      H   4793     H  18611  ...           0         0      0        0        0        0        0        63       1  01001
-27       01     001  23----     NaN      G  372      G   2891     G  13801  ...           0         0      0        0        0        0        0        63       1  01001
-93       01     001  31----     NaN      H  971      H  15386     H  64263  ...           0         1      0        0        0        0        0        63       1  01001
+    ...    N250_499  N500_999  N1000  N1000_1  N1000_2  N1000_3  N1000_4  \
+1   ...           0         0      0        0        0        0        0   
+10  ...           0         0      0        0        0        0        0   
+17  ...           0         0      0        0        0        0        0   
+27  ...           0         0      0        0        0        0        0   
+93  ...           0         1      0        0        0        0        0   
+
+    CENSTATE  CENCTY   FIPS  
+1         63       1  01001  
+10        63       1  01001  
+17        63       1  01001  
+27        63       1  01001  
+93        63       1  01001  
 
 [5 rows x 27 columns]
 ~~~
 {:.output}
-
 
 
 ===
@@ -324,26 +352,42 @@ table in its `Index` construct. One or more columns that uniquely
 identify rows can be set aside from the remaining columns.
 
 
+
 ~~~python
 cbp = cbp.set_index(['FIPS', 'NAICS'])
 cbp.head()
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
+             FIPSTATE FIPSCTY EMPFLAG EMP_NF  EMP QP1_NF    QP1 AP_NF     AP  \
+FIPS  NAICS                                                                    
+01001 11----       01     001     NaN      H   70      H    790     H   3566   
+      21----       01     001     NaN      H   82      H    713     H   3294   
+      22----       01     001     NaN      H  196      H   4793     H  18611   
+      23----       01     001     NaN      G  372      G   2891     G  13801   
+      31----       01     001     NaN      H  971      H  15386     H  64263   
 
-             FIPSTATE FIPSCTY EMPFLAG EMP_NF  EMP QP1_NF    QP1 AP_NF     AP  EST   ...    N100_249  N250_499  N500_999  N1000  N1000_1  N1000_2  N1000_3  N1000_4  CENSTATE  CENCTY
-FIPS  NAICS                                                                         ...                                                                                             
-01001 11----       01     001     NaN      H   70      H    790     H   3566    7   ...           0         0         0      0        0        0        0        0        63       1
-      21----       01     001     NaN      H   82      H    713     H   3294    3   ...           0         0         0      0        0        0        0        0        63       1
-      22----       01     001     NaN      H  196      H   4793     H  18611    9   ...           0         0         0      0        0        0        0        0        63       1
-      23----       01     001     NaN      G  372      G   2891     G  13801   75   ...           0         0         0      0        0        0        0        0        63       1
-      31----       01     001     NaN      H  971      H  15386     H  64263   24   ...           0         0         1      0        0        0        0        0        63       1
+              EST   ...    N100_249  N250_499  N500_999  N1000  N1000_1  \
+FIPS  NAICS         ...                                                   
+01001 11----    7   ...           0         0         0      0        0   
+      21----    3   ...           0         0         0      0        0   
+      22----    9   ...           0         0         0      0        0   
+      23----   75   ...           0         0         0      0        0   
+      31----   24   ...           0         0         1      0        0   
+
+              N1000_2  N1000_3  N1000_4  CENSTATE  CENCTY  
+FIPS  NAICS                                                
+01001 11----        0        0        0        63       1  
+      21----        0        0        0        63       1  
+      22----        0        0        0        63       1  
+      23----        0        0        0        63       1  
+      31----        0        0        0        63       1  
 
 [5 rows x 25 columns]
 ~~~
 {:.output}
-
 
 
 ===
@@ -351,11 +395,11 @@ FIPS  NAICS                                                                     
 Any hierarchical index can be "unstacked", and all columns appropriately spread into a "wide" table layout.
 
 
+
 ~~~python
 cbp = cbp[['EMP', 'AP']].unstack(fill_value=0)
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
-
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
 
 
 The last transformation kept only two variables for each FIPS and
@@ -373,15 +417,16 @@ Agriculture, Forestry, Fishing, and Hunting. The second is
 Accommodation and Food Services.
 
 
+
 ~~~python
 employment = cbp['EMP']
 employment = employment.loc[:, ['11----', '72----']]
 employment.head()
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
-
 NAICS  11----  72----
 FIPS                 
 01001      70    2091
@@ -391,5 +436,4 @@ FIPS
 01009      10     679
 ~~~
 {:.output}
-
 

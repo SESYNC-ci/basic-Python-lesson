@@ -1,23 +1,50 @@
 ---
 ---
 
+
+
+~~~r
+> plot(1:10, 1:10)
+~~~
+{:title="Console" .input}
+![ ]({{ "assignment/unnamed-chunk-1-1.png" | prepend: site.imageurl | relative_url }})
+{:.captioned}
+
+
+
+~~~python
+> import matplotlib.pyplot as plt
++ #plt.plot([1,2,3,4])
++ #plt.ylabel('some numbers')
++ plt.get_backend()
+~~~
+{:title="Console" .input}
+
+
+~~~
+u'TkAgg'
+~~~
+{:.output}
+
+
 ## Variables
 
 Variable assignment attaches the label left of an `=` to the return
 value of the expression on its right.
 
 
+
 ~~~python
 a = 'xyz'
 a
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
 
 ~~~
 'xyz'
 ~~~
 {:.output}
-
 
 
 Colloquially, you might say the new variable `a` equals `'xyz'`, but
@@ -31,29 +58,33 @@ the same `'xyz'`, which we can verify by `id()`.
 The "in-memory" location of `a` returned by `id()` ...
 
 
+
 ~~~python
-id(a)
+> id(a)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
-140241398229848
+139675600344408
 ~~~
 {:.output}
-
 
 
 ... is equal to that of `xyz` itself:
 
 
+
 ~~~python
-id('xyz')
+> id('xyz')
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
-140241398229848
+139675600344408
 ~~~
 {:.output}
-
 
 
 ===
@@ -62,15 +93,17 @@ The idiom to test this "sameness" is typical of the Python language:
 it uses plain English when words will suffice.
 
 
+
 ~~~python
-a is 'xyz'
+> a is 'xyz'
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
 True
 ~~~
 {:.output}
-
 
 
 ===
@@ -80,14 +113,16 @@ True
 The `id()` function helps demonstrate that "equal" is not the "same".
 
 
+
 ~~~python
 b = [1, 2, 3]
 id(b)
 ~~~
-{:.text-document title="{{ site.handouts[0]}}"}
+{:title="{{ site.data.lesson.handouts[0]}}" .text-document}
+
 
 ~~~
-140241398331720
+139675536021264
 ~~~
 {:.output}
 
@@ -95,14 +130,15 @@ id(b)
 
 
 ~~~python
-id([1, 2, 3])
+> id([1, 2, 3])
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
-140241398330440
+139675536022992
 ~~~
 {:.output}
-
 
 
 ===
@@ -111,15 +147,17 @@ Even though `b == [1, 2, 3]` returns `True`, these are not the same
 object:
 
 
+
 ~~~python
-b is [1, 2, 3]
+> b is [1, 2, 3]
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
 False
 ~~~
 {:.output}
-
 
 
 ===
@@ -132,16 +170,29 @@ side-effect occurs when an expression generates some ripples other
 than its return value.
 
 
+
 ~~~python
-b.pop()
-b
+> b.pop()
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
+~~~
+3
+~~~
+{:.output}
+
+
+~~~python
+> b
+~~~
+{:title="Console" .input}
+
+
 ~~~
 [1, 2]
 ~~~
 {:.output}
-
 
 
 Python is an object-oriented language from the ground up---everything
@@ -164,24 +215,32 @@ Side-effects trip up Python programmers when an object has multiple
 labels, which is not so unusual:
 
 
+
 ~~~python
 c = b
 b.pop()
 ~~~
-{:.text-document title="{{ site.handouts[0] }}"}
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
+
+~~~
+2
+~~~
+{:.output}
 
 
 
 
 ~~~python
-c
+> c
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
 [1]
 ~~~
 {:.output}
-
 
 
 The assignment to `c` does not create a new list, so the side-effect
@@ -199,44 +258,50 @@ Not every object is "mutable" like our list `b`. For example, the `a`
 assigned earlier is not.
 
 
+
 ~~~python
-x = a
-a.upper()
+> x = a
++ a.upper()
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
 'XYZ'
 ~~~
 {:.output}
 
 
-
 ===
 
 
+
 ~~~python
-x
+> x
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
 'xyz'
 ~~~
 {:.output}
-
 
 
 The string 'xyz' hasn't changed---it's immutable. So it is also a safe
 guess that there has been no side-effect on the original `a`.
 
 
+
 ~~~python
-a
+> a
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
+
+
 ~~~
 'xyz'
 ~~~
 {:.output}
-
 
 -->
