@@ -71,7 +71,7 @@ user
 
 
 ~~~
-{'Age': 24, 'First Name': 'J.', 'Last Name': 'Doe', 'Email': 'j.doe@gmail.com', 'Nickname': 'Jamie'}
+{'First Name': 'J.', 'Last Name': 'Doe', 'Email': 'j.doe@gmail.com', 'Age': 24, 'Nickname': 'Jamie'}
 ~~~
 {:.output}
 
