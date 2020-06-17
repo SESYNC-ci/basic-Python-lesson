@@ -175,7 +175,7 @@ S1.difference(S2)
 
 
 ~~~
-{('cat',), 'xyz'}
+{'xyz', ('cat',)}
 ~~~
 {:.output}
 
