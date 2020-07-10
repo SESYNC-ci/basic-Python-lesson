@@ -121,7 +121,7 @@ metrics.confusion_matrix(y, ml.predict(X), (True, False))
 ===
 
 A quick visualization using the [mlxtend](){:.pylib} package
-shows the challeng of separating this attribute space!
+shows the challenge of separating this attribute space!
 
 ```{python handout = 0}
 from mlxtend.plotting import plot_decision_regions
