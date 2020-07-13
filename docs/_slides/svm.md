@@ -114,12 +114,9 @@ ml.fit(X, y)
 
 
 ~~~
-LinearSVC(C=1.0, class_weight=None, dual=True, fit_intercept=True,
-          intercept_scaling=1, loss='squared_hinge', max_iter=1000,
-          multi_class='ovr', penalty='l2', random_state=None, tol=0.0001,
-          verbose=0)
+LinearSVC()
 
-//usr/local/lib/python3.5/dist-packages/sklearn/svm/_base.py:947: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+C:\Users\qread\AppData\Local\r-miniconda\envs\r-reticulate\lib\site-packages\sklearn\svm\_base.py:977: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
   "the number of iterations.", ConvergenceWarning)
 ~~~
 {:.output}
@@ -152,7 +149,10 @@ metrics.confusion_matrix(y, ml.predict(X), (True, False))
 
 ~~~
 array([[355, 238],
-       [109, 869]])
+       [109, 869]], dtype=int64)
+
+C:\Users\qread\AppData\Local\r-miniconda\envs\r-reticulate\lib\site-packages\sklearn\utils\validation.py:71: FutureWarning: Pass labels=(True, False) as keyword args. From version 0.25 passing these as positional arguments will result in an error
+  FutureWarning)
 ~~~
 {:.output}
 
@@ -160,13 +160,83 @@ array([[355, 238],
 ===
 
 A quick visualization using the [mlxtend](){:.pylib} package
-shows the challeng of separating this attribute space!
+shows the challenge of separating this attribute space!
 
 
 
+~~~python
+from mlxtend.plotting import plot_decision_regions
+
+plot_decision_regions(X, y, clf=ml, legend=2)
+~~~
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+![ ]({% include asset.html path="images/svmunnamed-chunk-6-1.png" %})
+{:.captioned}
+
+===
+
+## Kernel Method
+
+The `LinearSVM` is rarely used in practice despite its speed---rare is
+the case when a hyperplane cleanly separates the attributes. The more
+general `SVC` machine accepts multiple `kernel` options that provide
+great flexibility in the shape of the barrier (no longer a hyperplane).
 
 
 
+~~~python
+ml = svm.SVC(kernel = 'rbf', C=1, gamma='auto')
+ml.fit(X, y)
+~~~
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
+
+~~~
+SVC(C=1, gamma='auto')
+~~~
+{:.output}
+
+
+===
+
+The improvement in the confusion matrix is slight---we have not tuned
+the `gamma` value, which is automatically chosen based on the size of
+the dataset.
 
 
 
+~~~python
+metrics.confusion_matrix(y, ml.predict(X), (True, False))
+~~~
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+
+
+~~~
+array([[322, 271],
+       [ 35, 943]], dtype=int64)
+
+C:\Users\qread\AppData\Local\r-miniconda\envs\r-reticulate\lib\site-packages\sklearn\utils\validation.py:71: FutureWarning: Pass labels=(True, False) as keyword args. From version 0.25 passing these as positional arguments will result in an error
+  FutureWarning)
+~~~
+{:.output}
+
+
+===
+
+More important is to understand the nature of the separation, which
+can "wrap around" the attribute space as necessary.
+
+
+
+~~~python
+plot_decision_regions(X, y, clf=ml, legend=2)
+~~~
+{:title="{{ site.data.lesson.handouts[0] }}" .text-document}
+![ ]({% include asset.html path="images/svmunnamed-chunk-9-1.png" %})
+{:.captioned}
+
+<!--
+https://www.ers.usda.gov/data-products/rural-urban-continuum-codes/
+FIPS over 3K
+RUCC_2013 1,2,3 Metro / 4-9 Nonmetro
+-->
