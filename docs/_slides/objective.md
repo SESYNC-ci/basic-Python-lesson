@@ -6,7 +6,7 @@
 - Earn your Python "learner's permit"
 - Work with Pandas, the `DataFrame` package
 - Recognize differences between R and Python
-- Hit the *autubahn* with [Scikit-learn](){:.pylib}
+- Hit the *Autobahn* with [Scikit-learn](){:.pylib}
 
 ===
 
