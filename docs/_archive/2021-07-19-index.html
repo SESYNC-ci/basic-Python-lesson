@@ -1,0 +1,1562 @@
+---
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basic Python</title>
+<meta name="description" content="Start learning Python with Pandas and Scikit-learn.">
+<link rel="canonical"
+      href="https://SESYNC-ci.github.io/basic-Python-lesson/2021/07/19/index.html">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SESYNC-ci/lesson-style@3.0/docs/assets/css/default.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SESYNC-ci/lesson-style@3.0/docs/assets/css/syntax.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SESYNC-ci/lesson-style@3.0/docs/assets/css/static.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      rel="stylesheet"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous">
+
+    
+  </head>
+  <body>
+    <div class="page-content">
+      <div class="wrapper">
+        
+
+<h1 style="text-transform: none;" id="basic-python">Basic Python</h1>
+
+<p>Lesson 11 with **</p>
+
+<nav id="ToC">
+
+  <ul>
+    <li><a href="#/slides/objective">Lesson Objectives</a></li>
+    <li><a href="#/slides/assignment">Variables</a></li>
+    <li><a href="#/slides/types">Data Types</a></li>
+    <li><a href="#/slides/structs">Data Structures</a></li>
+    <li><a href="#/slides/flow">Flow Control</a></li>
+    <li><a href="#/slides/methods">Methods</a></li>
+    <li><a href="#/slides/pandas">Pandas</a></li>
+    <li><a href="#/slides/svm">Classification</a></li>
+    <li><a href="#/slides/conclude">Summary</a></li>
+    <li><a href="#/slides/exercise">Exercises</a></li>
+  </ul>
+</nav>
+
+<hr />
+<p><a name="/slides/objective"></a></p>
+
+<section><h2 id="lesson-objectives">Lesson Objectives</h2>
+
+<ul>
+  <li>Earn your Python “learner’s permit”</li>
+  <li>Work with Pandas, the <code class="language-plaintext highlighter-rouge">DataFrame</code> package</li>
+  <li>Recognize differences between R and Python</li>
+  <li>Hit the <em>Autobahn</em> with <a href="" class="pylib">Scikit-learn</a></li>
+</ul>
+
+</section>
+
+<section>
+
+<h2 id="specific-achievements">Specific Achievements</h2>
+
+<ul>
+  <li>Differentiate between data types and structures</li>
+  <li>Learn to use indentation as syntax</li>
+  <li>Import data and try a simple “split-apply-combine”</li>
+  <li>Implement a SVM for binary classification</li>
+</ul>
+
+<p class="notes">Why learn Python? While much of the academic research community has
+dived into R for an open source toolbox for data science, there are
+plenty of reasons to learn Python too. Some find they can learn to
+write scripts more quickly in Python, others find its object
+orientation a real boon. This lesson works towards a simple “machine
+learning” problem, which has long been a speciality of Python’s
+<a href="" class="pylib">Scikit-learn</a> package.</p>
+
+</section>
+
+<section>
+
+<h2 id="machine-learning">Machine Learning</h2>
+
+<p>Machine Learning is another take on regression (for continuous
+response) and classification (for categorical response).</p>
+
+<ul>
+  <li>Emphasis on prediction over parameter inference</li>
+  <li>Equal emphasis on probabilistic and non-probabilistic methods: whatever works</li>
+  <li>Not necessarilly “supervised” (e.g. clustering)</li>
+</ul>
+
+<p class="notes">This lesson will step through a non-probabilistic classifier, because
+it’s at far end of the spectrum relative to generalized linear
+regression. Some classification methods have probabilistic
+interpretations: logistic regression is actually a classifier, whether
+or not you follow through to choosing the most likely outcome or are
+satisfied with estimating its probability. Others optimize the
+classifier based on other abstract quantities: SVMs maximize the
+distance between the “support vectors”.</p>
+
+</section>
+
+<section>
+
+<h2 id="jupyter">Jupyter</h2>
+
+<p class="notes">Sign into JupyterHub and open up <code class="language-plaintext highlighter-rouge">worksheet-11.ipynb</code>. This
+worksheet is an Jupyter Notebook document: it is divided into “cells”
+that are run independently but access the same Python interpreter. Use
+the Notebook to write and annotate code.</p>
+
+<p>After opening <code class="language-plaintext highlighter-rouge">worksheet-11.ipynb</code>, right click anywhere in your
+notebook and choose “Create Console for Notebook”. Drag-and-drop the
+tabs into whatever arrangement you like.</p>
+</section>
+
+<p class="ToS"><a href="#/slides/objective">Top of Section</a></p>
+
+<hr />
+<p><a name="/slides/assignment"></a></p>
+
+<section><h2 id="variables">Variables</h2>
+
+<p>Variable assignment attaches the label left of an <code class="language-plaintext highlighter-rouge">=</code> to the return
+value of the expression on its right.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">'xyz'</span>
+<span class="n">a</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'xyz'
+</code></pre></div></div>
+
+<p class="notes">Colloquially, you might say the new variable <code class="language-plaintext highlighter-rouge">a</code> equals <code class="language-plaintext highlighter-rouge">'xyz'</code>, but
+Python makes it easy to “go deeper”. There can be only one string
+<code class="language-plaintext highlighter-rouge">'xyz'</code>, so the Python interpreter makes <code class="language-plaintext highlighter-rouge">a</code> into another label for
+the same <code class="language-plaintext highlighter-rouge">'xyz'</code>, which we can verify by <code class="language-plaintext highlighter-rouge">id()</code>.</p>
+
+</section>
+
+<section>
+
+<p>The “in-memory” location of <code class="language-plaintext highlighter-rouge">a</code> returned by <code class="language-plaintext highlighter-rouge">id()</code> …</p>
+
+<div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>738014016
+</code></pre></div></div>
+
+<p>… is equal to that of <code class="language-plaintext highlighter-rouge">xyz</code> itself:</p>
+
+<div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="s">'xyz'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>738014016
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>The idiom to test this “sameness” is typical of the Python language:
+it uses plain English when words will suffice.</p>
+
+<div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">a</span> <span class="ow">is</span> <span class="s">'xyz'</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<h2 id="equal-but-not-the-same">Equal but not the Same</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">id()</code> function helps demonstrate that “equal” is not the “same”.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nb">id</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>739311176
+</code></pre></div></div>
+
+<div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="nb">id</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>739310920
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>Even though <code class="language-plaintext highlighter-rouge">b == [1, 2, 3]</code> returns <code class="language-plaintext highlighter-rouge">True</code>, these are not the same
+object:</p>
+
+<div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">b</span> <span class="ow">is</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>False
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<h2 id="side-effects">Side-effects</h2>
+
+<p>The reason to be aware of what <code class="language-plaintext highlighter-rouge">b</code> <strong>is</strong> has to do with
+“side-effects”, an very import part of Python programming. A
+side-effect occurs when an expression generates some ripples other
+than its return value.</p>
+
+<div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">b</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3
+</code></pre></div></div>
+
+<div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">b</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1, 2]
+</code></pre></div></div>
+
+<p class="notes">Python is an object-oriented language from the ground up—everything
+is an “object” with some state to be more or less aware of. And
+side-effects don’t touch the label, they effect what the label is
+assigned to (i.e. what it <strong>is</strong>).</p>
+
+</section>
+
+<section>
+
+<dl>
+  <dt>Question</dt>
+  <dd>Re-check the “in-memory” location—is it the same <code class="language-plaintext highlighter-rouge">b</code>?</dd>
+  <dt>Answer</dt>
+  <dd class="fragment">Yes! The list got shorter but it is the same list.</dd>
+</dl>
+
+</section>
+
+<section>
+
+<p>Side-effects trip up Python programmers when an object has multiple
+labels, which is not so unusual:</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">c</span> <span class="o">=</span> <span class="n">b</span>
+<span class="n">b</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2
+</code></pre></div></div>
+
+<div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">c</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1]
+</code></pre></div></div>
+
+<p>The assignment to <code class="language-plaintext highlighter-rouge">c</code> does not create a new list, so the side-effect
+of popping off the tail of <code class="language-plaintext highlighter-rouge">b</code> ripples into <code class="language-plaintext highlighter-rouge">c</code>.</p>
+
+<p class="notes">A common mistake for those coming to Python from R, is to write <code class="language-plaintext highlighter-rouge">b =
+b.append(4)</code>, which overwrites <code class="language-plaintext highlighter-rouge">b</code> with the value <code class="language-plaintext highlighter-rouge">None</code> that happens
+to be returned by the <code class="language-plaintext highlighter-rouge">append()</code> method.</p>
+
+<!--
+===
+
+Not every object is "mutable" like our list `b`. For example, the `a`
+assigned earlier is not.
+
+
+
+~~~python
+> x = a
++ a.upper()
+~~~
+{:title="Console" .input}
+
+
+~~~
+'XYZ'
+~~~
+{:.output}
+
+
+===
+
+
+
+~~~python
+> x
+~~~
+{:title="Console" .input}
+
+
+~~~
+'xyz'
+~~~
+{:.output}
+
+
+The string 'xyz' hasn't changed---it's immutable. So it is also a safe
+guess that there has been no side-effect on the original `a`.
+
+
+
+~~~python
+> a
+~~~
+{:title="Console" .input}
+
+
+~~~
+'xyz'
+~~~
+{:.output}
+
+-->
+</section>
+
+<p class="ToS"><a href="#/slides/assignment">Top of Section</a></p>
+
+<hr />
+<p><a name="/slides/types"></a></p>
+
+<section><h2 id="data-types">Data Types</h2>
+
+<p>The basic data types are</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">'int'</code></td>
+      <td>integers</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">'float'</code></td>
+      <td>real numbers</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">'str'</code></td>
+      <td>character strings</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">'bool'</code></td>
+      <td><code class="language-plaintext highlighter-rouge">True</code> or <code class="language-plaintext highlighter-rouge">False</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">'NoneType'</code></td>
+      <td><code class="language-plaintext highlighter-rouge">None</code></td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+
+<section>
+
+<p>Any object can be queried with <code class="language-plaintext highlighter-rouge">type()</code></p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="nb">type</span><span class="p">(</span><span class="s">'x'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'str'&gt;
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<h2 id="operators">Operators</h2>
+
+<p>Python supports the usual (or not) arithmetic operators for numeric types:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">+</code></td>
+      <td>addition</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">-</code></td>
+      <td>subtraction</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">*</code></td>
+      <td>multiplication</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">/</code></td>
+      <td>floating-point division</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">**</code></td>
+      <td>exponent</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">%</code></td>
+      <td>modulus</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">//</code></td>
+      <td>floor division</td>
+    </tr>
+  </tbody>
+</table>
+
+</section>
+
+<section>
+
+<p>One or both of these might be a surprise:</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="mi">5</span> <span class="o">**</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>25
+</code></pre></div></div>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span> <span class="o">//</span> <span class="mi">3</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>Some operators have natural extensions to non-numeric types:</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">*</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'xyzxyz'
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>Comparison operators are symbols or plain english:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">==</code></td>
+      <td>equal</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">!=</code></td>
+      <td>non-equal</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;</code></td>
+      <td>greater, lesser</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&gt;=</code>, <code class="language-plaintext highlighter-rouge">&lt;=</code></td>
+      <td>greater or equal, lesser or equal</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">and</code></td>
+      <td>logical and</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">or</code></td>
+      <td>logical or</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">not</code></td>
+      <td>logical negation</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">in</code></td>
+      <td>logical membership</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<p class="ToS"><a href="#/slides/types">Top of Section</a></p>
+
+<hr />
+<p><a name="/slides/structs"></a></p>
+
+<section><h2 id="data-structures">Data Structures</h2>
+
+<p>The built-in structures for holding multiple values are:</p>
+
+<ul>
+  <li>Tuple</li>
+  <li>List</li>
+  <li>Set</li>
+  <li>Dictionary</li>
+</ul>
+
+</section>
+
+<section>
+
+<h2 id="tuple">Tuple</h2>
+
+<p>The simplest kind of sequence, a tuple is declared with
+comma-separated values, optionally inside <code class="language-plaintext highlighter-rouge">(...)</code>. The tuple is a
+common type of return value for functions with multiple outputs.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">T</span> <span class="o">=</span> <span class="s">'x'</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="bp">True</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'tuple'&gt;
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>To declare a one-tuple without <code class="language-plaintext highlighter-rouge">(...)</code>, a trailing “,” is required.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">T</span> <span class="o">=</span> <span class="s">'cat'</span><span class="p">,</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'tuple'&gt;
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<h2 id="list">List</h2>
+
+<p>The more common kind of sequence in Python is the list, which is
+declared with comma-separated values inside <code class="language-plaintext highlighter-rouge">[...]</code>. Unlike a tuple, a
+list is mutable.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.14</span><span class="p">,</span> <span class="s">'xyz'</span><span class="p">,</span> <span class="n">T</span><span class="p">]</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'list'&gt;
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<h2 id="subsetting-tuples-and-lists">Subsetting Tuples and Lists</h2>
+
+<p>Subsetting elements from a tuple or list is performed with square
+brackets in both cases, and selects elements using their integer
+position starting from zero—their “index”.</p>
+
+<div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3.14
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>Negative indices are allowed, and refer to the reverse ordering: -1 is
+the last item in the list, -2 the second-to-last item, and so on.</p>
+
+<div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">L</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('cat',)
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>The syntax <code class="language-plaintext highlighter-rouge">L[i:j]</code> selects a sub-list starting with the element at index
+<code class="language-plaintext highlighter-rouge">i</code> and ending with the element at index <code class="language-plaintext highlighter-rouge">j - 1</code>.</p>
+
+<div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[3.14, 'xyz']
+</code></pre></div></div>
+
+<p>A blank space before or after the “:” indicates the start or end of the list,
+respectively. For example, the previous example could have been written 
+<code class="language-plaintext highlighter-rouge">L[:2]</code>.</p>
+
+</section>
+
+<section>
+
+<p>A potentially useful trick to remember the list subsetting rules in Python is
+to picture the indices as “dividers” between list elements.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 0      1       2          3 
+ | 3.14 | 'xyz' | ('cat',) |
+-3     -2      -1
+</code></pre></div></div>
+
+<p class="notes">Positive indices are written at the top and negative indices at the bottom. 
+<code class="language-plaintext highlighter-rouge">L[i]</code> returns the element to the right of <code class="language-plaintext highlighter-rouge">i</code> whereas <code class="language-plaintext highlighter-rouge">L[i:j]</code> returns
+elements between <code class="language-plaintext highlighter-rouge">i</code> and <code class="language-plaintext highlighter-rouge">j</code>.</p>
+
+</section>
+
+<section>
+
+<h2 id="set">Set</h2>
+
+<p>The third and last “sequence” data structure is a set, useful for
+operations like “union” and “difference”. Declare a set with
+comma-separated values inside <code class="language-plaintext highlighter-rouge">{...}</code> or by casting another sequence with
+<code class="language-plaintext highlighter-rouge">set()</code>.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">S1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="n">S2</span> <span class="o">=</span> <span class="p">{</span><span class="mf">3.14</span><span class="p">,</span> <span class="s">'z'</span><span class="p">}</span>
+<span class="n">S1</span><span class="p">.</span><span class="n">difference</span><span class="p">(</span><span class="n">S2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'xyz', ('cat',)}
+</code></pre></div></div>
+
+<p class="notes">Python is a rather principled language: a set is technically
+unordered, so its elements do not have an index. You cannot subset a
+set using <code class="language-plaintext highlighter-rouge">[...]</code>.</p>
+
+</section>
+
+<section>
+
+<h2 id="dictionary">Dictionary</h2>
+
+<p>Lists are useful when you need to access elements by their position in
+a sequence. In contrast, a dictionary is needed to find values based
+on arbitrary identifiers, called “keys”.</p>
+
+</section>
+
+<section>
+
+<p>Construct a dictionary with comma-separated <code class="language-plaintext highlighter-rouge">key: value</code> pairs within <code class="language-plaintext highlighter-rouge">{...}</code>.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">user</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'First Name'</span><span class="p">:</span> <span class="s">'J.'</span><span class="p">,</span>
+  <span class="s">'Last Name'</span><span class="p">:</span> <span class="s">'Doe'</span><span class="p">,</span>
+  <span class="s">'Email'</span><span class="p">:</span> <span class="s">'j.doe@gmail.com'</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;class 'dict'&gt;
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>Individual values are accessed using square brackets, as for lists,
+but the key must be used rather than an index.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">user</span><span class="p">[</span><span class="s">'Email'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'j.doe@gmail.com'
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>To add a single new element to the dictionary, define a new
+<code class="language-plaintext highlighter-rouge">key:value</code> pair by assigning a value to a novel key in the
+dictionary.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">user</span><span class="p">[</span><span class="s">'Age'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+</code></pre></div></div>
+
+<p class="notes">Dictionary keys are unique. Assigning a value to an existing key
+overwrites its previous value. You would replace the current Gmail
+address with <code class="language-plaintext highlighter-rouge">user['Email'] = doedoe1337@aol.com</code>.</p>
+</section>
+
+<p class="ToS"><a href="#/slides/structs">Top of Section</a></p>
+
+<hr />
+<p><a name="/slides/flow"></a></p>
+
+<section><h2 id="flow-control">Flow Control</h2>
+
+<p>The syntax for “if … then” tests and for-loops involves plain
+English and few special characters—you will easily ingest
+it. Whitespace actually serves as the most important special
+character, although you may not think of it that way, and that is our
+main motivation for looking at flow control.</p>
+
+</section>
+
+<section>
+
+<h2 id="for-loops">For-loops</h2>
+
+<p>A <code class="language-plaintext highlighter-rouge">for</code> loop takes any “iterable” object and executes a block of code
+once for each element <code class="language-plaintext highlighter-rouge">in</code> the object.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">squares</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4
+</code></pre></div></div>
+
+<p class="notes">The <code class="language-plaintext highlighter-rouge">range(i, j)</code> function creates an object that iterates from <code class="language-plaintext highlighter-rouge">i</code> up
+through <code class="language-plaintext highlighter-rouge">j - 1</code>; just like in the case of list slices, the range is
+not inclusive of the upper bound.</p>
+
+</section>
+
+<section>
+
+<h2 id="indentation">Indentation</h2>
+
+<p>Note the pattern of the block above:</p>
+
+<ul>
+  <li>the <code class="language-plaintext highlighter-rouge">for x in y</code> expression is followed by a <code class="language-plaintext highlighter-rouge">:</code></li>
+  <li>the following lines are indented <strong>equally</strong></li>
+  <li>un-indenting indicates the end of the block</li>
+</ul>
+
+<p class="notes">Compared with other programming languages in which code indentation
+only serves to enhance readability, Python uses indentation to define
+“code blocks”. In a sense, indentation serves two purposes in Python,
+enhancing readiblity and defining complete statements, which is kinda
+how we use indentation too.</p>
+
+</section>
+
+<section>
+
+<h2 id="nesting-indentation">Nesting Indentation</h2>
+
+<p>Each level of indentation indicates blocks within blocks. Nesting a
+conditional within a for-loop is a common case.</p>
+
+<p class="notes">The following example creates a contact list (as a list of
+dictionaries), then performs a loop over all contacts. Within the
+loop, a conditional statement (<code class="language-plaintext highlighter-rouge">if</code>) checks if the name is ‘Alice’. If
+so, the interpreter prints her email address; otherwise it prints an
+empty string.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">users</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s">'Name'</span><span class="p">:</span><span class="s">'Alice'</span><span class="p">,</span> <span class="s">'Email'</span><span class="p">:</span><span class="s">'alice@email.com'</span><span class="p">},</span>
+    <span class="p">{</span><span class="s">'Name'</span><span class="p">:</span><span class="s">'Bob'</span><span class="p">,</span> <span class="s">'Email'</span><span class="p">:</span> <span class="s">'bob@email.com'</span><span class="p">},</span>
+    <span class="p">]</span>
+<span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">u</span><span class="p">[</span><span class="s">'Name'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'Alice'</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="s">'Email'</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alice@email.com
+</code></pre></div></div>
+
+</section>
+
+<p class="ToS"><a href="#/slides/flow">Top of Section</a></p>
+
+<hr />
+<p><a name="/slides/methods"></a></p>
+
+<section><h2 id="methods">Methods</h2>
+
+<p>The period is a special character in Python that accesses an object’s
+attributes and methods. In either the Jupyter Notebook or Console,
+typing an object’s name followed by <code class="language-plaintext highlighter-rouge">.</code> and then pressing the <code class="language-plaintext highlighter-rouge">TAB</code>
+key brings up suggestions.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">squares</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>We call this <code class="language-plaintext highlighter-rouge">index()</code> function a method of lists (recall that
+<code class="language-plaintext highlighter-rouge">squares</code> is of type <code class="language-plaintext highlighter-rouge">'list'</code>). A useful feature of having methods
+attached to objects is that their documentation is attached too.</p>
+
+<div class="language-python input highlighter-rouge" title="Console"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="n">help</span><span class="p">(</span><span class="n">squares</span><span class="p">.</span><span class="n">index</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Help on built-in function index:
+
+index(...) method of builtins.list instance
+    L.index(value, [start, [stop]]) -&gt; integer -- return first index of value.
+    Raises ValueError if the value is not present.
+</code></pre></div></div>
+
+<p class="notes">A major differnce between Python and R has to do with the process for
+making functions behave differently for different objects. In Python,
+a function is attached to an object as a “method”, while in R it is
+common for a “dispatcher” to examine the attributes of a function
+call’s arguments and chooses the particular function to use.</p>
+
+</section>
+
+<section>
+
+<p>Dictionary’s have an <code class="language-plaintext highlighter-rouge">update()</code> method, for merging the contents
+of a second dictionary into the one calling <code class="language-plaintext highlighter-rouge">update()</code>.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">user</span><span class="p">.</span><span class="n">update</span><span class="p">({</span>
+  <span class="s">'Nickname'</span><span class="p">:</span> <span class="s">'Jamie'</span><span class="p">,</span>
+  <span class="s">'Age'</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="n">user</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{'First Name': 'J.', 'Last Name': 'Doe', 'Email': 'j.doe@gmail.com', 'Age': 24, 'Nickname': 'Jamie'}
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>Note a couple “Pythonic” style choices in the above:</p>
+
+<ol>
+  <li>Leave a space after the <code class="language-plaintext highlighter-rouge">:</code> when declaring <code class="language-plaintext highlighter-rouge">key: value</code> pairs</li>
+  <li>Trailing null arguments are syntactically correct, even advantageous</li>
+  <li>White space within <code class="language-plaintext highlighter-rouge">(...)</code> has no meaning and can improve readiability</li>
+</ol>
+
+<p class="notes">The “style-guide” for Python scripting, <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a>, is first authored by the inventor
+of Python and adhered too by many. It’s sometimes nice to know their is a preferred
+way of writing code, but don’t let it be a burden.</p>
+
+</section>
+
+<p class="ToS"><a href="#/slides/methods">Top of Section</a></p>
+
+<hr />
+<p><a name="/slides/pandas"></a></p>
+
+<section><h2 id="pandas">Pandas</h2>
+
+<p>If you have used the statistical programming language R, you are familiar with
+“data frames”, two-dimensional data structures where each column can hold a 
+different type of data, as in a spreadsheet.</p>
+
+<p>The analagous data frame package for Python is <a href="" class="pylib">pandas</a>,
+which provides a <code class="language-plaintext highlighter-rouge">DataFrame</code> object type with methods to subset,
+filter reshape and aggregate tabular data.</p>
+
+</section>
+
+<section>
+
+<p>After importing <a href="" class="pylib">pandas</a>, we call its <code class="language-plaintext highlighter-rouge">read_csv</code> function
+to load the <a href="https://www.census.gov/programs-surveys/cbp/data/datasets.html">County Business Patterns (CBP)</a> dataset.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="n">cbp</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'data/cbp15co.csv'</span><span class="p">)</span>
+<span class="n">cbp</span><span class="p">.</span><span class="n">dtypes</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FIPSTATE     int64
+FIPSCTY      int64
+NAICS       object
+EMPFLAG     object
+EMP_NF      object
+EMP          int64
+QP1_NF      object
+QP1          int64
+AP_NF       object
+AP           int64
+EST          int64
+N1_4         int64
+N5_9         int64
+N10_19       int64
+N20_49       int64
+N50_99       int64
+N100_249     int64
+N250_499     int64
+N500_999     int64
+N1000        int64
+N1000_1      int64
+N1000_2      int64
+N1000_3      int64
+N1000_4      int64
+CENSTATE     int64
+CENCTY       int64
+dtype: object
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>As is common with CSV files, the inferred data types were not quite right.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">cbp</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s">'data/cbp15co.csv'</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s">'FIPSTATE'</span><span class="p">:</span><span class="s">'str'</span><span class="p">,</span> <span class="s">'FIPSCTY'</span><span class="p">:</span><span class="s">'str'</span><span class="p">},</span>
+    <span class="p">)</span>
+<span class="n">cbp</span><span class="p">.</span><span class="n">dtypes</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FIPSTATE    object
+FIPSCTY     object
+NAICS       object
+EMPFLAG     object
+EMP_NF      object
+EMP          int64
+QP1_NF      object
+QP1          int64
+AP_NF       object
+AP           int64
+EST          int64
+N1_4         int64
+N5_9         int64
+N10_19       int64
+N20_49       int64
+N50_99       int64
+N100_249     int64
+N250_499     int64
+N500_999     int64
+N1000        int64
+N1000_1      int64
+N1000_2      int64
+N1000_3      int64
+N1000_4      int64
+CENSTATE     int64
+CENCTY       int64
+dtype: object
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>There are many ways to slice a <code class="language-plaintext highlighter-rouge">DataFrame</code>. To select a subset of rows
+and/or columns by name, use the <code class="language-plaintext highlighter-rouge">loc</code> attribute and <code class="language-plaintext highlighter-rouge">[</code> for indexing.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">cbp</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'FIPSTATE'</span><span class="p">,</span> <span class="s">'NAICS'</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        FIPSTATE   NAICS
+0             01  ------
+1             01  11----
+2             01  113///
+3             01  1133//
+4             01  11331/
+...          ...     ...
+2126596       56  812990
+2126597       56  813///
+2126598       56  8133//
+2126599       56  81331/
+2126600       56  813312
+
+[2126601 rows x 2 columns]
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>As with lists, <code class="language-plaintext highlighter-rouge">:</code> by itself indicates all the rows (or
+columns). Unlike lists, the <code class="language-plaintext highlighter-rouge">loc</code> attribute returns both endpoints of
+a slice.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">cbp</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s">'FIPSTATE'</span><span class="p">:</span><span class="s">'NAICS'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  FIPSTATE FIPSCTY   NAICS
+2       01     001  113///
+3       01     001  1133//
+4       01     001  11331/
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">iloc</code> attribute of a DataFrame to get rows and/or columns by
+position, which behaves identically to list indexing.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">cbp</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  FIPSTATE FIPSCTY   NAICS
+2       01     001  113///
+3       01     001  1133//
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>The default indexing for a DataFrame, without using the <code class="language-plaintext highlighter-rouge">loc</code> or
+<code class="language-plaintext highlighter-rouge">iloc</code> attributes, is by column name.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">cbp</span><span class="p">[[</span><span class="s">'NAICS'</span><span class="p">,</span> <span class="s">'AP'</span><span class="p">]].</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    NAICS      AP
+0  ------  321433
+1  11----    3566
+2  113///    3551
+3  1133//    3551
+4  11331/    3551
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>The <code class="language-plaintext highlighter-rouge">loc</code> attribute also allows logical indexing, i.e. the use of a
+boolean array of appropriate length for the selected dimension. The
+subset of <code class="language-plaintext highlighter-rouge">cbp</code> with sector level NAICS codes can indexed with string
+matching.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">logical_idx</span> <span class="o">=</span> <span class="n">cbp</span><span class="p">[</span><span class="s">'NAICS'</span><span class="p">].</span><span class="nb">str</span><span class="p">.</span><span class="n">match</span><span class="p">(</span><span class="s">'[0-9]{2}----'</span><span class="p">)</span>
+<span class="n">cbp</span> <span class="o">=</span> <span class="n">cbp</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="n">logical_idx</span><span class="p">]</span>
+<span class="n">cbp</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   FIPSTATE FIPSCTY   NAICS EMPFLAG  ... N1000_3  N1000_4 CENSTATE  CENCTY
+1        01     001  11----     NaN  ...       0        0       63       1
+10       01     001  21----     NaN  ...       0        0       63       1
+17       01     001  22----     NaN  ...       0        0       63       1
+27       01     001  23----     NaN  ...       0        0       63       1
+93       01     001  31----     NaN  ...       0        0       63       1
+
+[5 rows x 26 columns]
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>Creation of new variables, our old favorite the full FIPS identifier,
+is done by assignment to new column names, using another <code class="language-plaintext highlighter-rouge">str</code> method.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">cbp</span><span class="p">[</span><span class="s">'FIPS'</span><span class="p">]</span> <span class="o">=</span> <span class="n">cbp</span><span class="p">[</span><span class="s">'FIPSTATE'</span><span class="p">].</span><span class="nb">str</span><span class="p">.</span><span class="n">cat</span><span class="p">(</span><span class="n">cbp</span><span class="p">[</span><span class="s">'FIPSCTY'</span><span class="p">])</span>
+<span class="n">cbp</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   FIPSTATE FIPSCTY   NAICS EMPFLAG  ... N1000_4  CENSTATE CENCTY   FIPS
+1        01     001  11----     NaN  ...       0        63      1  01001
+10       01     001  21----     NaN  ...       0        63      1  01001
+17       01     001  22----     NaN  ...       0        63      1  01001
+27       01     001  23----     NaN  ...       0        63      1  01001
+93       01     001  31----     NaN  ...       0        63      1  01001
+
+[5 rows x 27 columns]
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<h2 id="index">Index</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">DataFrame</code> object includes the notion of “primary keys” for a
+table in its <code class="language-plaintext highlighter-rouge">Index</code> construct. One or more columns that uniquely
+identify rows can be set aside from the remaining columns.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">cbp</span> <span class="o">=</span> <span class="n">cbp</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s">'FIPS'</span><span class="p">,</span> <span class="s">'NAICS'</span><span class="p">])</span>
+<span class="n">cbp</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>             FIPSTATE FIPSCTY EMPFLAG  ... N1000_4  CENSTATE CENCTY
+FIPS  NAICS                            ...                         
+01001 11----       01     001     NaN  ...       0        63      1
+      21----       01     001     NaN  ...       0        63      1
+      22----       01     001     NaN  ...       0        63      1
+      23----       01     001     NaN  ...       0        63      1
+      31----       01     001     NaN  ...       0        63      1
+
+[5 rows x 25 columns]
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>Any hierarchical index can be “unstacked”, and all columns appropriately spread into a “wide” table layout.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">cbp</span> <span class="o">=</span> <span class="n">cbp</span><span class="p">[[</span><span class="s">'EMP'</span><span class="p">,</span> <span class="s">'AP'</span><span class="p">]].</span><span class="n">unstack</span><span class="p">(</span><span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p class="notes">The last transformation kept only two variables for each FIPS and
+NAICS combination: the number of employees and the annual payroll (x
+$1000). By now, it may be obvious we are slowly working towards some
+goal!</p>
+
+</section>
+
+<section>
+
+<p>The number of employees in just two sectors will serve as the set of
+variables (i.e. columns) by which we attempt to classify each county
+as “Metro” (i.e. urban) or not (i.e. rural). The first code is for
+Agriculture, Forestry, Fishing, and Hunting. The second is
+Accommodation and Food Services.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">employment</span> <span class="o">=</span> <span class="n">cbp</span><span class="p">[</span><span class="s">'EMP'</span><span class="p">]</span>
+<span class="n">employment</span> <span class="o">=</span> <span class="n">employment</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'11----'</span><span class="p">,</span> <span class="s">'72----'</span><span class="p">]]</span>
+<span class="n">employment</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAICS  11----  72----
+FIPS                 
+01001      70    2091
+01003      14   12081
+01005     180     594
+01007      70     306
+01009      10     679
+</code></pre></div></div>
+
+</section>
+
+<p class="ToS"><a href="#/slides/pandas">Top of Section</a></p>
+
+<hr />
+<p><a name="/slides/svm"></a></p>
+
+<section><h2 id="classification">Classification</h2>
+
+<p>The CBP dataset provides economic attributes of the three thousand and
+some US counties. The employment numbers are continuous attributes, and
+we expect those are somehow different between urban and rural counties.</p>
+
+<p>We need a classifier suitable for:</p>
+
+<ol>
+  <li>many continuous “predictors”</li>
+  <li>a binary “response”</li>
+</ol>
+
+</section>
+
+<section>
+
+<p>Continuous attributes paried with a binary class, which we hope to
+predict given a model and a set of training data, could be a problem
+for logistic regression. An alternative method, and a foundation of
+machine learning, is the Support Vector Machine.</p>
+
+<p class="captioned"><img src="https://cdn.jsdelivr.net/gh/SESYNC-ci/basic-Python-lesson@v0.5/docs/assets/images/Kernel_Machine.svg" alt="" width="60%" /><br />
+<em><a href="https://commons.wikimedia.org/w/index.php?curid=47868867">Image</a> by Alisneaky / <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA</a></em></p>
+
+<p class="notes">The name arises from the main optimization task: choosing a subset of
+the training data attributes to be the “support vectors” (vector is
+another way of referring to a point in attribute space). The support
+vectors sit near (“support”) a barrier that more or less divides
+attribute space into regions dominated by a single class. The points
+sitting on the dashed lines above are the support vectors.</p>
+
+</section>
+
+<section>
+
+<p>The USDA ERS classifies the counties of the US with a set of 9
+<a href="https://www.ers.usda.gov/data-products/rural-urban-continuum-codes/">Rural-Urban Continuum Codes</a>. Joining these to the CBP attributes,
+and creating a binary “Metropolitan” class based on the the codes for
+urban-influenced areas, completes our dataset.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">rural_urban</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s">'data/ruralurbancodes2013.csv'</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s">'FIPS'</span><span class="p">:</span><span class="s">'str'</span><span class="p">},</span>
+    <span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="s">'FIPS'</span><span class="p">)</span>
+<span class="n">rural_urban</span><span class="p">[</span><span class="s">'Metro'</span><span class="p">]</span> <span class="o">=</span> <span class="n">rural_urban</span><span class="p">[</span><span class="s">'RUCC_2013'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">4</span>
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>By default, the join will take place on the index, which serves as a
+primary key, for each table. It is a one-to-one join.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">employment_rural_urban</span> <span class="o">=</span> <span class="n">employment</span><span class="p">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="n">rural_urban</span><span class="p">[</span><span class="s">'Metro'</span><span class="p">],</span>
+    <span class="n">how</span><span class="o">=</span><span class="s">'inner'</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div></div>
+
+<p class="notes">Only the single variable “Metro” is taken from the <code class="language-plaintext highlighter-rouge">rural_urban</code> table for use
+in the classification problem.</p>
+
+</section>
+
+<section>
+
+<p>Model evaluation for SVMs and other machine learning methods lacking a
+probabilistic interpretion is based on subsetting data into “training”
+and “validation” sets.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="n">employment_rural_urban</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span>
+    <span class="n">frac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">random_state</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">345</span><span class="p">))</span>
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>Import the learning machine from <code class="language-plaintext highlighter-rouge">sklearn</code>, and pass the training data
+separately as the attributes (as <code class="language-plaintext highlighter-rouge">X</code> below) and class (as <code class="language-plaintext highlighter-rouge">y</code>).</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<span class="n">ml</span> <span class="o">=</span> <span class="n">svm</span><span class="p">.</span><span class="n">LinearSVC</span><span class="p">()</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">train</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="s">'Metro'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">).</span><span class="n">values</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s">'Metro'</span><span class="p">].</span><span class="n">values</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">ml</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LinearSVC()
+
+C:\Users\qread\AppData\Local\r-miniconda\envs\r-reticulate\lib\site-packages\sklearn\svm\_base.py:977: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  "the number of iterations.", ConvergenceWarning)
+</code></pre></div></div>
+
+<p class="notes">Why <code class="language-plaintext highlighter-rouge">np.log(1 + X)</code>? Remember, “whatever it takes” is the machine
+learning mantra. In this case the high skew of the employment numbers
+had attributes widely dispersed in attribute space, and the fit was
+worse (and harder to visualize). The offset with a positive number is
+necessary to keep counties with 0 employees in a sector.</p>
+
+</section>
+
+<section>
+
+<h2 id="classifier-evaluation">Classifier Evaluation</h2>
+
+<p>The “confusion matrix” shows the largest numbers are on the
+diagonal—that is the number of metro and Non-metro data points
+correctly separated by the chosen support vectors.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+
+<span class="n">metrics</span><span class="p">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">ml</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[355, 238],
+       [109, 869]], dtype=int64)
+
+C:\Users\qread\AppData\Local\r-miniconda\envs\r-reticulate\lib\site-packages\sklearn\utils\validation.py:71: FutureWarning: Pass labels=(True, False) as keyword args. From version 0.25 passing these as positional arguments will result in an error
+  FutureWarning)
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>A quick visualization using the <a href="" class="pylib">mlxtend</a> package
+shows the challenge of separating this attribute space!</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">mlxtend.plotting</span> <span class="kn">import</span> <span class="n">plot_decision_regions</span>
+
+<span class="n">plot_decision_regions</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">clf</span><span class="o">=</span><span class="n">ml</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+<p class="captioned"><img src="https://cdn.jsdelivr.net/gh/SESYNC-ci/basic-Python-lesson@v0.5/docs/assets/images/svmunnamed-chunk-6-1.png" alt=" " /></p>
+
+</section>
+
+<section>
+
+<h2 id="kernel-method">Kernel Method</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">LinearSVM</code> is rarely used in practice despite its speed—rare is
+the case when a hyperplane cleanly separates the attributes. The more
+general <code class="language-plaintext highlighter-rouge">SVC</code> machine accepts multiple <code class="language-plaintext highlighter-rouge">kernel</code> options that provide
+great flexibility in the shape of the barrier (no longer a hyperplane).</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">ml</span> <span class="o">=</span> <span class="n">svm</span><span class="p">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span> <span class="o">=</span> <span class="s">'rbf'</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="s">'auto'</span><span class="p">)</span>
+<span class="n">ml</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SVC(C=1, gamma='auto')
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>The improvement in the confusion matrix is slight—we have not tuned
+the <code class="language-plaintext highlighter-rouge">gamma</code> value, which is automatically chosen based on the size of
+the dataset.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">metrics</span><span class="p">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">ml</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="bp">False</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[322, 271],
+       [ 35, 943]], dtype=int64)
+
+C:\Users\qread\AppData\Local\r-miniconda\envs\r-reticulate\lib\site-packages\sklearn\utils\validation.py:71: FutureWarning: Pass labels=(True, False) as keyword args. From version 0.25 passing these as positional arguments will result in an error
+  FutureWarning)
+</code></pre></div></div>
+
+</section>
+
+<section>
+
+<p>More important is to understand the nature of the separation, which
+can “wrap around” the attribute space as necessary.</p>
+
+<div class="language-python text-document highlighter-rouge" title="worksheet-11.ipynb"><div class="highlight"><pre class="highlight"><code><span class="n">plot_decision_regions</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">clf</span><span class="o">=</span><span class="n">ml</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+<p class="captioned"><img src="https://cdn.jsdelivr.net/gh/SESYNC-ci/basic-Python-lesson@v0.5/docs/assets/images/svmunnamed-chunk-9-1.png" alt=" " /></p>
+
+<!--
+https://www.ers.usda.gov/data-products/rural-urban-continuum-codes/
+FIPS over 3K
+RUCC_2013 1,2,3 Metro / 4-9 Nonmetro
+-->
+</section>
+
+<p class="ToS"><a href="#/slides/svm">Top of Section</a></p>
+
+<hr />
+<p><a name="/slides/conclude"></a></p>
+
+<section><h2 id="summary">Summary</h2>
+
+<p>Python is said to have a gentle learning curve, but all new languages take practice.</p>
+
+<p>Key concepts covered in this lesson include:</p>
+
+<ul>
+  <li>Variables, or objects</li>
+  <li>Data structures</li>
+  <li>Methods</li>
+  <li><a href="" class="pylib">pandas</a> <code class="language-plaintext highlighter-rouge">DataFrame</code></li>
+  <li><a href="" class="pylib">Scikit-learn</a> <code class="language-plaintext highlighter-rouge">SVC</code></li>
+</ul>
+
+</section>
+
+<section>
+
+<p>Additional critical packages for data science:</p>
+<ul>
+  <li><a href="" class="pylib">matplotlib</a>, <a href="" class="pylib">plotly</a>, <a href="" class="pylib">seaborn</a> for vizualization</li>
+  <li><a href="" class="pylib">StatsModels</a>, and <a href="" class="pylib">pystan</a> for model fitting</li>
+  <li><a href="" class="pylib">PyQGIS</a>, <a href="" class="pylib">rasterio</a>, <a href="" class="pylib">Shapely</a>, and <a href="" class="pylib">Cartopy</a> for GIS</li>
+</ul>
+</section>
+
+<p class="ToS"><a href="#/slides/conclude">Top of Section</a></p>
+
+<hr />
+<p><a name="/slides/exercise"></a></p>
+
+<section><h2 id="exercises">Exercises</h2>
+
+</section>
+
+<section>
+
+<h3 id="exercise-1">Exercise 1</h3>
+
+<p>Explore the use of <code class="language-plaintext highlighter-rouge">in</code> to test membership in a list. Create a list of
+multiple integers, and use <code class="language-plaintext highlighter-rouge">in</code> to test membership of some other
+numbers in your list.</p>
+
+<p class="notes"><a href="#solution-1">View solution</a></p>
+
+</section>
+
+<section>
+
+<h3 id="exercise-2">Exercise 2</h3>
+
+<p>Based on what we have learned so far about lists and dictionaries,
+think up a data structure suitable for an address book of names and
+emails. Now create it! Enter the name and email address for yourself
+and your neighbor in a new variable called <code class="language-plaintext highlighter-rouge">addr</code>.</p>
+
+<p class="notes"><a href="#solution-2">View solution</a></p>
+
+</section>
+
+<section>
+
+<h3 id="exercise-3">Exercise 3</h3>
+
+<p>Write a for-loop that prints all even numbers between 1 and 9. Use the
+modulo operator (<code class="language-plaintext highlighter-rouge">%</code>) to check for evenness: if <code class="language-plaintext highlighter-rouge">i</code> is even, then <code class="language-plaintext highlighter-rouge">i %
+2</code> returns <code class="language-plaintext highlighter-rouge">0</code>, because <code class="language-plaintext highlighter-rouge">%</code> gives the remainder after division of the
+first number by the second.</p>
+
+<p class="notes"><a href="#solution-3">View solution</a></p>
+
+</section>
+
+<section>
+
+<h3 id="exercise-4">Exercise 4</h3>
+
+<p>Tune the <code class="language-plaintext highlighter-rouge">gamma</code> parameter for the Support Vector Machine from above
+that used the <code class="language-plaintext highlighter-rouge">rbf</code> kernel method. It can take any postivie value.
+Can you improve the confusion matrix? How does <code class="language-plaintext highlighter-rouge">gamma</code> appear to
+affect the regions seen with <code class="language-plaintext highlighter-rouge">plot_decision_regions</code>? Does the
+consuion matrix look okay out-of-sample (i.e. making predictions for
+the counties not used for training)?</p>
+
+</section>
+
+<section>
+
+<h2 id="solutions">Solutions</h2>
+
+</section>
+
+<section>
+
+<h3 id="solution-1">Solution 1</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">answers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">19</span><span class="p">]</span>
+<span class="mi">42</span> <span class="ow">in</span> <span class="n">answers</span>
+</code></pre></div></div>
+
+<p class="notes"><a href="#exercise-1">Return</a></p>
+
+</section>
+
+<section>
+
+<h3 id="solution-2">Solution 2</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">addr</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Alice'</span><span class="p">,</span> <span class="s">'email'</span><span class="p">:</span> <span class="s">'alice@gmail.com'</span><span class="p">},</span>
+  <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Bob'</span><span class="p">,</span> <span class="s">'email'</span><span class="p">:</span> <span class="s">'bob59@aol.com'</span><span class="p">},</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<p class="notes"><a href="#exercise-1">Return</a></p>
+
+</section>
+
+<section>
+
+<h3 id="solution-3">Solution 3</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p class="notes"><a href="#exercise-3">Return</a></p>
+</section>
+
+<p class="ToS"><a href="#/slides/exercise">Top of Section</a></p>
+
+
+
+        <hr>
+
+<p>If you need to catch-up before a section of code will work, just squish it's
+🍅 to copy code above it into your clipboard. Then paste into your interpreter's
+console, run, and you'll be ready to start in on that section. Code copied by
+both 🍅 and 📋 will also appear below, where you can edit first, and then copy,
+paste, and run again.</p>
+
+<div class="output">
+  <pre id="ketchup" contenteditable="true"><code># Nothing here yet!</code></pre>
+</div>
+
+<script>
+$(document).ready(function(){
+  
+  // Add code help icons to code blocks
+  $('.input, .text-document').append('<ul class="code-help">');
+  $('.code-help')
+    .append('<li class="clipboard">📋</li>');
+  $('.text-document:not(.no-eval) .code-help')
+    .append('<li class="ketchup">🍅</li>');
+
+  // Bind copy actions to mouse clicks on icons
+  var $ketchup = $('#ketchup');
+  var rng = document.createRange();
+  var sel = window.getSelection();
+  $('.ketchup').click(function(){
+    var $prev = $(this)
+      .parents('.text-document')
+      .prevAll('.text-document:has(.ketchup)');
+    $ketchup.find('code').text($prev.find('pre').text());
+    rng.selectNodeContents($ketchup[0]);
+    sel.removeAllRanges();
+    sel.addRange(rng);
+    document.execCommand("copy");
+    sel.removeAllRanges();
+  });
+  $('.text-document .clipboard').click(function(){
+    var pre = $(this).parents('.text-document').find('pre').text();
+    $ketchup.find('code').text(pre);
+    rng.selectNodeContents($ketchup[0]);
+    sel.removeAllRanges();
+    sel.addRange(rng);
+    document.execCommand("copy");
+    sel.removeAllRanges();
+  });
+  $('.input .clipboard').click(function(){
+    var pre = $(this).parents('.input').find('pre').text();
+    pre = pre.replace(/(^|\n)[>+] /g, '$1');
+    $ketchup.find('code').text(pre);
+    rng.selectNodeContents($ketchup[0]);
+    sel.removeAllRanges();
+    sel.addRange(rng);
+    document.execCommand("copy");
+    sel.removeAllRanges();
+  });
+});
+</script>
+      </div>
+    </div>
+    <script>
+$(document).ready(function(){
+  // Add links to R and Python package repositories
+  $('a.rlib').map(function(){
+    this.href = 'https://cran.r-project.org/package=' + this.innerText;
+  });
+  $('a.pylib').map(function(){
+    this.href = 'https://pypi.python.org/pypi/' + this.innerText;
+  });
+});
+</script>
+
+  </body>
+</html>
