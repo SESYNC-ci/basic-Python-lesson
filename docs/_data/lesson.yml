@@ -4,12 +4,13 @@ handouts:
  - data/cbp15co.csv
  - data/ruralurbancodes2013.csv
  - data/README.md
-tag: v0.5
+tag: v0.6
 lesson: 11
 instructor: 
 lifecycle: stable # status for lifecycle badge
 badgecolor: green # color for lifecycle badge
 warning: false # whether to include note about lifecycle status
+doi: 10.5281/zenodo.5705512
 authors:
   - Philippe Marchand
   - Ian Carroll
